@@ -1,6 +1,9 @@
-import { getAll } from "../../../server/controllers/farmsController";
+import {
+  getAll,
+  createPlace,
+} from "../../../server/controllers/placesController";
 import { connectDB } from "../../../server/utils/db";
-import FarmModel from "../../../server/models/farmModel";
+import PlaceModel from "../../../server/models/placeModel";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -8,23 +11,16 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       // Get data from your database
-      getAll(req, res);
+      await getAll(req, res);
       //   res.status(200).json({ id, name: `User ${id}` });
       break;
     case "POST":
       // Update or create data in your database
-      const { name } = req.body;
-
-      await connectDB();
-
-      console.log("connected");
-      const newFarm = await FarmModel.create({ name: name });
+      await createPlace(req, res);
 
       break;
     default:
       res.setHeader("Allow", ["GET", "PUT"]);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
-  console.log(method);
-  res.status(200).json({ name: "John Doe" });
 }
