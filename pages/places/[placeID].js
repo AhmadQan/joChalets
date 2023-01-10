@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, listAll } from "firebase/storage";
 import { v4 } from "uuid";
 
 import { storage } from "../../client/utils/firebase";
@@ -9,8 +9,10 @@ export default function PlaceDetailPage() {
   const router = useRouter();
   const { placeID } = router.query;
 
-  console.log(placeID);
   const [file, setfile] = useState(null);
+  const [imgList, setimgList] = useState([]);
+
+  const placeImagesRef = ref(storage, `images/${placeID}/`);
 
   const handleSubmit = async (e) => {
     // modify this so that it bulk upload all the files
@@ -23,6 +25,14 @@ export default function PlaceDetailPage() {
     const response = await uploadBytes(uploadRef, file[0]);
     console.log(response);
   };
+
+  const fetchImages = async () => {
+    const response = await listAll(placeImagesRef);
+    console.log(response);
+  };
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
   return (
     <section className="flex flex-col justify-center items-center">
