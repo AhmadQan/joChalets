@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { ref, uploadBytes, listAll } from "firebase/storage";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
 import { storage } from "../../client/utils/firebase";
@@ -10,10 +10,17 @@ export default function PlaceDetailPage() {
   const { placeID } = router.query;
 
   const [file, setfile] = useState(null);
-  const [imgList, setimgList] = useState([]);
+  const ListOfUrls = [];
 
   const placeImagesRef = ref(storage, `images/${placeID}/`);
 
+  const fetchImages = async () => {
+    const response = await listAll(placeImagesRef);
+    response.items.forEach(async (item) => {
+      const url = await getDownloadURL(item);
+      ListOfUrls.push(url);
+    });
+  };
   const handleSubmit = async (e) => {
     // modify this so that it bulk upload all the files
     e.preventDefault();
@@ -26,13 +33,9 @@ export default function PlaceDetailPage() {
     console.log(response);
   };
 
-  const fetchImages = async () => {
-    const response = await listAll(placeImagesRef);
-    console.log(response);
-  };
   useEffect(() => {
     fetchImages();
-  }, []);
+  }, [placeImagesRef]);
 
   return (
     <section className="flex flex-col justify-center items-center">
