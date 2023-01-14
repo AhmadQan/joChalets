@@ -10,6 +10,7 @@ export const PlacesSlice = createSlice({
     selectedPlaceId: null,
     totalCount: null,
     pageNumber: null,
+    idToEdit: null,
   },
   reducers: {
     loadAllPlacesReq: (state) => {
@@ -26,6 +27,10 @@ export const PlacesSlice = createSlice({
     },
     selectPlace: (state, action) => {
       state.place = action.payload;
+    },
+    setPlaceToEdit: (state, action) => {
+      state.idToEdit = action.payload;
+      state.loading = false;
     },
   },
 });
@@ -47,6 +52,25 @@ export const fetchPlaces = (size, page) => async (dispatch) => {
     );
   }
 };
+export const createPlaces = (data) => async (dispatch) => {
+  try {
+    dispatch(loadAllPlacesReq());
+
+    const response = await https.post(`places`, { data: data });
+    console.log(response.data._id);
+    dispatch(setPlaceToEdit(response.data._id));
+
+    // dispatch(fetchPlaces());
+  } catch (error) {
+    dispatch(
+      loadAllPlacesError(
+        error.response && error.response.data?.detail
+          ? error.response.data?.detail
+          : error.message
+      )
+    );
+  }
+};
 
 // Action creators are generated for each case reducer function
 export const {
@@ -54,6 +78,7 @@ export const {
   loadAllPlacesSuccess,
   loadAllPlacesError,
   selectPlace,
+  setPlaceToEdit,
 } = PlacesSlice.actions;
 
 export default PlacesSlice.reducer;

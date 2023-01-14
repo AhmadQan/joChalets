@@ -51,10 +51,11 @@ export const getById = async (req, res) => {
 export const updateById = async (req, res) => {
   const { placeid } = req.query;
   const { data } = req.body;
+  console.log(data);
 
   await connectDB();
 
-  const updatedPlace = await PlaceModel.findOneAndUpdate(
+  const updatedPlace = await PlaceModel.findOneAndReplace(
     { _id: placeid },
     data
   ).catch((err) => {
@@ -62,4 +63,17 @@ export const updateById = async (req, res) => {
   });
 
   return res.status(200).json(updatedPlace);
+};
+export const deleteById = async (req, res) => {
+  const { placeid } = req.query;
+
+  await connectDB();
+
+  await PlaceModel.findOneAndDelete({
+    _id: placeid,
+  }).catch((err) => {
+    res.status(400).json({ err });
+  });
+
+  return res.status(200).json(placeid);
 };

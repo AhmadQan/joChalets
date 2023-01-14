@@ -55,7 +55,7 @@ export default function PlaceDetailPage() {
           }}
         ></input>
         <button className=" bg-white rounded-md py-3" type="submit">
-          Save
+          SAVE
         </button>
       </form>
       <img src={file}></img>

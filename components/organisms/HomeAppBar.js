@@ -1,7 +1,10 @@
 import * as React from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 export default function HomeAppBar() {
+  const router = useRouter();
+
   const navVariant = {
     hidden: {
       opacity: 0,
@@ -51,6 +54,14 @@ export default function HomeAppBar() {
             d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
           />
         </svg>
+        <button
+          onClick={() => {
+            router.push("/places/createPlace");
+          }}
+          className="font-Koulen text-accent"
+        >
+          add Place
+        </button>
       </div>{" "}
     </motion.nav>
   );
