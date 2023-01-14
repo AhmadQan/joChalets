@@ -7,6 +7,8 @@ module.exports = {
   theme: {
     colors: {
       primary: "#122b50",
+      gradiantBG:
+        "linear-gradient(to left top, #122b50, #1b4572, #216195, #217fb8, #1a9edc)",
       secondry: "#1a9edc",
       accent: "#28d580",
       grayDark: "#273444",

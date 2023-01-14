@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchPlaces } from "../../storeSlices/placesSlice";
+import PlacesGridItem from "../organisms/PlacesGridItem";
 
-import PlacesGridItem from "../../components/organisms/PlacesGridItem";
-
-export default function PlacesGrid() {
+function PlacesGrid() {
   const PlacesStore = useSelector((state) => state.places);
   const { allPlaces, loading, err, totalCount } = PlacesStore;
 
@@ -14,7 +13,6 @@ export default function PlacesGrid() {
   useEffect(() => {
     dispatch(fetchPlaces(5, 1));
   }, []);
-
   return (
     <div className="flex flex-col px-5 items-center">
       {allPlaces.map((place) => (
@@ -23,3 +21,5 @@ export default function PlacesGrid() {
     </div>
   );
 }
+
+export default PlacesGrid;
