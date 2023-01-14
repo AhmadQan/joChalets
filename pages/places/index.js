@@ -18,7 +18,7 @@ export default function PlacesGrid() {
   return (
     <div className="flex flex-col px-5 items-center">
       {allPlaces.map((place) => (
-        <PlacesGridItem data={place} />
+        <PlacesGridItem key={place._id} data={place} />
       ))}
     </div>
   );
