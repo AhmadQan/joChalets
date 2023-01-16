@@ -22,7 +22,6 @@ export default function AddPlaceForm() {
 
   useEffect(() => {
     if (idToEdit) {
-      console.log(idToEdit);
       router.push(`/places/${idToEdit}/createProcess`);
     }
   }, [idToEdit]);

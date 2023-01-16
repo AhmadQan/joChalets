@@ -51,7 +51,6 @@ export const getById = async (req, res) => {
 export const updateById = async (req, res) => {
   const { placeid } = req.query;
   const { data } = req.body;
-  console.log(data);
 
   await connectDB();
 

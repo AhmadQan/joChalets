@@ -1,14 +1,23 @@
+//to do creat a canceltion function
+//that deletes the place from the database
+//and delete the images from the firebase
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 
 import { UploadImages, getImages } from "../../../client/helpers/imagesHelper";
 import ImageGrid from "../../../components/organisms/ImageGrid";
+import { updatePlaces } from "../../../storeSlices/placesSlice";
 
 export default function createProcess() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { placeID } = router.query;
 
+  //this state is used for saving the list coming from firebase
   const [imgList, setimgList] = useState(null);
+
   const identifier = placeID;
 
   //upload images states
@@ -16,18 +25,17 @@ export default function createProcess() {
 
   //fetch images from firebase
   const getAllImages = async (id) => {
+    if (!id) return;
     const imagesData = await getImages(id);
     setimgList(imagesData);
   };
 
   //uploading images to firebase function
   const imagesHandler = async (e) => {
-    console.log(imgList, files);
     e.preventDefault();
-    if (!files) return;
+    if (!files || !identifier) return;
 
     for (const index in files) {
-      console.log("uploading", files[index]);
       if (files[index]?.size) {
         await UploadImages(identifier, files[index]);
       }
@@ -48,7 +56,14 @@ export default function createProcess() {
   };
 
   const attachImagesToDBHandler = () => {
-    console.log(imgList);
+    if (imgList.length === 0) return;
+    const toBeUploadedList = [];
+    imgList.map((image, index) => {
+      toBeUploadedList.push({ imgIndex: index, img: image });
+    });
+    dispatch(updatePlaces(identifier, { images: toBeUploadedList }));
+
+    router.push(`/places/${identifier}`);
   };
 
   return (

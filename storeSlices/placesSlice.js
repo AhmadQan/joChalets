@@ -64,7 +64,7 @@ export const createPlaces = (data) => async (dispatch) => {
     dispatch(loadAllPlacesReq());
 
     const response = await https.post(`places`, { data: data });
-    console.log(response.data._id);
+
     dispatch(setPlaceToEdit(response.data._id));
 
     // dispatch(fetchPlaces());
@@ -78,12 +78,12 @@ export const createPlaces = (data) => async (dispatch) => {
     );
   }
 };
-export const updatePlaces = (id) => async (dispatch) => {
+export const updatePlaces = (placeId, placeData) => async (dispatch) => {
   try {
     dispatch(loadAllPlacesReq());
 
-    const response = await https.post(`places/${id}`, { data: data });
-    console.log(response);
+    const response = await https.put(`places/${placeId}`, { data: placeData });
+
     dispatch(setPlaceToEdit(response.data._id));
 
     // dispatch(fetchPlaces());

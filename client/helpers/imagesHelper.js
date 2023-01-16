@@ -5,7 +5,6 @@ import { v4 } from "uuid";
 const UploadImages = async (placeId, file) => {
   const uploadRef = ref(storage, `images/${placeId}/${file.name + v4()}`);
   const response = await uploadBytes(uploadRef, file);
-  console.log(response);
 };
 
 export const getImages = async (placeId) => {
