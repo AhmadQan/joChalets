@@ -10,7 +10,7 @@ import { UploadImages, getImages } from "../../../client/helpers/imagesHelper";
 import ImageGrid from "../../../components/organisms/ImageGrid";
 import { updatePlaces } from "../../../storeSlices/placesSlice";
 
-export default function createProcess() {
+export default function CreateProcess() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { placeID } = router.query;
