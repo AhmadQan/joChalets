@@ -1,9 +1,11 @@
 import * as React from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+
+import { toggleAddModel } from "../../storeSlices/placesSlice";
 
 export default function HomeAppBar() {
-  const router = useRouter();
+  const dispatch = useDispatch();
 
   const navVariant = {
     hidden: {
@@ -56,7 +58,7 @@ export default function HomeAppBar() {
         </svg>
         <button
           onClick={() => {
-            router.push("/places/createPlace");
+            dispatch(toggleAddModel());
           }}
           className="font-Koulen text-accent"
         >

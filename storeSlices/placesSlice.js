@@ -11,6 +11,7 @@ export const PlacesSlice = createSlice({
     totalCount: null,
     pageNumber: null,
     idToEdit: null,
+    showAddModel: false,
   },
   reducers: {
     loadAllPlacesReq: (state) => {
@@ -31,6 +32,12 @@ export const PlacesSlice = createSlice({
     setPlaceToEdit: (state, action) => {
       state.idToEdit = action.payload;
       state.loading = false;
+    },
+    toggleAddModel: (state) => {
+      state.showAddModel = !state.showAddModel;
+    },
+    setImagesList: (state, action) => {
+      state.imagesList = action.payload;
     },
   },
 });
@@ -71,6 +78,25 @@ export const createPlaces = (data) => async (dispatch) => {
     );
   }
 };
+export const updatePlaces = (id) => async (dispatch) => {
+  try {
+    dispatch(loadAllPlacesReq());
+
+    const response = await https.post(`places/${id}`, { data: data });
+    console.log(response);
+    dispatch(setPlaceToEdit(response.data._id));
+
+    // dispatch(fetchPlaces());
+  } catch (error) {
+    dispatch(
+      loadAllPlacesError(
+        error.response && error.response.data?.detail
+          ? error.response.data?.detail
+          : error.message
+      )
+    );
+  }
+};
 
 // Action creators are generated for each case reducer function
 export const {
@@ -79,6 +105,8 @@ export const {
   loadAllPlacesError,
   selectPlace,
   setPlaceToEdit,
+  toggleAddModel,
+  setImagesList,
 } = PlacesSlice.actions;
 
 export default PlacesSlice.reducer;
