@@ -54,7 +54,7 @@ export const updateById = async (req, res) => {
 
   await connectDB();
 
-  const updatedPlace = await PlaceModel.findOneAndReplace(
+  const updatedPlace = await PlaceModel.findOneAndUpdate(
     { _id: placeid },
     data
   ).catch((err) => {
