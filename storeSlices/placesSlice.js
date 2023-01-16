@@ -46,8 +46,8 @@ export const fetchPlaces = (size, page) => async (dispatch) => {
   try {
     dispatch(loadAllPlacesReq());
 
-    const response = await https.get(`places?p=${page}&s=${size}`);
-
+    const response = await https.get(`places/?p=${page}&s=${size}`);
+    console.log(response);
     dispatch(loadAllPlacesSuccess(response.data));
   } catch (error) {
     dispatch(

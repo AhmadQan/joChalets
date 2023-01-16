@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Spline from "@splinetool/react-spline";
-import Image from "next/image";
 
 function Hero() {
   const [loaded, setloaded] = useState(false);
@@ -20,11 +19,10 @@ function Hero() {
       </div>
       <div className="h-3/6 w-screen relative">
         {loaded || (
-          <Image
-            className="blur-lg"
-            fill={true}
-            src={"/HeroCapture.PNG"}
-          ></Image>
+          <img
+            className="w-full aspect-video blur-lg"
+            src="https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2FheroCapture.PNG?alt=media&token=4cf8fe09-f3a0-4b77-ab1a-12f9a10f5a86"
+          />
         )}
         <Spline
           style={{
