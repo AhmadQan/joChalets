@@ -5,7 +5,7 @@ function Hero() {
   const [loaded, setloaded] = useState(false);
 
   return (
-    <section className="flex flex-col pt-12  items-stretch  h-screen">
+    <section className="flex flex-col pt-12  items-stretch  h-screen overflow-hidden">
       <div className="flex flex-col px-5 gap-6 ">
         <h1 className="font-IBMPlexSans font-bold text-7xl text-grayLight text-opacity-90">
           Heavenly places
@@ -17,7 +17,7 @@ function Hero() {
           Find Places
         </button>
       </div>
-      <div className="h-3/6 w-screen relative">
+      <div className="h-3/6 w-screen ">
         {loaded || (
           <img
             className="w-full aspect-video blur-lg"

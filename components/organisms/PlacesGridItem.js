@@ -1,16 +1,14 @@
 import React from "react";
 
+import ImageSlider from "./ImageSlider";
+
 export default function PlacesGridItem({ data }) {
-  console.log(data);
+  // console.log(data);
+
   return (
-    <div className="w-full rounded-3xl flex flex-col  bg-opacity-10 shadow-xl bg-grayLight border-secondry border-2 overflow-hidden">
-      <div className="w-full">
-        <img
-          className=" object-cover w-full aspect-square"
-          src={data.images[0].img}
-          alt={data.name}
-        />
-      </div>
+    <div className="w-card overflow-hidden rounded-3xl flex flex-col relative bg-opacity-10 shadow-xl bg-grayLight border-secondry border-2 ">
+      <ImageSlider imgList={data.images} />
+
       <div className="w-full flex flex-col p-5 gap-5">
         <div className="flex justify-between">
           <div className="flex flex-col items-start justify-between">

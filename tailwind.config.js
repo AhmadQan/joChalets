@@ -21,7 +21,11 @@ module.exports = {
       IBMPlexSansArabic: ["IBM Plex Sans Arabic", "sans-serif"],
     },
 
-    extend: {},
+    extend: {
+      spacing: {
+        card: "94vw",
+      },
+    },
   },
   plugins: [],
 };
