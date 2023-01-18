@@ -1,11 +1,11 @@
 import * as React from "react";
 import { motion } from "framer-motion";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-// import { toggleAddModel } from "../../storeSlices/placesSlice";
+import { toggleAddModel } from "../../storeSlices/placesSlice";
 
 export default function HomeAppBar() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const navVariant = {
     hidden: {
@@ -34,14 +34,14 @@ export default function HomeAppBar() {
         <h1 className="text-accent font-Koulen  font-normal text-2xl">
           JoChalets
         </h1>
-        {/* <button
+        <button
           onClick={() => {
             dispatch(toggleAddModel());
           }}
           className="font-Koulen text-accent"
         >
           add Place
-        </button> */}
+        </button>
         <svg
           className="text-accent w-8"
           xmlns="http://www.w3.org/2000/svg"

@@ -6,8 +6,10 @@ export default function ImageSlider({ imgList }) {
   const caroselref = useRef();
 
   useEffect(() => {
-    console.log(imgList?.length);
-    setWidth(caroselref.current?.clientWidth / imgList?.length);
+    const constrainLeft =
+      caroselref.current?.clientWidth -
+      caroselref.current?.clientWidth / imgList?.length;
+    setWidth(constrainLeft);
   }, [imgList]);
   return (
     <motion.div ref={caroselref} className="  w-max  h-auto ">

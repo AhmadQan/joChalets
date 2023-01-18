@@ -24,7 +24,7 @@ export const PlacesSlice = createSlice({
     },
     loadAllPlacesError: (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.err = action.payload;
     },
     selectPlace: (state, action) => {
       state.place = action.payload;

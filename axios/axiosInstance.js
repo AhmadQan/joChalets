@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const https = axios.create({
-  baseURL: "https://jo-chalets.vercel.app/api/",
+  baseURL: "http://localhost:3000/api/",
   headers: {
     "Content-Type": "application/json",
   },
