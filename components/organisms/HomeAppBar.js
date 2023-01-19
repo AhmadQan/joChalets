@@ -25,25 +25,25 @@ export default function HomeAppBar() {
   };
   return (
     <motion.nav
-      className="border-b-2 border-accent bg-gray bg-opacity-25 backdrop-blur-sm shadow-lg rounded-b-2xl"
+      className="border-b-2 border-secondryligth bg-primaryBase bg-opacity-25 backdrop-blur-sm shadow-lg rounded-b-2xl"
       initial="hidden"
       whileInView={"show"}
       variants={navVariant}
     >
-      <div className="p-7  flex justify-between items-center">
-        <h1 className="text-accent font-Koulen  font-normal text-2xl">
+      <div className="p-5  flex justify-between items-center">
+        <h1 className="text-secondryligth font-Koulen  font-normal text-2xl">
           JoChalets
         </h1>
         <button
           onClick={() => {
             dispatch(toggleAddModel());
           }}
-          className="font-Koulen text-accent"
+          className="font-Koulen text-secondryligth"
         >
           add Place
         </button>
         <svg
-          className="text-accent w-8"
+          className="text-secondryligth w-8"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

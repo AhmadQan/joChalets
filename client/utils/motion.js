@@ -50,11 +50,11 @@ export const staggerContainer = (staggerChildren, delayChildren) => ({
 
 export const textVariant = (delay) => ({
   hidden: {
-    y: 50,
+    scale: 0,
     opacity: 0,
   },
   show: {
-    y: 0,
+    scale: 1,
     opacity: 1,
     transition: {
       type: "spring",
@@ -70,6 +70,7 @@ export const textContainer = {
   },
   show: (i = 1) => ({
     opacity: 1,
+
     transition: { staggerChildren: 0.1, delayChildren: i * 0.1 },
   }),
 };
@@ -112,7 +113,6 @@ export const textVariant2 = {
     transition: {
       type: "tween",
       ease: "easeIn",
-      // repeat: Infinity,
     },
   },
 };
