@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 
 import { toggleAddModel } from "../../storeSlices/placesSlice";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -18,20 +19,20 @@ export default function HomeAppBar() {
   const LogedinButtons = (
     <div className="flex flex-col justify-center items-center  gap-5 ">
       {user?.dbinfo?.role === "customer" ? (
-        [
-          <a
-            className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
-          >
-            profile
-          </a>,
-        ]
+        <Link
+          // href={}
+          className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
+        >
+          profile
+        </Link>
       ) : user?.dbinfo?.role === "admin" ? (
-        [
-          <a
+        <>
+          <Link
             className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
           >
             admin
-          </a>,
+          </Link>
+          ,
           <button
             onClick={() => {
               dispatch(toggleAddModel());
@@ -39,36 +40,35 @@ export default function HomeAppBar() {
             className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
           >
             add Place
-          </button>,
-        ]
+          </button>
+          ,
+        </>
       ) : user?.dbinfo?.role === "owner" ? (
-        [
-          <a
-            className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
-          >
-            dashboard
-          </a>,
-        ]
+        <Link
+          className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
+        >
+          dashboard
+        </Link>
       ) : (
         <></>
       )}
-      <a
+      <Link
         className={`${stylesObj.buttons.textBTN} text-red border-b-2 pb-1`}
         href="/api/auth/logout"
       >
         Logout
-      </a>
+      </Link>
     </div>
   );
 
   const LogedoutButtons = (
     <div className=" text-primaryDark font-bold cursor-pointer font-Koulen">
-      <a
+      <Link
         className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
         href="/api/auth/login"
       >
         Login
-      </a>
+      </Link>
     </div>
   );
 
