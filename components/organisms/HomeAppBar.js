@@ -20,7 +20,7 @@ export default function HomeAppBar() {
     <div className="flex flex-col justify-center items-center  gap-5 ">
       {user?.dbinfo?.role === "customer" ? (
         <Link
-          // href={}
+          href={""}
           className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
         >
           profile
@@ -28,6 +28,7 @@ export default function HomeAppBar() {
       ) : user?.dbinfo?.role === "admin" ? (
         <>
           <Link
+            href={""}
             className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
           >
             admin
@@ -45,6 +46,7 @@ export default function HomeAppBar() {
         </>
       ) : user?.dbinfo?.role === "owner" ? (
         <Link
+          href={""}
           className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
         >
           dashboard
