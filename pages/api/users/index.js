@@ -1,7 +1,4 @@
-import {
-  getAll,
-  createPlace,
-} from "../../../server/controllers/placesController";
+import { createUser } from "../../../server/controllers/userController";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -14,7 +11,7 @@ export default async function handler(req, res) {
       break;
     case "POST":
       // Update or create data in your database
-      await createPlace(req, res);
+      await createUser(req, res);
 
       break;
     default:

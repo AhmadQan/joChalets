@@ -45,7 +45,11 @@ module.exports = {
         card: "94vw",
       },
       boxShadow: {
-        oval: "-16px 16px 32px #0e213e,16px -16px 32px #163562",
+        oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",
+        hole: " inset 12px 12px 16px #b2bbc8,inset -12px -12px 16px #ffffff",
+      },
+      borderRadius: {
+        blob: "70% 70% 10% 10%;",
       },
     },
   },
