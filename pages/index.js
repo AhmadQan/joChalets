@@ -21,18 +21,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main
-        style={{
-          background:
-            "linear-gradient(to right bottom, #126f9a, #145d88, #154c75, #143b63, #122b50)",
-        }}
-        className=" h-auto"
-      >
+      <main className=" h-auto bg-primaryLigther">
         <HomeAppBar />
         <Hero />
         <PlacesGrid />
         {showAddModel && (
-          <div className="h-full w-full bg-primary bg-opacity-25 backdrop-blur-lg absolute top-0 left-0">
+          <div className="h-full w-full bg-primary bg-opacity-25 backdrop-blur-lg absolute top-0 left-0 z-20">
             <AddPlaceForm />
           </div>
         )}
