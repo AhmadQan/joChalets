@@ -9,11 +9,11 @@ function Hero() {
   return (
     <div className="flex flex-col py-16 pt-28 gap-7  relative items-center z-10 h-auto overflow-hidden">
       <div className="gradient-02 h-full w-full" />
-      <div className="gradient-04 h-full w-1/3 absolute bottom-0 right-0" />
+      <div className="gradient-04 h-full w-1/3 absolute top-0 left-0" />
       <div className="flex flex-col px-5 gap-6 z-10 w-11/12 ">
         <TypingText
           title={"time for summer fun"}
-          classes={"font-Koulen font-semibold text-5xl text-primary"}
+          classes={"font-Koulen font-semibold text-5xl text-secondryDark"}
         />
         <TypingText
           delay={0.3}
@@ -21,24 +21,24 @@ function Hero() {
             "our places collection is the top places to have a good summer fun"
           }
           classes={
-            "font-Koulen font-thin text-lg text-secondry text-opacity-75"
+            "font-Koulen font-thin text-lg text-primaryBase text-opacity-75"
           }
         />
       </div>
-      <div className="w-screen h-full flex flex-col items-center justify-center">
+      <div className="w-screen h-full flex flex-col items-center justify-center relative">
         <img
-          className="z-0 opacity-90 w-11/12 object-fill "
-          src="https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2Fherochalet.png?alt=media&token=066383dd-6408-464c-b482-1d5d03fac447"
+          className=" aspect-square w-11/12 object-fill  opacity-90 z-10 "
+          src="https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2FHeroChaletSqure.png?alt=media&token=ffb05d0d-d99d-4d8f-9ed3-279d47c1c45c"
         />
-        <div className="w-full bg-white h-32 shadow-hole  rounded-blob overflow-hidden ">
+        <div className="w-doubleScreen  h-32 shadow-hole  absolute z-0 overflow-hidden ">
           <motion.img
             animate={{
-              scale: [1, 1.2, 1.1, 1.3, 1],
-              rotate: [0, 7.5, -5, 0, 10],
-              x: [0, 5, -3, 0, 0],
+              scale: [1, 1.19, 1.1, 1.13, 1],
+
+              x: [0, 15, -15, 0, 5],
               transition: {
-                type: "spring",
-                duration: 35,
+                type: "tween",
+                duration: 20,
                 repeat: Infinity,
               },
             }}

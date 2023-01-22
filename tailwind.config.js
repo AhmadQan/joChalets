@@ -43,6 +43,7 @@ module.exports = {
       },
       spacing: {
         card: "94vw",
+        doubleScreen: "200vw",
       },
       boxShadow: {
         oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",
