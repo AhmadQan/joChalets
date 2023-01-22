@@ -7,9 +7,9 @@ function Hero() {
   const [loaded, setloaded] = useState(false);
 
   return (
-    <div className="flex flex-col py-16 pt-28 gap-7  relative items-center z-10 h-auto overflow-hidden">
-      <div className="gradient-02 h-full w-full" />
-      <div className="gradient-04 h-full w-1/3 absolute top-0 left-0" />
+    <div className="flex flex-col py-16 pt-28 gap-7 min-h-screen justify-between relative items-center z-10 h-auto overflow-hidden">
+      <div className="gradient-02 absolute top-0 left-0 h-3/4 w-1/3 rotate-45" />
+      <div className="gradient-04 absolute top-1/2 left-1/2 h-3/4 w-1/3  " />
       <div className="flex flex-col px-5 gap-6 z-10 w-11/12 ">
         <TypingText
           title={"time for summer fun"}

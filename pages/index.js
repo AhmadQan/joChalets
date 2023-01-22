@@ -21,8 +21,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className=" h-auto bg-primaryLigther">
+      <main className=" h-auto bg-blue-200">
         <HomeAppBar />
+        <div className="bg-white backdrop-blur-sm w-full rounded-xl h-40 shadow-lg border-4  fixed top-80 z-20 bg-opacity-30"></div>
         <Hero />
         <PlacesGrid />
         {showAddModel && (

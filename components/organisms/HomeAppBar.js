@@ -97,7 +97,7 @@ export default function HomeAppBar() {
   };
   return (
     <motion.nav
-      className="border-b-2 border-secondry bg-primaryBase bg-opacity-25 backdrop-blur-sm shadow-lg rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
+      className="border-b-2 shadow-secondryligth border-secondry bg-secondry bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
       initial="hidden"
       whileInView={"show"}
       variants={navVariant}

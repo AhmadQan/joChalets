@@ -40,14 +40,8 @@ body {
 }
 
 .gradient-02 {
-  position: absolute;
-  width: 200px;
-  height: 438px;
-  top: 0px;
-  right: 0px;
-
-  background: #7aebfb;
-  filter: blur(190px);
+  background: #4be330df;
+  filter: blur(120px);
 }
 
 .glassmorphism {
@@ -70,12 +64,8 @@ body {
 }
 
 .gradient-04 {
-  position: absolute;
-  width: 304px;
-
-  background: rgba(45, 72, 152, 0.75);
-  filter: blur(200px);
-  transform: rotate(-53.13deg);
+  background: rgba(35, 167, 219, 0.818);
+  filter: blur(100px);
 }
 
 .gradient-05 {

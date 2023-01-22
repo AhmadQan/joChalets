@@ -15,11 +15,6 @@ function PlacesGrid() {
   }, []);
   return (
     <div className="flex flex-col gap-7 px-5 items-center">
-      <div className="bg-secondry w-full rounded-full flex  overflow-hidden ">
-        <input className="p-5" placeholder="Where" />
-        <input className="" placeholder="From" />
-        <input className="" placeholder="To" />
-      </div>
       {allPlaces.map((place) => (
         <PlacesGridItem key={place._id} data={place} />
       ))}
