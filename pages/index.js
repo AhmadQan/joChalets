@@ -23,7 +23,6 @@ export default function Home() {
       </Head>
       <main className=" h-auto bg-blue-200">
         <HomeAppBar />
-        <div className="bg-white backdrop-blur-sm w-full rounded-xl h-40 shadow-lg border-4  fixed top-80 z-20 bg-opacity-30"></div>
         <Hero />
         <PlacesGrid />
         {showAddModel && (

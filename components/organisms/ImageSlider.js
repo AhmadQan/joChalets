@@ -1,21 +1,51 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function ImageSlider({ imgList }) {
-  const [width, setWidth] = useState(0);
-  const caroselref = useRef();
+export default function ImageSlider({ imagesList }) {
+  const [imgList, setimgList] = useState([...imagesList]);
 
-  useEffect(() => {
-    const constrainLeft =
-      caroselref.current?.clientWidth -
-      caroselref.current?.clientWidth / imgList?.length;
-    setWidth(constrainLeft);
-  }, [imgList]);
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset, velocity) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const paginate = (newDirection) => {
+    if (newDirection > 0) {
+      const lsitDummy = imgList;
+
+      const element = lsitDummy.splice(0, 1)[0];
+      lsitDummy.push(element);
+
+      setimgList([...lsitDummy]);
+    } else if (newDirection < 0) {
+      const lsitDummy = imgList;
+
+      const element = lsitDummy.splice(imgList?.length - 1, 1)[0];
+      lsitDummy.unshift(element);
+
+      setimgList([...lsitDummy]);
+    }
+  };
+
   return (
-    <motion.div ref={caroselref} className="  w-max  h-auto ">
+    <motion.div className="self-baseline  w-max  h-auto ">
       <motion.div
-        drag={"x"}
-        dragConstraints={{ right: 0, left: -width }}
+        transition={{
+          x: { type: "spring", stiffness: 300, damping: 30 },
+          opacity: { duration: 0.2 },
+        }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={1}
+        onDragEnd={(e, { offset, velocity }) => {
+          const swipe = swipePower(offset.x, velocity.x);
+
+          if (swipe < -swipeConfidenceThreshold) {
+            paginate(1);
+          } else if (swipe > swipeConfidenceThreshold) {
+            paginate(-1);
+          }
+        }}
         className="w-full relative  flex  "
       >
         {imgList.map((img, i) => (
