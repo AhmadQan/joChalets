@@ -1,4 +1,4 @@
-import { createUser } from "../../../server/controllers/userController";
+import { createUser, getAll } from "../../../server/controllers/userController";
 
 export default async function handler(req, res) {
   const { method } = req;

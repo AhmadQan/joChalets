@@ -1,14 +1,59 @@
 import { connectDB } from "../utils/db";
 import PlaceModel from "../models/placeModel";
+import BookingModel from "../models/bookingModel";
 
 export const getAll = async (req, res) => {
   //where p is the page number and s is the size or the number of element per page
   const { p = 0, s = 50 } = req.query;
+  const { start, end } = req.body;
 
   await connectDB();
 
+  // only if the user searched by time available:: Logic for finding the places with booking that intersect with the time interval user intered
+  //so we can remove them from the list of places sent back to the user
+  const BookingIntersecting = await BookingModel.find({
+    $or: [
+      {
+        $and: [
+          { startDateInSec: { $gte: start } },
+          { startDateInSec: { $lt: end } },
+        ],
+      },
+      {
+        $and: [
+          { endDateInSec: { $lte: end } },
+          { endDateInSec: { $gt: start } },
+        ],
+      },
+      {
+        $and: [
+          { startDateInSec: { $lte: start } },
+          { endDateInSec: { $gt: start } },
+        ],
+      },
+      {
+        $and: [
+          { startDateInSec: { $lt: end } },
+          { endDateInSec: { $gte: end } },
+        ],
+      },
+    ],
+  })
+    .skip(p * s)
+    .limit(s)
+    .catch((err) => {
+      res.status(400).json({ err });
+    });
+
+  const placesToRemove = [];
+  BookingIntersecting.map((booking) => {
+    placesToRemove.push(booking?.placeBooked?._id);
+  });
+
+  ///
+
   //quering the data from the db with pagination logic
-  const allPlaces = await PlaceModel.find()
+  const allPlaces = await PlaceModel.find({ _id: { $nin: placesToRemove } })
     .skip(p * s)
     .limit(s)
     .catch((err) => {
@@ -17,6 +62,7 @@ export const getAll = async (req, res) => {
 
   const totalCount = await PlaceModel.count();
 
+  console.log(placesToRemove);
   // return the res statment to avoid stalled requests
   return res
     .status(200)

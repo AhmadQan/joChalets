@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
+
 import HomeAppBar from "../components/organisms/HomeAppBar";
+import FilterForm from "../components/organisms/FilterForm";
 import Hero from "../components/sections/Hero";
 import PlacesGrid from "../components/sections/PlacesGrid";
 
@@ -23,6 +25,7 @@ export default function Home() {
       </Head>
       <main className=" h-auto bg-blue-200">
         <HomeAppBar />
+        <FilterForm />
         <Hero />
         <PlacesGrid />
         {showAddModel && (

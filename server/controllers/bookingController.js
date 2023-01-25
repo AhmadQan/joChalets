@@ -1,82 +1,83 @@
 import { connectDB } from "../utils/db";
-import UserModel from "../models/userModel";
+import BookingModel from "../models/bookingModel";
 
 export const getAll = async (req, res) => {
   //where p is the page number and s is the size or the number of element per page
   const { p = 0, s = 50 } = req.query;
+  const { start, end } = req.body;
+
+  console.log(start, end);
 
   await connectDB();
 
-  //quering the data from the db with pagination logic
-  const allUsers = await UserModel.find()
+  const allBooking = await BookingModel.find()
+    // .populate("placeBooked", "name")
+    .populate("customer")
     .skip(p * s)
     .limit(s)
     .catch((err) => {
       res.status(400).json({ err });
     });
 
-  const totalCount = await UserModel.count();
+  const totalCount = await BookingModel.count();
 
   // return the res statment to avoid stalled requests
   return res
     .status(200)
-    .json({ data: allUsers, totalCount: totalCount, pageNum: p });
+    .json({ data: allBooking, totalCount: totalCount, pageNum: p });
 };
 
-export const createUser = async (req, res) => {
+export const createBooking = async (req, res) => {
   const { data } = req.body;
-  console.log(data);
   //data can be one object or a list of objects and both cases will work
   //send list of objects when you need to bulk insert
 
   await connectDB();
 
-  const newUser = await UserModel.create({
-    name: data.name,
-    email: data.email,
-  }).catch((err) => {
+  const newBooking = await BookingModel.create(data).catch((err) => {
     res.status(400).json({ err });
   });
-  return res.status(200).json(newUser);
+  return res.status(200).json(newBooking);
 };
 
 export const getById = async (req, res) => {
-  const { placeid } = req.query;
+  const { bookingId } = req.query;
 
   await connectDB();
 
-  const place = await PlaceModel.find({ _id: placeid }).catch((err) => {
+  const booking = await BookingModel.find({ _id: bookingId }).catch((err) => {
     res.status(400).json({ err });
   });
 
-  return res.status(200).json(place);
+  return res.status(200).json(booking);
 };
 
 export const updateById = async (req, res) => {
-  const { placeid } = req.query;
+  const { bookingId } = req.query;
+
   const { data } = req.body;
 
   await connectDB();
 
-  const updatedPlace = await PlaceModel.findOneAndUpdate(
-    { _id: placeid },
+  const updatedBooking = await BookingModel.findOneAndUpdate(
+    { _id: bookingId },
     data
   ).catch((err) => {
     res.status(400).json({ err });
   });
 
-  return res.status(200).json(updatedPlace);
+  return res.status(200).json(updatedBooking);
 };
 export const deleteById = async (req, res) => {
-  const { placeid } = req.query;
+  const { bookingId } = req.query;
 
   await connectDB();
 
-  await PlaceModel.findOneAndDelete({
-    _id: placeid,
+  await BookingModel.findOneAndDelete({
+    _id: bookingId,
   }).catch((err) => {
     res.status(400).json({ err });
   });
 
-  return res.status(200).json(placeid);
+  return res.status(200).json(bookingId);
 };
