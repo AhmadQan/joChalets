@@ -52,6 +52,9 @@ module.exports = {
       borderRadius: {
         blob: "70% 70% 10% 10%;",
       },
+      aspectRatio: {
+        btn: "6 / 2",
+      },
     },
   },
   plugins: [],

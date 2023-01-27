@@ -25,7 +25,7 @@ export default function Home() {
       </Head>
       <main className=" h-auto bg-blue-200">
         <HomeAppBar />
-        <FilterForm />
+
         <Hero />
         <PlacesGrid />
         {showAddModel && (

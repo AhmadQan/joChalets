@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 import { toggleAddModel } from "../../storeSlices/placesSlice";
+import { toggleFilterModel } from "../../storeSlices/settingSlice";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { stylesObj } from "../../styles/stylesSpecific/index";
+import FilterForm from "./FilterForm";
 
 export default function HomeAppBar() {
   const dispatch = useDispatch();
+  const seetingStore = useSelector((state) => state.settings);
+  const { showFilterModel } = seetingStore;
 
   const [isopen, setisopen] = useState(false);
 
@@ -95,19 +100,46 @@ export default function HomeAppBar() {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: "-100%" },
   };
+
   return (
     <motion.nav
-      className="border-b-2 shadow-secondryligth border-secondry bg-secondry bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
+      className=" shadow-secondryligth  bg-gray-200 bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
       initial="hidden"
       whileInView={"show"}
       variants={navVariant}
     >
-      <div className="p-5  flex justify-between items-center ">
+      <div className="p-5  flex justify-start gap-3 items-center ">
         <button
           className={`${stylesObj.buttons.textBTN} text-primaryDark font-bold  font-IBMPlexSansArabic`}
         >
           JoChalets
         </button>
+        <div className="flex-1">
+          <button
+            className={`flex-1 w-1/2 ${
+              showFilterModel ? "bg-secondry" : "bg-secondryBase"
+            }  p-2 shadow-md rounded-full`}
+            onClick={() => {
+              dispatch(toggleFilterModel());
+              console.log(showFilterModel);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 text-secondryDark"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </button>
+        </div>
         {user ? (
           <svg
             className="text-secondryDark w-8"
@@ -139,11 +171,10 @@ export default function HomeAppBar() {
           animate={isopen ? "open" : "closed"}
           variants={variants}
         >
-          {/* <Toggle onClick={() => setisopen((isopen) => !isopen)} /> */}
-          {/* <Items /> */}
           {user ? LogedinButtons : LogedoutButtons}
         </motion.nav>
       )}
+      {showFilterModel && <FilterForm />}
     </motion.nav>
   );
 }
