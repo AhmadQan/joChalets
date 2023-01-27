@@ -35,15 +35,11 @@ export default function FilterForm() {
   };
 
   return (
-    <div className="w-full h-auto flex flex-col  gap-5 backdrop-blur-md overflow-hidden rounded-b-3xl z-30">
-      <div className="flex flex-col gap-11 pt-8  px-5">
-        <h1 className="text-3xl font-Koulen text-secondry ">
-          Filters by your needs
-        </h1>
-      </div>
+    <div className="w-full max-h-screen h-auto flex flex-col  gap-6 backdrop-blur-md overflow-hidden rounded-b-3xl z-30">
+      <div className="flex flex-col gap-11 px-5"></div>
       <div className="flex w-full px-3 gap-5">
         <select
-          className="w-1/2 h-12   rounded-xl shadow-md"
+          className="w-1/2 h-10   rounded-xl shadow-md"
           type={"select"}
           placeholder="Select the City"
         >
@@ -60,15 +56,18 @@ export default function FilterForm() {
         <input
           type={"number"}
           defaultValue={1}
-          className="w-1/2 h-12 px-3  rounded-xl shadow-md"
+          className="w-1/2 h-10 px-3  rounded-xl shadow-md"
           placeholder="Number of guests"
         />
       </div>
-      <div className="flex w-full justify-between px-3 gap-5">
-        <div className="w-1/2">
-          <p>From</p>
-          <div className="overflow-hidden pl-2 flex justify-between items-center bg-white h-12 rounded-xl text-primaryDarker">
-            <p>{dateRanges.start.getDate()}</p>
+
+      <div className=" flex flex-col rounded-b-3xl bg-white overflow-hidden ">
+        <div className="flex w-full justify-center px-2 py-2 gap-5">
+          <div className=" w-1/2 h-auto   flex justify-start gap-4 items-center text-primaryDarker">
+            <p>From</p>
+            <p className="bg-gray-200 rounded-md py-2 px-4">
+              {dateRanges.start.getDate()}
+            </p>
             <SwitchDayLight
               status={isMorningFrom}
               Handler={() => {
@@ -76,11 +75,12 @@ export default function FilterForm() {
               }}
             />
           </div>
-        </div>
-        <div className="w-1/2">
-          <p>To</p>
-          <div className="overflow-hidden pl-2 flex justify-between items-center bg-white h-12 rounded-xl text-primaryDarker">
-            <p>{dateRanges.end.getDate()}</p>
+
+          <div className=" w-1/2 flex justify-start gap-4 items-center bg-white  text-primaryDarker">
+            <p>To</p>
+            <p className="bg-gray-200 rounded-md py-2 px-4">
+              {dateRanges.end.getDate()}
+            </p>
             <SwitchDayLight
               status={isMorningTo}
               Handler={() => {
@@ -89,15 +89,14 @@ export default function FilterForm() {
             />
           </div>
         </div>
-      </div>
-      <div className="flex flex-col rounded-b-3xl overflow-hidden h-3/4">
         <DateRange
           showDateDisplay={false}
           scroll={{
             enabled: true,
-            monthHeight: 300,
-            calendarHeight: 300,
+            monthHeight: 250,
+            calendarHeight: 250,
           }}
+          months={1}
           weekStartsOn={4}
           className=" w-full"
           minDate={new Date()}

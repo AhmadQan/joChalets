@@ -2,7 +2,7 @@ import React from "react";
 
 function SwitchDayLight({ status, Handler }) {
   return (
-    <div className=" shadow-md p-1 shadow-gray-300 bg-secondryligth w-1/3 rounded-xl h-full ">
+    <div className="text-center shadow-md p-1 shadow-gray-300 bg-secondryligth  rounded-full h-full ">
       {status ? (
         <svg
           onClick={() => {
