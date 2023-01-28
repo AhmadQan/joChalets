@@ -11,7 +11,7 @@ function PlacesGrid() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPlaces(5, 0));
+    dispatch(fetchPlaces(0));
   }, []);
   return (
     <div className="flex flex-col gap-7 px-5 items-center">

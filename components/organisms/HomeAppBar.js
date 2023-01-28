@@ -103,12 +103,12 @@ export default function HomeAppBar() {
 
   return (
     <motion.nav
-      className=" shadow-secondryligth  bg-gray-200 bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
+      className="   bg-gray-200 bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
       initial="hidden"
       whileInView={"show"}
       variants={navVariant}
     >
-      <div className="p-5  flex justify-start gap-3 items-center ">
+      <div className=" px-3 py-4 flex justify-start gap-3 items-center ">
         <button
           className={`${stylesObj.buttons.textBTN} text-primaryDark font-bold  font-IBMPlexSansArabic`}
         >

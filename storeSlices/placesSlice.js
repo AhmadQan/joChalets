@@ -9,7 +9,7 @@ export const PlacesSlice = createSlice({
     err: null,
     selectedPlaceId: null,
     totalCount: null,
-    pageNumber: null,
+    pageNumber: 0,
     idToEdit: null,
     showAddModel: false,
   },
@@ -26,9 +26,7 @@ export const PlacesSlice = createSlice({
       state.loading = false;
       state.err = action.payload;
     },
-    selectPlace: (state, action) => {
-      state.place = action.payload;
-    },
+
     setPlaceToEdit: (state, action) => {
       state.idToEdit = action.payload;
       state.loading = false;
@@ -36,19 +34,24 @@ export const PlacesSlice = createSlice({
     toggleAddModel: (state) => {
       state.showAddModel = !state.showAddModel;
     },
-    setImagesList: (state, action) => {
-      state.imagesList = action.payload;
+    setPageNumber: (state, payload) => {
+      state.pageNumber = payload;
     },
   },
 });
 
-export const fetchPlaces = (size, page) => async (dispatch) => {
+export const fetchPlaces = (page, filterData) => async (dispatch, getState) => {
+  const state = getState();
+  const pageNumber = state.places.pageNumber;
+
   try {
     dispatch(loadAllPlacesReq());
+    const response = await https.get(`places/?p=${page}&s=${10}`, {
+      params: filterData,
+    });
 
-    const response = await https.get(`places/?p=${page}&s=${size}`);
-    console.log(response);
     dispatch(loadAllPlacesSuccess(response.data));
+    dispatch(setPageNumber(page));
   } catch (error) {
     dispatch(
       loadAllPlacesError(
@@ -66,8 +69,6 @@ export const createPlaces = (data) => async (dispatch) => {
     const response = await https.post(`places`, { data: data });
 
     dispatch(setPlaceToEdit(response.data._id));
-
-    // dispatch(fetchPlaces());
   } catch (error) {
     dispatch(
       loadAllPlacesError(
@@ -85,8 +86,6 @@ export const updatePlaces = (placeId, placeData) => async (dispatch) => {
     const response = await https.put(`places/${placeId}`, { data: placeData });
 
     dispatch(setPlaceToEdit(response.data._id));
-
-    // dispatch(fetchPlaces());
   } catch (error) {
     dispatch(
       loadAllPlacesError(
@@ -103,10 +102,9 @@ export const {
   loadAllPlacesReq,
   loadAllPlacesSuccess,
   loadAllPlacesError,
-  selectPlace,
   setPlaceToEdit,
+  setPageNumber,
   toggleAddModel,
-  setImagesList,
 } = PlacesSlice.actions;
 
 export default PlacesSlice.reducer;
