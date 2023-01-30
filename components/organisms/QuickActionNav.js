@@ -25,7 +25,7 @@ function QuickActionNav() {
             e.preventDefault();
             setexpanded(!expanded);
           }}
-          className={`${stylesObj.buttons.BTN_SM} flex items-center justify-center  bg-secondry text-secondryLigther font-bold`}
+          className={`w-20  text-center text-xs aspect-video rounded-md shadow-flat  flex items-center justify-center  bg-secondry text-secondryLigther font-bold`}
         >
           {expanded ? (
             <ArrowIcon fill={"#FFF"} className={"w-6 aspect-square"} />
