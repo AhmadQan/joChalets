@@ -1,10 +1,17 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 import ImageSlider from "./ImageSlider";
 
 export default function PlacesGridItem({ data }) {
+  const router = useRouter();
   return (
-    <div className="w-card overflow-hidden rounded-3xl flex flex-col relative bg-opacity-10 shadow-xl bg-grayLight border-secondry border-2 ">
+    <div
+      onClick={() => {
+        router.push(`/places/${data.id}`);
+      }}
+      className="w-card overflow-hidden rounded-3xl flex flex-col relative bg-opacity-10 shadow-xl bg-grayLight border-secondry border-2 "
+    >
       <ImageSlider imagesList={data.images} />
 
       <div className="w-full flex flex-col p-5 gap-5">

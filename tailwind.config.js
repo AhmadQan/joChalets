@@ -48,6 +48,7 @@ module.exports = {
       boxShadow: {
         oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",
         hole: " inset 12px 12px 16px #b2bbc8,inset -12px -12px 16px #ffffff",
+        flat: "0px 0px 8px rgba(0, 0, 0, 0.25)",
       },
       borderRadius: {
         blob: "70% 70% 10% 10%;",
