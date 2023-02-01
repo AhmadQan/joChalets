@@ -17,6 +17,7 @@ module.exports = {
         primaryBase: "#5288D8",
         primaryligth: "#97B7E8",
         primaryLigther: "#dce7f7",
+        primaryWhite: "#F9FBFF",
         primaryDark: "#173868",
         primaryDarker: "#081323",
 
@@ -55,6 +56,7 @@ module.exports = {
       },
       aspectRatio: {
         btn: "6 / 2",
+        btnOutlined: "4.45 / 1",
       },
     },
   },

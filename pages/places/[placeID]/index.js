@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 
 import HomeAppBar from "../../../components/organisms/HomeAppBar";
 import QuickActionNav from "../../../components/organisms/QuickActionNav";
+import PlaceAboutUS from "../../../components/sections/PlaceAboutUS";
+import PlaceUtils from "../../../components/sections/PlaceUtils";
 
 import { stylesObj } from "../../../styles/stylesSpecific";
 
@@ -15,7 +17,7 @@ export default function PlaceDetailPage() {
   const { placeID } = router.query;
 
   return (
-    <section className="flex flex-col min-h-[200vh]">
+    <section className="flex flex-col ">
       <HomeAppBar />
       <div className="h-[63vh] w-screen bg-secondryDark relative">
         <motion.img
@@ -42,6 +44,8 @@ export default function PlaceDetailPage() {
         </div>
       </div>
       <QuickActionNav />
+      <PlaceAboutUS />
+      <PlaceUtils />
     </section>
   );
 }
