@@ -7,6 +7,7 @@ import QuickActionNav from "../../../components/organisms/QuickActionNav";
 import PlaceAboutUS from "../../../components/sections/PlaceAboutUS";
 import PlaceUtils from "../../../components/sections/PlaceUtils";
 import PlaceDetailImageSlider from "../../../components/sections/PlaceDetailImageSlider";
+import PlaceFeedback from "../../../components/sections/PlaceFeedback";
 
 import { stylesObj } from "../../../styles/stylesSpecific";
 
@@ -24,6 +25,7 @@ export default function PlaceDetailPage() {
       <QuickActionNav />
       <PlaceAboutUS />
       <PlaceUtils />
+      <PlaceFeedback />
     </section>
   );
 }

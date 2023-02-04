@@ -2,6 +2,35 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import BookIcon from "../../client/assets/icons/BookIcon";
 import HeartIcon from "../../client/assets/icons/HeartIcon";
+import CirculeArrow from "../../client/assets/icons/CirculeArrow";
+
+const SliderOverlay = ({ className }) => (
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg, rgba(82, 136, 216, 0) 10%, #5288D8 100%)",
+    }}
+    className={className}
+  >
+    <div className="w-full flex justify-between">
+      <CirculeArrow fill={"#fff"} className={`w-[12%] aspect-square`} />
+      <CirculeArrow
+        fill={"#fff"}
+        className={`w-[12%] aspect-square rotate-180`}
+      />
+    </div>
+    <BookIcon fill={"#94ebc0"} className={"w-1/5 aspect-square "} />
+    <div className="flex justify-between items-end">
+      <h2 className="text-3xl font-IBMPlexSans font-normal bg-gr text-white">
+        Welcome To <br /> {`  Place name`}
+      </h2>
+      <div>
+        <HeartIcon fill={"#BF3115"} className={"w-8 aspect-square "} />
+        <p className="text-white">235 people</p>
+      </div>
+    </div>
+  </div>
+);
 
 function PlaceDetailImageSlider() {
   const imagesList = [
@@ -14,35 +43,12 @@ function PlaceDetailImageSlider() {
   const SliderRef = useRef();
   const [sliderWidth, setsliderWidth] = useState(0);
 
-  const [currentIdx, setCurrentIdx] = useState(0);
-
   const sliderRefWidth = SliderRef.current?.clientWidth;
   useEffect(() => {
     if (sliderRefWidth) {
       setsliderWidth(sliderRefWidth * (imagesList.length - 1));
     }
   }, [sliderRefWidth]);
-
-  const SliderOverlay = ({ className }) => (
-    <div
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(82, 136, 216, 0) 10%, #5288D8 100%)",
-      }}
-      className={className}
-    >
-      <BookIcon fill={"#94ebc0"} className={"w-1/5 aspect-square "} />
-      <div className="flex justify-between items-end">
-        <h2 className="text-3xl font-IBMPlexSans font-normal text-white">
-          Welcome To <br /> {`  Place name`}
-        </h2>
-        <div>
-          <HeartIcon fill={"#BF3115"} className={"w-8 aspect-square "} />
-          <p className="text-white">235 people</p>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className="w-screen overflow-hidden relative">
@@ -58,7 +64,7 @@ function PlaceDetailImageSlider() {
         }}
         drag="x"
         dragConstraints={{ left: -sliderWidth, right: 0 }}
-        dragElastic={1}
+        dragElastic={0.5}
         className="h-[63vh] w-auto bg-secondryDark   relative"
       >
         <div className={`absolute top-0  flex h-full`}>
@@ -83,7 +89,7 @@ function PlaceDetailImageSlider() {
               />
               <SliderOverlay
                 className={
-                  "h-2/3 justify-end w-full p-9 flex flex-col gap-9 absolute bottom-0  z-10"
+                  "h-2/3 justify-start w-full p-9 flex flex-col gap-9 absolute bottom-0  z-10"
                 }
               />
             </div>
