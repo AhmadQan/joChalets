@@ -64,7 +64,7 @@ function PlaceDetailImageSlider() {
         }}
         drag="x"
         dragConstraints={{ left: -sliderWidth, right: 0 }}
-        dragElastic={0.5}
+        dragElastic={1}
         className="h-[63vh] w-auto bg-secondryDark   relative"
       >
         <div className={`absolute top-0  flex h-full`}>

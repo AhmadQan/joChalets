@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
 
 import HomeAppBar from "../../../components/organisms/HomeAppBar";
 import QuickActionNav from "../../../components/organisms/QuickActionNav";
@@ -8,11 +7,7 @@ import PlaceAboutUS from "../../../components/sections/PlaceAboutUS";
 import PlaceUtils from "../../../components/sections/PlaceUtils";
 import PlaceDetailImageSlider from "../../../components/sections/PlaceDetailImageSlider";
 import PlaceFeedback from "../../../components/sections/PlaceFeedback";
-
-import { stylesObj } from "../../../styles/stylesSpecific";
-
-import BookIcon from "../../../client/assets/icons/BookIcon";
-import HeartIcon from "../../../client/assets/icons/HeartIcon";
+import PlaceInstruction from "../../../components/sections/PlaceInstruction";
 
 export default function PlaceDetailPage() {
   const router = useRouter();
@@ -26,6 +21,7 @@ export default function PlaceDetailPage() {
       <PlaceAboutUS />
       <PlaceUtils />
       <PlaceFeedback />
+      <PlaceInstruction />
     </section>
   );
 }

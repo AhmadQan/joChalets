@@ -83,6 +83,9 @@ function PlaceFeedback() {
           );
         })}
       </div>
+      <button className="w-[47%] aspect-btnOutlined border-2 border-primary rounded-lg text-primaryDark">
+        View More{" "}
+      </button>
       <div className=" -z-10 w-3/4 rounded-full absolute h-full -bottom-[50%] bg-opacity-10 blur-3xl bg-teal-400" />
       <div className=" -z-10  w-3/4 right-0 rounded-full absolute h-full  -top-[50%] bg-opacity-25 blur-3xl bg-primaryBase" />
     </section>
