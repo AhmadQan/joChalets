@@ -19,26 +19,9 @@ function PlaceDetailImageSlider() {
   const sliderRefWidth = SliderRef.current?.clientWidth;
   useEffect(() => {
     if (sliderRefWidth) {
-      setsliderWidth(sliderRefWidth);
+      setsliderWidth(sliderRefWidth * (imagesList.length - 1));
     }
   }, [sliderRefWidth]);
-
-  const swipeConfidenceThreshold = 10000;
-  const swipePower = (offset, velocity) => {
-    return Math.abs(offset) * velocity;
-  };
-  const paginate = (newDirection) => {
-    if (newDirection > 0) {
-      if (currentIdx >= imagesList.length - 2) return;
-      console.log("triggering pagination");
-      setsliderWidth(sliderWidth + sliderRefWidth);
-      setCurrentIdx(currentIdx + 1);
-    } else if (newDirection < 0) {
-      if (currentIdx == 0) return;
-      setsliderWidth(sliderRefWidth);
-      setCurrentIdx(0);
-    }
-  };
 
   const SliderOverlay = ({ className }) => (
     <div
@@ -76,15 +59,6 @@ function PlaceDetailImageSlider() {
         drag="x"
         dragConstraints={{ left: -sliderWidth, right: 0 }}
         dragElastic={1}
-        onDragEnd={(e, { offset, velocity }) => {
-          const swipe = swipePower(offset.x, velocity.x);
-
-          if (swipe < -swipeConfidenceThreshold) {
-            paginate(1);
-          } else if (swipe > swipeConfidenceThreshold) {
-            paginate(-1);
-          }
-        }}
         className="h-[63vh] w-auto bg-secondryDark   relative"
       >
         <div className={`absolute top-0  flex h-full`}>
