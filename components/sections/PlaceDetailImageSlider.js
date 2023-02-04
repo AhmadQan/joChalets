@@ -70,7 +70,7 @@ function PlaceDetailImageSlider() {
                 variants={{
                   start: {
                     opacity: 0,
-                    scale: 0.5,
+                    scale: 0.9,
                   },
                   end: {
                     opacity: 1,
