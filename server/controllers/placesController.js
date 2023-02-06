@@ -97,10 +97,10 @@ export const getById = async (req, res) => {
   await connectDB();
 
   const place = await PlaceModel.findOne({ _id: placeid })
-    .populate({ path: "placeReviews" })
-    .populate({ path: "bookingList" })
+    .populate("placeReviews")
+    .populate("bookingList")
     .catch((err) => {
-      res.status(400).json({ err });
+      return res.status(400).json({ err });
     });
 
   return res.status(200).json(place);
