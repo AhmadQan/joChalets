@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+
+import { fetchSelectedPlace } from "../../../storeSlices/placesSlice";
 
 import HomeAppBar from "../../../components/organisms/HomeAppBar";
 import QuickActionNav from "../../../components/organisms/QuickActionNav";
@@ -12,6 +15,16 @@ import PlaceInstruction from "../../../components/sections/PlaceInstruction";
 export default function PlaceDetailPage() {
   const router = useRouter();
   const { placeID } = router.query;
+
+  const dispatch = useDispatch();
+  const PlaceState = useSelector((state) => state.places);
+  const { placeSelected, err, loading } = PlaceState;
+
+  useEffect(() => {
+    if (!placeSelected && placeID) {
+      dispatch(fetchSelectedPlace(placeID));
+    }
+  }, [placeSelected, placeID]);
 
   return (
     <section className="flex flex-col ">

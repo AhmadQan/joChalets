@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+
 import BookIcon from "../../client/assets/icons/BookIcon";
 import HeartIcon from "../../client/assets/icons/HeartIcon";
 import CirculeArrow from "../../client/assets/icons/CirculeArrow";
 
-const SliderOverlay = ({ className }) => (
+const SliderOverlay = ({ className, title }) => (
   <div
     style={{
       background:
@@ -22,7 +24,7 @@ const SliderOverlay = ({ className }) => (
     <BookIcon fill={"#94ebc0"} className={"w-1/5 aspect-square "} />
     <div className="flex justify-between items-end">
       <h2 className="text-3xl font-IBMPlexSans font-normal bg-gr text-white">
-        Welcome To <br /> {`  Place name`}
+        Welcome To <br /> {`${title}`}
       </h2>
       <div>
         <HeartIcon fill={"#BF3115"} className={"w-8 aspect-square "} />
@@ -33,12 +35,10 @@ const SliderOverlay = ({ className }) => (
 );
 
 function PlaceDetailImageSlider() {
-  const imagesList = [
-    "https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/images%2F63cc28528963c01baf7c3dbf%2FIMG-20220808-WA0129.jpg578f2a83-9476-4872-9277-56a977566eb5?alt=media&token=8ce6503b-6c10-467c-9b4c-12e2bdc1510a",
-    "https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/images%2F63cc28528963c01baf7c3dbf%2FIMG-20220808-WA0130.jpg0aac435a-6c26-4c10-8513-7772234a27e7?alt=media&token=d7f1d830-9550-40d7-a7e0-83db593a0c0f",
-    "https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/images%2F63cc28528963c01baf7c3dbf%2FIMG-20220808-WA0131.jpg476e1138-63af-476b-bfce-b203d221f410?alt=media&token=673ad6f2-3491-45de-9504-9733bf0cfba1",
-    "https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/images%2F63cc28528963c01baf7c3dbf%2FIMG-20220808-WA0132.jpg6624171c-11bd-454d-8521-34b87f33c45d?alt=media&token=adea94bd-6303-4b37-9a2d-a4821b65e7f6",
-  ];
+  const PlacesStore = useSelector((state) => state.places);
+  const { placeSelected, loading, err } = PlacesStore;
+
+  const imagesList = placeSelected?.images || [];
 
   const SliderRef = useRef();
   const [sliderWidth, setsliderWidth] = useState(0);
@@ -84,10 +84,11 @@ function PlaceDetailImageSlider() {
                   },
                 }}
                 className=" object-cover w-full h-full "
-                src={img}
+                src={img.img}
                 alt={img.img}
               />
               <SliderOverlay
+                title={placeSelected?.name}
                 className={
                   "h-2/3 justify-start w-full p-9 flex flex-col gap-9 absolute bottom-0  z-10"
                 }

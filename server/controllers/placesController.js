@@ -96,7 +96,7 @@ export const getById = async (req, res) => {
 
   await connectDB();
 
-  const place = await PlaceModel.find({ _id: placeid })
+  const place = await PlaceModel.findOne({ _id: placeid })
     .populate({ path: "placeReviews" })
     .populate({ path: "bookingList" })
     .catch((err) => {

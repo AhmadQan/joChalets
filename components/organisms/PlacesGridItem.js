@@ -1,14 +1,19 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 
 import ImageSlider from "./ImageSlider";
+import { fetchSelectedPlace } from "../../storeSlices/placesSlice";
 
 export default function PlacesGridItem({ data }) {
+  const dispatch = useDispatch();
+
   const router = useRouter();
   return (
     <div
       onClick={() => {
         router.push(`/places/${data._id}`);
+        dispatch(fetchSelectedPlace(data._id));
       }}
       className="w-card overflow-hidden rounded-3xl flex flex-col relative bg-opacity-10 shadow-xl bg-grayLight border-secondry border-2 "
     >
