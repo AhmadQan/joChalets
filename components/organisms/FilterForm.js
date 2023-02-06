@@ -43,7 +43,6 @@ export default function FilterForm() {
       endDate: dateRanges.end.getTime(),
       city: city,
     };
-    console.log("searchData", data);
     dispatch(fetchPlaces(0, data));
   };
 

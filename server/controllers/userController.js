@@ -25,7 +25,6 @@ export const getAll = async (req, res) => {
 
 export const createUser = async (req, res) => {
   const { data } = req.body;
-  console.log(data);
   //data can be one object or a list of objects and both cases will work
   //send list of objects when you need to bulk insert
 

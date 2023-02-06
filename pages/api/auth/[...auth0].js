@@ -11,7 +11,6 @@ const getUserFromDB = async (userInfo) => {
   );
 
   if (!user) {
-    console.log("User not found");
     const newUser = await UserModel.create({ name, email }).catch((err) => {
       res.status(400).json({ err });
     });
@@ -23,7 +22,6 @@ const getUserFromDB = async (userInfo) => {
 
 const afterCallback = async (req, res, session, state) => {
   const isUserSavedDB = await getUserFromDB(session.user);
-  console.log(isUserSavedDB);
 
   if (isUserSavedDB) {
     session.user.dbinfo = isUserSavedDB;

@@ -19,8 +19,6 @@ export default function HomeAppBar() {
 
   const { user, error, isLoading } = useUser();
 
-  console.log(user, isLoading, error);
-
   const LogedinButtons = (
     <div className="flex flex-col justify-center items-center  gap-5 ">
       {user?.dbinfo?.role === "customer" ? (
@@ -121,7 +119,6 @@ export default function HomeAppBar() {
             }  p-2 shadow-md rounded-full`}
             onClick={() => {
               dispatch(toggleFilterModel());
-              console.log(showFilterModel);
             }}
           >
             <svg

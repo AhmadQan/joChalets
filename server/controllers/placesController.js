@@ -1,6 +1,7 @@
 import { connectDB } from "../utils/db";
 import PlaceModel from "../models/placeModel";
 import BookingModel from "../models/bookingModel";
+import UserModel from "../models/userModel";
 
 export const getAll = async (req, res) => {
   //where p is the page number and s is the size or the number of element per page
@@ -95,9 +96,12 @@ export const getById = async (req, res) => {
 
   await connectDB();
 
-  const place = await PlaceModel.find({ _id: placeid }).catch((err) => {
-    res.status(400).json({ err });
-  });
+  const place = await PlaceModel.find({ _id: placeid })
+    .populate({ path: "placeReviews" })
+    .populate({ path: "bookingList" })
+    .catch((err) => {
+      res.status(400).json({ err });
+    });
 
   return res.status(200).json(place);
 };

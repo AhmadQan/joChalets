@@ -8,7 +8,7 @@ export default function PlacesGridItem({ data }) {
   return (
     <div
       onClick={() => {
-        router.push(`/places/${data.id}`);
+        router.push(`/places/${data._id}`);
       }}
       className="w-card overflow-hidden rounded-3xl flex flex-col relative bg-opacity-10 shadow-xl bg-grayLight border-secondry border-2 "
     >
