@@ -2,6 +2,7 @@ import { connectDB } from "../utils/db";
 import PlaceModel from "../models/placeModel";
 import BookingModel from "../models/bookingModel";
 import UserModel from "../models/userModel";
+import ReviewsModel from "../models/reviewsModel";
 
 export const getAll = async (req, res) => {
   //where p is the page number and s is the size or the number of element per page
@@ -102,6 +103,9 @@ export const getById = async (req, res) => {
     .catch((err) => {
       return res.status(400).json({ err });
     });
+
+  // const { bookingList, placeReviews } = place;
+  // console.log(bookingList, placeReviews);
 
   return res.status(200).json(place);
 };
