@@ -98,3 +98,6 @@ body {
   background: #65c4fa;
   filter: blur(150px);
 }
+.rdrMonth {
+  width: 100% !important;
+}

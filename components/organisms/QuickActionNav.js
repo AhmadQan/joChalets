@@ -15,9 +15,7 @@ function QuickActionNav() {
   const [expanded, setexpanded] = useState(false);
   return (
     <div
-      className={`min-h-[10%] ${
-        expanded ? " bg-white" : "bg-transparent"
-      } flex flex-col fixed bottom-0 w-full justify-center h-auto rounded-t-lg shadow-flat px-6 py-2 z-20`}
+      className={`min-h-[10%] max-h-[100%] bg-white flex flex-col fixed bottom-0 w-full justify-center h-auto rounded-t-lg shadow-flat px-6 py-2 z-20`}
     >
       <div className="  w-full   justify-between  flex items-center ">
         <button
