@@ -30,7 +30,7 @@ function BookingForm() {
           </div>
         </div>
         <div className="relative w-full overflow-hidden  ">
-          <Calendar date={new Date()} onChange={HandleChange} />
+          <Calendar onChange={HandleChange} />
         </div>
         <div className="h-[10%] w-full  flex justify-between p-2">
           <button className="w-[45%] aspect-btnOutlined border border-secondryDark rounded-xl">
@@ -94,7 +94,7 @@ function BookingForm() {
 
   const Step3 = () => {
     return (
-      <form className="h-[82.1%] w-full flex flex-col justify-start gap-10  ">
+      <form className="h-[82.1%] w-full  flex flex-col justify-start gap-10  ">
         <div className="w-full flex flex-col gap-3">
           <div className="flex justify-between items-center w-full">
             <h3 className="text-sm text-primaryDark">
@@ -149,7 +149,7 @@ function BookingForm() {
     console.log(date);
   };
   return (
-    <div className="h-[92vh] w-full bg-white flex justify-center items-center font-IBMPlexSans">
+    <div className="h-[92vh] w-full  flex justify-center items-center font-IBMPlexSans">
       <div className="h-[92.0%] w-[90%]   justify-between flex overflow-hidden items-center flex-col gap-[5.1%]">
         <div className="flex flex-col w-full h-[15.3%]  justify-between">
           <h3 className="text-sm text-primaryDark">
