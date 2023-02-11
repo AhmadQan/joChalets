@@ -9,7 +9,6 @@ function BookingForm() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -19,7 +18,6 @@ function BookingForm() {
   const [toDate, setToDate] = useState(null);
   const [toIsMorning, setToIsMorning] = useState(false);
 
-  const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [step, setStep] = useState(1);
 
   const Step1 = () => {
@@ -70,7 +68,7 @@ function BookingForm() {
         <div className="relative w-full overflow-hidden  rounded-xl">
           <Calendar onChange={HandleChangeCalender} />
         </div>
-        <div className="h-[10%] w-full  flex justify-between p-2">
+        <div className="h-[14%] w-full  flex justify-between p-2">
           <button className="w-[45%] aspect-btnOutlined border border-secondryDark rounded-xl">
             Back
           </button>
@@ -114,7 +112,7 @@ function BookingForm() {
           </div>
         </div>
 
-        <div className="flex  justify-start items-start h-auto w-full gap-4 pt-2">
+        <div className="flex  justify-end items-start h-auto w-full gap-4 pt-2">
           <div
             onClick={() => {
               setToIsMorning(true);
@@ -143,7 +141,7 @@ function BookingForm() {
         <div className="relative w-full overflow-hidden  rounded-xl">
           <Calendar onChange={HandleChangeCalenderTo} />
         </div>
-        <div className="h-[10%] w-full  flex justify-between p-2">
+        <div className="h-[14%] w-full  flex justify-between p-2">
           <button className="w-[45%] aspect-btnOutlined border border-secondryDark rounded-xl">
             Back
           </button>
@@ -164,14 +162,10 @@ function BookingForm() {
     );
   };
 
-  console.log(watch("numberOfGuests"));
-
   const Step3 = () => {
     return (
       <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
+        onSubmit={handleSubmit(handleSubmitUseForm)}
         className="h-[78%] w-full  flex flex-col justify-start gap-10  "
       >
         <div className="w-full flex flex-col gap-3">
@@ -180,9 +174,16 @@ function BookingForm() {
               how many <br />{" "}
               <span className="text-xl font-bold text-primaryDark">Guests</span>{" "}
             </h3>
-            <div>{watch("numberOfGuests")}</div>
           </div>
-          <input {...register("numberOfGuests")} max={50} type={"range"} />
+          <input
+            id="numberOfGuests"
+            className="h-[7vh] w-[98%] mx-auto shadow-flat rounded-xl pl-2"
+            {...register("numberOfGuests", { required: "This Field Required" })}
+            type={"number"}
+          />
+          {errors?.numberOfGuests?.message && (
+            <p className="text-redBase">{errors?.numberOfGuests?.message}</p>
+          )}
         </div>
         <div className="w-full flex flex-col flex-1  gap-3">
           <h3 className="text-sm text-primaryDark">
@@ -191,24 +192,34 @@ function BookingForm() {
               Phone num
             </span>{" "}
           </h3>
-          <div className="w-[90%] h-[5vh] shadow-flat bg-white flex items-center justify-center ml-2 rounded-xl ">
-            <p className="font-semibold border-secondryligth text-secondryDarker pl-2">
+          <div className="w-[98%] mx-auto  h-[7vh] shadow-flat bg-white flex items-center justify-center ml-2 rounded-xl overflow-hidden">
+            <p className="font-semibold w-[15%] border-secondryligth text-secondryDarker pl-2">
               +962
             </p>
             <input
-              {...register("contactPhoneNumber")}
-              type={"number"}
-              className="h-full flex-1 "
+              {...register("contactPhoneNumber", {
+                required: "This Field Required",
+                minLength: {
+                  value: 9,
+                  message: "Should be at least 9 characters",
+                },
+              })}
+              type={"tel"}
+              className="h-full flex-1 w-[85%] "
             />
           </div>
+          {errors?.contactPhoneNumber?.message && (
+            <p className="text-redBase">
+              {errors?.contactPhoneNumber?.message}
+            </p>
+          )}
         </div>
-        <div className="h-[10%] w-full   flex justify-between p-2">
+        <div className="h-[14%] w-full   flex justify-between p-2">
           <button className="w-[45%] aspect-btnOutlined border border-secondryDark rounded-xl">
             Back
           </button>
           <button
             type="submit"
-            // disabled={true}
             className="w-[45%] aspect-btnOutlined bg-secondryBase text-secondryDarker font-bold rounded-xl  disabled:bg-gray-400 disabled:text-gray-200"
           >
             Next
@@ -217,6 +228,13 @@ function BookingForm() {
       </form>
     );
   };
+
+  //step 3 logic
+  const handleSubmitUseForm = (data) => {
+    console.log(data);
+  };
+
+  //logic for optaining the dates
 
   const HandleChangeCalender = (date) => {
     const toBeChanged = new Date(date.getTime());
@@ -258,7 +276,7 @@ function BookingForm() {
 
   return (
     <div className="h-[92vh] w-full  flex justify-center items-center">
-      <div className="h-[92.0%] w-[90%]   justify-between flex overflow-hidden items-center flex-col gap-[5.1%]">
+      <div className="h-[92.0%] w-[96%] box-border overflow-y-scroll  justify-between flex overflow-hidden items-center flex-col gap-[5.1%]">
         <div className="flex flex-col w-full h-[15.3%]  justify-between">
           <h3 className="text-sm text-primaryDark">
             Step 1 <br />{" "}

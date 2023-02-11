@@ -3,6 +3,8 @@ import mongoose, { Schema, model, models } from "mongoose";
 const BookingSchema = new Schema({
   startDateInSec: { type: Number, required: true },
   endDateInSec: { type: Number, required: true },
+  contactPhoneNumber: { type: Number, required: true },
+  numberOfGuests: { type: Number, required: true },
   customer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
