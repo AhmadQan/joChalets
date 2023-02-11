@@ -5,7 +5,12 @@ import SunOutlineIcon from "../../client/assets/icons/SunOutlineIcon";
 import MoonOutlineIcon from "../../client/assets/icons/MoonOutlineIcon";
 
 function BookingForm() {
-  const [fromDate, setFromDate] = useState();
+  const [fromDate, setFromDate] = useState(null);
+  const [isMorning, setisMorning] = useState(true);
+
+  const [toDate, setToDate] = useState(null);
+  const [toIsMorning, setToIsMorning] = useState(false);
+
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [step, setStep] = useState(1);
 
@@ -17,7 +22,9 @@ function BookingForm() {
             <div className="h-full greenGradient1 w-[40%] rounded-full   flex justify-center items-center">
               <h2 className="text-base font-bold text-white">From</h2>
             </div>
-            <h2 className="text-sm font-bold text-secondryDarker">12/3/2023</h2>
+            <h2 className="text-xs font-bold text-secondryDarker">
+              {fromDate?.toLocaleString()}
+            </h2>
           </div>
           <div className="flex  w-full justify-center gap-3 items-center  rounded-xl ">
             <div className="h-full greenGradient1 w-[40%] rounded-full  opacity-30 flex justify-center items-center">
@@ -27,19 +34,33 @@ function BookingForm() {
         </div>
 
         <div className="flex  justify-start items-start h-auto w-full gap-4 pt-2">
-          <div className=" flex gap-2 shadow-flat px-1 py-2 rounded-full">
+          <div
+            onClick={() => {
+              setisMorning(true);
+              HandleToggleMorning(10);
+            }}
+            className={`${
+              isMorning ? "bg-secondryligth text-secondryDarker" : "bg-white"
+            } flex gap-2 shadow-flat px-1 py-2 rounded-full`}
+          >
             <SunOutlineIcon fill={"#333"} className={"h-6 aspect-square"} />
             <p>10 AM</p>
-            <input type={"checkbox"} />
           </div>
-          <div className=" flex gap-2 px-1 py-2 shadow-flat rounded-full">
+          <div
+            onClick={() => {
+              setisMorning(false);
+              HandleToggleMorning(22);
+            }}
+            className={`${
+              !isMorning ? "bg-secondryligth text-secondryDarker" : "bg-white"
+            } flex gap-2 shadow-flat px-1 py-2 rounded-full`}
+          >
             <MoonOutlineIcon fill={"#333"} className={"h-6 aspect-square"} />
             <p>10 PM</p>
-            <input type={"checkbox"} />
           </div>
         </div>
         <div className="relative w-full overflow-hidden  rounded-xl">
-          <Calendar onChange={HandleChange} />
+          <Calendar onChange={HandleChangeCalender} />
         </div>
         <div className="h-[10%] w-full  flex justify-between p-2">
           <button className="w-[45%] aspect-btnOutlined border border-secondryDark rounded-xl">
@@ -50,8 +71,10 @@ function BookingForm() {
               e.preventDefault();
               setStep(2);
             }}
-            // disabled={true}
-            className="w-[45%] aspect-btnOutlined greenGradient1 text-secondryLigther  font-bold rounded-xl  disabled:bg-gray-400 disabled:text-gray-200"
+            disabled={!fromDate}
+            className={`w-[45%] aspect-btnOutlined  ${
+              !fromDate && "opacity-30"
+            } greenGradient1 text-secondryLigther  font-bold rounded-xl  disabled:bg-gray-400 disabled:text-gray-200`}
           >
             Next
           </button>
@@ -67,30 +90,50 @@ function BookingForm() {
             <div className="h-full greenGradient1 w-[40%] rounded-full   flex justify-center items-center">
               <h2 className="text-base font-bold  text-white">From</h2>
             </div>
-            <h2 className="text-sm font-bold text-secondryDarker">12/3/2023</h2>
+            <h2 className="text-xs font-normal text-secondryDarker">
+              {" "}
+              {fromDate?.toLocaleString()}
+            </h2>
           </div>
           <div className="flex  w-full justify-center gap-3 items-center  rounded-xl ">
             <div className="h-full greenGradient1 w-[40%] rounded-full   flex justify-center items-center">
               <h2 className="text-base font-bold text-white">To</h2>
             </div>
-            <h2 className="text-sm font-bold text-secondryDarker">12/3/2023</h2>
+            <h2 className="text-xs font-normal text-secondryDarker">
+              {" "}
+              {toDate?.toLocaleString()}
+            </h2>
           </div>
         </div>
 
-        <div className="flex  justify-end items-start h-auto w-full gap-4 pt-2">
-          <div className=" flex gap-2 shadow-flat px-1 py-2 rounded-full">
+        <div className="flex  justify-start items-start h-auto w-full gap-4 pt-2">
+          <div
+            onClick={() => {
+              setToIsMorning(true);
+              HandleToggleMorningTo(10);
+            }}
+            className={`${
+              toIsMorning ? "bg-secondryligth text-secondryDarker" : "bg-white"
+            } flex gap-2 shadow-flat px-1 py-2 rounded-full`}
+          >
             <SunOutlineIcon fill={"#333"} className={"h-6 aspect-square"} />
             <p>10 AM</p>
-            <input type={"checkbox"} />
           </div>
-          <div className=" flex gap-2 px-1 py-2 shadow-flat rounded-full">
+          <div
+            onClick={() => {
+              setToIsMorning(false);
+              HandleToggleMorningTo(22);
+            }}
+            className={`${
+              !toIsMorning ? "bg-secondryligth text-secondryDarker" : "bg-white"
+            } flex gap-2 shadow-flat px-1 py-2 rounded-full`}
+          >
             <MoonOutlineIcon fill={"#333"} className={"h-6 aspect-square"} />
             <p>10 PM</p>
-            <input type={"checkbox"} />
           </div>
         </div>
         <div className="relative w-full overflow-hidden  rounded-xl">
-          <Calendar onChange={HandleChange} />
+          <Calendar onChange={HandleChangeCalenderTo} />
         </div>
         <div className="h-[10%] w-full  flex justify-between p-2">
           <button className="w-[45%] aspect-btnOutlined border border-secondryDark rounded-xl">
@@ -101,8 +144,10 @@ function BookingForm() {
               e.preventDefault();
               setStep(3);
             }}
-            // disabled={true}
-            className="w-[45%] aspect-btnOutlined greenGradient1 text-secondryLigther  font-bold rounded-xl  disabled:bg-gray-400 disabled:text-gray-200"
+            disabled={!toDate}
+            className={`w-[45%] aspect-btnOutlined  ${
+              !toDate && "opacity-30"
+            } greenGradient1 text-secondryLigther  font-bold rounded-xl  disabled:bg-gray-400 disabled:text-gray-200`}
           >
             Next
           </button>
@@ -164,11 +209,46 @@ function BookingForm() {
     );
   };
 
-  const HandleChange = (date) => {
-    console.log(date);
+  const HandleChangeCalender = (date) => {
+    const toBeChanged = new Date(date.getTime());
+    if (isMorning) {
+      toBeChanged.setHours(10);
+      setFromDate(toBeChanged);
+    } else {
+      toBeChanged.setHours(22);
+      setFromDate(toBeChanged);
+    }
+    console.log(fromDate?.getHours());
   };
+
+  const HandleToggleMorning = (hours) => {
+    if (!fromDate) return;
+    const dateToChange = new Date(fromDate.getTime());
+    dateToChange.setHours(hours);
+    setFromDate(dateToChange);
+  };
+
+  const HandleChangeCalenderTo = (date) => {
+    const toBeChanged = new Date(date.getTime());
+    if (toIsMorning) {
+      toBeChanged.setHours(10);
+      setToDate(toBeChanged);
+    } else {
+      toBeChanged.setHours(22);
+      setToDate(toBeChanged);
+    }
+    console.log(toDate?.getHours());
+  };
+
+  const HandleToggleMorningTo = (hours) => {
+    if (!toDate) return;
+    const dateToChange = new Date(toDate.getTime());
+    dateToChange.setHours(hours);
+    setToDate(dateToChange);
+  };
+
   return (
-    <div className="h-[92vh] w-full  flex justify-center items-center font-IBMPlexSans ">
+    <div className="h-[92vh] w-full  flex justify-center items-center">
       <div className="h-[92.0%] w-[90%]   justify-between flex overflow-hidden items-center flex-col gap-[5.1%]">
         <div className="flex flex-col w-full h-[15.3%]  justify-between">
           <h3 className="text-sm text-primaryDark">
