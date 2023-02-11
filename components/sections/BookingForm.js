@@ -1,11 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar } from "react-date-range";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useUser } from "@auth0/nextjs-auth0/client";
+
+import { createBooking } from "../../storeSlices/bookingSlice";
 
 import SunOutlineIcon from "../../client/assets/icons/SunOutlineIcon";
 import MoonOutlineIcon from "../../client/assets/icons/MoonOutlineIcon";
 
+import BookingBody from "../organisms/BookingBody";
+
 function BookingForm() {
+  const router = useRouter();
+  const { placeID } = router.query;
+
+  const { user, error, isLoading } = useUser();
+
+  //store logic
+  const dispatch = useDispatch();
+  const bookingState = useSelector((state) => {
+    return state.booking;
+  });
+
+  const { loading, bookingError, newBooking } = bookingState;
+
+  //use Form Logic
   const {
     register,
     handleSubmit,
@@ -19,6 +40,11 @@ function BookingForm() {
   const [toIsMorning, setToIsMorning] = useState(false);
 
   const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    if (!newBooking) return;
+    setStep(4);
+  }, [newBooking]);
 
   const Step1 = () => {
     return (
@@ -229,9 +255,52 @@ function BookingForm() {
     );
   };
 
+  const Step4 = () => {
+    return (
+      <div className="w-full h-[78.77%] flex flex-col gap-8 px-2  font-IBMPlexSans">
+        <h3 className="text-secondryDarker">
+          FYI <br /> <span className="font-bold">Order Has three status</span>
+        </h3>
+        <div className="flex flex-col gap-4 h-[28.1%] ">
+          <div className="flex justify-between h-[18.33%]">
+            <div className="h-full w-auto  px-2 shadow-flat">
+              <p>Created</p>
+            </div>
+            <div>waiting to be approved</div>
+          </div>
+          <div className="flex justify-between h-[18.33%]">
+            <div className="h-full w-auto  px-2 shadow-flat bg-yellow-100">
+              <p>approved</p>
+            </div>
+            <div>waiting on you to pay deposite</div>
+          </div>
+          <div className="flex justify-between h-[18.33%]">
+            <div className="h-full w-auto  px-2 shadow-flat bg-secondryligth">
+              <p>confirmed</p>
+            </div>
+            <div>All is Good have fun</div>
+          </div>
+        </div>
+        <div className="h-[37.9%] w-full">
+          <BookingBody />
+        </div>
+      </div>
+    );
+  };
+
   //step 3 logic
   const handleSubmitUseForm = (data) => {
-    console.log(data);
+    const APIdata = {
+      contactPhoneNumber: data.contactPhoneNumber,
+      numberOfGuests: parseInt(data.numberOfGuests),
+      placeBooked: placeID,
+      startDateInSec: fromDate.getTime(),
+      endDateInSec: toDate.getTime(),
+      customer: user?.dbinfo?._id,
+    };
+    dispatch(createBooking(APIdata));
+
+    console.log(APIdata);
   };
 
   //logic for optaining the dates
@@ -276,31 +345,37 @@ function BookingForm() {
 
   return (
     <div className="h-[92vh] w-full  flex justify-center items-center">
-      <div className="h-[92.0%] w-[96%] box-border overflow-y-scroll  justify-between flex overflow-hidden items-center flex-col gap-[5.1%]">
-        <div className="flex flex-col w-full h-[15.3%]  justify-between">
-          <h3 className="text-sm text-primaryDark">
-            Step 1 <br />{" "}
-            <span className="text-xl font-bold text-primaryDark">Dates</span>{" "}
-          </h3>
-          <div className="w-full h-[35%] bg-white shadow-flat rounded-full overflow-hidden  ">
-            <div
-              style={{
-                width: `${step * 25}%`,
-              }}
-              className="h-full w-[30%] greenGradient1 shadow-md "
-            />
+      {loading ? (
+        <div className="h-full w-full bg-white">Loading</div>
+      ) : (
+        <div className="h-[92.0%] w-[96%] box-border overflow-y-scroll  justify-between flex overflow-hidden items-center flex-col gap-[5.1%]">
+          <div className="flex flex-col w-full h-[15.3%]  justify-between">
+            <h3 className="text-sm text-primaryDark">
+              Step 1 <br />{" "}
+              <span className="text-xl font-bold text-primaryDark">Dates</span>{" "}
+            </h3>
+            <div className="w-full h-[35%] bg-white shadow-flat rounded-full overflow-hidden  ">
+              <div
+                style={{
+                  width: `${step * 25}%`,
+                }}
+                className="h-full w-[30%] greenGradient1 shadow-md "
+              />
+            </div>
           </div>
+          {step === 1 ? (
+            <Step1 />
+          ) : step === 2 ? (
+            <Step2 />
+          ) : step === 3 ? (
+            <Step3 />
+          ) : step === 4 ? (
+            <Step4 />
+          ) : (
+            <></>
+          )}
         </div>
-        {step === 1 ? (
-          <Step1 />
-        ) : step === 2 ? (
-          <Step2 />
-        ) : step === 3 ? (
-          <Step3 />
-        ) : (
-          <></>
-        )}
-      </div>
+      )}
     </div>
   );
 }
