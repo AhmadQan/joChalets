@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { Calendar } from "react-date-range";
+import { useForm } from "react-hook-form";
 
 import SunOutlineIcon from "../../client/assets/icons/SunOutlineIcon";
 import MoonOutlineIcon from "../../client/assets/icons/MoonOutlineIcon";
 
 function BookingForm() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const [fromDate, setFromDate] = useState(null);
   const [isMorning, setisMorning] = useState(true);
 
@@ -156,25 +164,25 @@ function BookingForm() {
     );
   };
 
+  console.log(watch("numberOfGuests"));
+
   const Step3 = () => {
     return (
-      <form className="h-[78%] w-full  flex flex-col justify-start gap-10  ">
+      <form
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+        })}
+        className="h-[78%] w-full  flex flex-col justify-start gap-10  "
+      >
         <div className="w-full flex flex-col gap-3">
           <div className="flex justify-between items-center w-full">
             <h3 className="text-sm text-primaryDark">
               how many <br />{" "}
               <span className="text-xl font-bold text-primaryDark">Guests</span>{" "}
             </h3>
-            <div>{numberOfGuests}</div>
+            <div>{watch("numberOfGuests")}</div>
           </div>
-          <input
-            // value={numberOfGuests}
-            max={50}
-            onChange={(e) => {
-              // setNumberOfGuests(e.target.value);
-            }}
-            type={"range"}
-          />
+          <input {...register("numberOfGuests")} max={50} type={"range"} />
         </div>
         <div className="w-full flex flex-col flex-1  gap-3">
           <h3 className="text-sm text-primaryDark">
@@ -187,7 +195,11 @@ function BookingForm() {
             <p className="font-semibold border-secondryligth text-secondryDarker pl-2">
               +962
             </p>
-            <input type={"number"} className="h-full flex-1 " />
+            <input
+              {...register("contactPhoneNumber")}
+              type={"number"}
+              className="h-full flex-1 "
+            />
           </div>
         </div>
         <div className="h-[10%] w-full   flex justify-between p-2">
@@ -195,10 +207,7 @@ function BookingForm() {
             Back
           </button>
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              setStep(1);
-            }}
+            type="submit"
             // disabled={true}
             className="w-[45%] aspect-btnOutlined bg-secondryBase text-secondryDarker font-bold rounded-xl  disabled:bg-gray-400 disabled:text-gray-200"
           >
