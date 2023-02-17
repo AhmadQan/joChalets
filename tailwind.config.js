@@ -41,6 +41,8 @@ module.exports = {
         redLigther: "#FBDED9",
         redDark: "#731D0D",
         redDarker: "#260A04",
+
+        bgGray: "#e0e0e0",
       },
       spacing: {
         card: "94vw",
@@ -48,7 +50,7 @@ module.exports = {
       },
       boxShadow: {
         oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",
-        hole: " inset 12px 12px 16px #b2bbc8,inset -12px -12px 16px #ffffff",
+        hole: " inset 18px 18px 16px #c1c1c1,inset -18px -18px 16px  #F6F6F6",
         flat: "0px 0px 8px rgba(0, 0, 0, 0.25)",
       },
       borderRadius: {

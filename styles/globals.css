@@ -109,3 +109,11 @@ body {
     rgba(34, 179, 107, 0.63) 100%
   );
 }
+
+.bubblerGradient {
+  background: linear-gradient(
+    180deg,
+    rgba(83, 189, 251, 0.25) 0%,
+    rgba(83, 189, 251, 0) 100%
+  );
+}
