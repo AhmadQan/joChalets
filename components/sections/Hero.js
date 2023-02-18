@@ -28,10 +28,10 @@ function Hero() {
             <HouseBoldIcon fill={"#35E956"} className={"h-12 aspect-square "} />
             <p className="text-xl font-bold text-primary90">
               Book Now
-              <br />{" "}
+              <br />
               <span className="font-normal text-primary100 text-base">
                 only 3 steps for
-              </span>{" "}
+              </span>
             </p>
           </div>
           <div className="w-gridWidth relative aspect-square rounded-20 border shadow-flat border-primary50 bg-white overflow-hidden">
@@ -43,7 +43,7 @@ function Hero() {
             <div className="w-full h-[80%] imgOverlayColor absolute z-10 bottom-0 flex justify-start p-10 items-end">
               <p className="text-xl font-semibold text-white">
                 Fun Family <br />
-                <span className="text-primary90 text-lg">memory's</span>
+                <span className="text-primary90 text-lg">memorys</span>
               </p>
             </div>
           </div>
