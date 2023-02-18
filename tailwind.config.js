@@ -13,13 +13,16 @@ module.exports = {
 
     extend: {
       colors: {
-        primary: "#275DAD",
-        primaryBase: "#5288D8",
-        primaryligth: "#97B7E8",
-        primaryLigther: "#dce7f7",
-        primaryWhite: "#F9FBFF",
-        primaryDark: "#173868",
-        primaryDarker: "#081323",
+        primary10: "#E8F7FF",
+        primary20: "#D7F0FE",
+        primary30: "#9CD9FC",
+        primary40: "#53BDFB",
+        primary50: "#24ABF9",
+        primary60: "#10A4F9",
+        primary70: "#068DDB",
+        primary80: "#068DDB",
+        primary90: "#034D77",
+        primary100: "#023350",
 
         secondry: "#22b36b",
         secondryBase: "#4cdd96",
@@ -47,6 +50,7 @@ module.exports = {
       spacing: {
         card: "94vw",
         doubleScreen: "200vw",
+        gridWidth: "82.09vw",
       },
       boxShadow: {
         oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",

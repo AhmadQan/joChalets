@@ -101,7 +101,7 @@ export default function HomeAppBar() {
 
   return (
     <nav className="w-full h-[12.206vh]  fixed top-0 z-10 flex justify-center items-end">
-      <div className="w-[81.58vw] h-[69.23%] bubblerGradient rounded-full backdrop-blur-md shadow-flat border-blue-500 border"></div>
+      <div className="w-[81.58vw] h-[69.23%] bubblerGradient rounded-full backdrop-blur-md shadow-flat border-primary50 border"></div>
     </nav>
     // <motion.nav
     //   className="   bg-gray-200 bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"

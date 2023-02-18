@@ -117,3 +117,11 @@ body {
     rgba(83, 189, 251, 0) 100%
   );
 }
+
+.imgOverlayColor {
+  background: linear-gradient(
+    180deg,
+    rgba(83, 189, 251, 0) 42.55%,
+    #53bdfb 100%
+  );
+}
