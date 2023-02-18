@@ -7,6 +7,7 @@ function Hero() {
   return (
     <div className="h-screen w-full bg-white shadow-hole flex flex-col justify-between  items-center overflow-hidden relative">
       <img
+        alt="jochalets bubble background"
         src="https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2Fstream.png?alt=media&token=76ecbf51-5ec3-4e33-9880-2fa5fb60f8cf"
         className={"w-full object-cover absolute top-0"}
       />
@@ -35,6 +36,7 @@ function Hero() {
           </div>
           <div className="w-gridWidth relative aspect-square rounded-20 border shadow-flat border-primary50 bg-white overflow-hidden">
             <img
+              alt="kid enjoying a swim in the pool"
               className="w-full aspect-square object-cover"
               src="https://images.pexels.com/photos/9044049/pexels-photo-9044049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             />
