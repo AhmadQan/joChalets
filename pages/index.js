@@ -23,7 +23,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className=" h-auto bg-blue-200">
+      <main className=" h-auto  relative ">
         <HomeAppBar />
 
         <Hero />

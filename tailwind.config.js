@@ -50,11 +50,12 @@ module.exports = {
       },
       boxShadow: {
         oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",
-        hole: " inset 18px 18px 16px #c1c1c1,inset -18px -18px 16px  #F6F6F6",
+        hole: " inset 8px 8px 16px #c1c1c1,inset -8px -8px 16px  #F6F6F6",
         flat: "0px 0px 8px rgba(0, 0, 0, 0.25)",
       },
       borderRadius: {
         blob: "70% 70% 10% 10%;",
+        20: "22px",
       },
       aspectRatio: {
         btn: "6 / 2",
