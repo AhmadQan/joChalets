@@ -10,6 +10,8 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { stylesObj } from "../../styles/stylesSpecific/index";
 import FilterForm from "./FilterForm";
 
+import NotificationIcon from "../../client/assets/icons/NotificationIcon";
+
 export default function HomeAppBar() {
   const dispatch = useDispatch();
   const seetingStore = useSelector((state) => state.settings);
@@ -101,7 +103,26 @@ export default function HomeAppBar() {
 
   return (
     <nav className="w-full h-[12.206vh]  fixed top-0 z-10 flex justify-center items-end">
-      <div className="w-[81.58vw] h-[69.23%] bubblerGradient rounded-full backdrop-blur-md shadow-flat border-primary50 border"></div>
+      <div className="w-[81.58vw] h-[69.23%] bubblerGradient rounded-full backdrop-blur-md shadow-flat border-primary50 border flex justify-between px-4 items-center">
+        <div className="flex justify-center items-center w-12 aspect-square bg-secondryBase rounded-full border border-primary50 shadow-flat">
+          <img
+            className="w-10  object-cover"
+            alt="jochalets logo"
+            src="https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2Fjochaletfullwhiteblue.png?alt=media&token=f5ac7ee2-a809-44ba-b1b8-09125065393d"
+          />
+        </div>
+        <div className="flex gap-2 w-[44.20%]">
+          <NotificationIcon fill={"#5AED75"} className={"w-8 aspect-square "} />
+          <div className="w-[71.63%] h-12 bg-white rounded-full border border-primary50 shadow-flat flex justify-center items-center">
+            <Link
+              className={`text-sm font-bold text-primary90`}
+              href="/api/auth/login"
+            >
+              Login
+            </Link>
+          </div>
+        </div>
+      </div>
     </nav>
     // <motion.nav
     //   className="   bg-gray-200 bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
