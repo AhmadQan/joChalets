@@ -15,6 +15,9 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const PlacesStore = useSelector((state) => state.places);
   const { showAddModel } = PlacesStore;
+
+  const seetingStore = useSelector((state) => state.settings);
+  const { showFilterModel } = seetingStore;
   return (
     <>
       <Head>
@@ -31,6 +34,12 @@ export default function Home() {
         {showAddModel && (
           <div className="h-full w-full bg-primary bg-opacity-25 backdrop-blur-lg absolute top-0 left-0 z-20">
             <AddPlaceForm />
+          </div>
+        )}
+
+        {showFilterModel && (
+          <div className="absolute top-0 w-full h-screen">
+            <FilterForm />
           </div>
         )}
       </main>

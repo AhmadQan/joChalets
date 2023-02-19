@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { toggleAddModel } from "../../storeSlices/placesSlice";
 import { toggleFilterModel } from "../../storeSlices/settingSlice";
@@ -11,119 +10,72 @@ import { stylesObj } from "../../styles/stylesSpecific/index";
 import FilterForm from "./FilterForm";
 
 import NotificationIcon from "../../client/assets/icons/NotificationIcon";
+import { navVariants } from "../../client/utils/motion";
+import MenuOutlineIcon from "../../client/assets/icons/MenuOutlineIcon";
 
 export default function HomeAppBar() {
   const dispatch = useDispatch();
   const seetingStore = useSelector((state) => state.settings);
   const { showFilterModel } = seetingStore;
-
-  const [isopen, setisopen] = useState(false);
+  const [avatarMenu, setAvatarMenu] = useState(false);
 
   const { user, error, isLoading } = useUser();
 
-  const LogedinButtons = (
-    <div className="flex flex-col justify-center items-center  gap-5 ">
-      {user?.dbinfo?.role === "customer" ? (
-        <Link
-          href={""}
-          className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
-        >
-          profile
-        </Link>
-      ) : user?.dbinfo?.role === "admin" ? (
-        <>
-          <Link
-            href={""}
-            className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
-          >
-            admin
-          </Link>
-          ,
-          <button
-            onClick={() => {
-              dispatch(toggleAddModel());
-            }}
-            className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
-          >
-            add Place
-          </button>
-          ,
-        </>
-      ) : user?.dbinfo?.role === "owner" ? (
-        <Link
-          href={""}
-          className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
-        >
-          dashboard
-        </Link>
-      ) : (
-        <></>
-      )}
-      <Link
-        className={`${stylesObj.buttons.textBTN} text-red border-b-2 pb-1`}
-        href="/api/auth/logout"
-      >
-        Logout
-      </Link>
-    </div>
-  );
-
-  const LogedoutButtons = (
-    <div className=" text-primaryDark font-bold cursor-pointer font-Koulen">
-      <Link
-        className={`${stylesObj.buttons.textBTN} text-secondryDark border-b-2 pb-1`}
-        href="/api/auth/login"
-      >
-        Login
-      </Link>
-    </div>
-  );
-
-  const navVariant = {
-    hidden: {
-      opacity: 0,
-      y: -50,
-      transition: {
-        type: "tween",
-      },
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "tween",
-      },
-    },
-  };
-
-  const variants = {
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, x: "-100%" },
-  };
+  console.log(user);
 
   return (
-    <nav className="w-full h-[12.206vh]  fixed top-0 z-10 flex justify-center items-end">
+    <motion.nav
+      initial="hidden"
+      whileInView={"show"}
+      variants={navVariants}
+      className="w-full h-[12.206vh]  fixed top-0 z-10 flex justify-center items-end"
+    >
       <div className="w-[81.58vw] h-[69.23%] bubblerGradient rounded-full backdrop-blur-md shadow-flat border-primary50 border flex justify-between px-4 items-center">
         <div className="flex justify-center items-center w-12 aspect-square bg-secondryBase rounded-full border border-primary50 shadow-flat">
-          <img
-            className="w-10  object-cover"
-            alt="jochalets logo"
-            src="https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2Fjochaletfullwhiteblue.png?alt=media&token=f5ac7ee2-a809-44ba-b1b8-09125065393d"
-          />
+          <Link href={"/"}>
+            <img
+              className="w-10  object-cover"
+              alt="jochalets logo"
+              src="https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2Fjochaletfullwhiteblue.png?alt=media&token=f5ac7ee2-a809-44ba-b1b8-09125065393d"
+            />
+          </Link>
         </div>
-        <div className="flex gap-2 w-[44.20%]">
+        <div className="flex gap-2 w-auto relative">
           <NotificationIcon fill={"#5AED75"} className={"w-8 aspect-square "} />
-          <div className="w-[71.63%] h-12 bg-white rounded-full border border-primary50 shadow-flat flex justify-center items-center">
-            <Link
-              className={`text-sm font-bold text-primary90`}
-              href="/api/auth/login"
-            >
-              Login
-            </Link>
+
+          <div className="w-auto h-12 bg-white rounded-full border border-primary50 shadow-flat flex justify-center items-center">
+            {user?.picture ? (
+              <div
+                onClick={() => {
+                  setAvatarMenu(!avatarMenu);
+                }}
+                className="flex justify-center items-center gap-8 will-change-auto p-2 h-full w-full"
+              >
+                <div className="w-8 flex justify-center items-center rounded-lg aspect-square bg-secondryBase rounded-8">
+                  <MenuOutlineIcon
+                    fill={"#fff"}
+                    className={"w-6 aspect-square"}
+                  />
+                </div>
+                <p>{user?.given_name}</p>
+              </div>
+            ) : (
+              <Link
+                className={`text-sm font-bold text-primary90 px-2`}
+                href="/api/auth/login"
+              >
+                Login
+              </Link>
+            )}
           </div>
+          {avatarMenu && (
+            <div className="w-[32.99vw] h-auto px-2 py-2 bg-white absolute top-full right-0 border-primary50 border shadow-flat rounded-md">
+              <Link href={"/api/auth/logout"}>Log Out</Link>
+            </div>
+          )}
         </div>
       </div>
-    </nav>
+    </motion.nav>
     // <motion.nav
     //   className="   bg-gray-200 bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
     //   initial="hidden"
