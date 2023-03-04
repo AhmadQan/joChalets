@@ -25,17 +25,30 @@ export default function FilterForm() {
   } = useForm();
 
   //logic for the API
-  const searchHandler = async (e) => {
-    e.preventDefault();
-    const data = {
-      startDate: dateRanges.start.getTime(),
-      endDate: dateRanges.end.getTime(),
-      city: city,
+  const searchHandler = async (data) => {
+    if (data?.FromSlot === "Morning") {
+      data?.fromDate.setHours(10, 0, 0);
+    } else {
+      data?.fromDate.setHours(22, 0, 0);
+    }
+
+    if (data?.ToSlot === "Morning") {
+      data?.toDate.setHours(10, 0, 0);
+    } else {
+      data?.toDate.setHours(22, 0, 0);
+    }
+    const dataToApi = {
+      startDate: data?.fromDate.getTime(),
+      endDate: data?.toDate.getTime(),
     };
-    dispatch(fetchPlaces(0, data));
+
+    dispatch(fetchPlaces(0, dataToApi));
   };
 
-  const onSubmit = (data) => {};
+  const onSubmit = async (data) => {
+    await searchHandler(data);
+    dispatch(toggleFilterModel());
+  };
 
   return (
     <div className="w-full h-full bg-primary100 bg-opacity-30 flex justify-center items-center fixed backdrop-blur-md overflow-hidden z-20 ">
