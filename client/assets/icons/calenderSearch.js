@@ -1,9 +1,10 @@
 import React from "react";
 
-function CalenderSearch({ fill, className }) {
+function CalenderSearch({ fill, className, onClick }) {
   return (
     <svg
       className={className}
+      onClick={onClick}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

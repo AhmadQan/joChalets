@@ -24,6 +24,17 @@ module.exports = {
         primary90: "#034D77",
         primary100: "#023350",
 
+        secondry10: "#ECFDEF",
+        secondry20: "#C8F9D1",
+        secondry30: "#A3F5B2",
+        secondry40: "#7EF193",
+        secondry50: "#5AED75",
+        secondry60: "#35E956",
+        secondry70: "#18DC3C",
+        secondry80: "#12A52D",
+        secondry90: "#0C6E1E",
+        secondry100: "#04250A",
+
         secondry: "#22b36b",
         secondryBase: "#4cdd96",
         secondryligth: "#94ebc0",
@@ -64,6 +75,7 @@ module.exports = {
       aspectRatio: {
         btn: "6 / 2",
         btnOutlined: "4.45 / 1",
+        longBton: "6/1",
       },
     },
   },
