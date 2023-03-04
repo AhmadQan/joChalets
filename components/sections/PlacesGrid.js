@@ -14,7 +14,7 @@ function PlacesGrid() {
     dispatch(fetchPlaces(0));
   }, []);
   return (
-    <div className="flex flex-col gap-7 px-5 items-center">
+    <div className="flex flex-col gap-7 px-5 bg-primary20 items-center">
       {allPlaces.map((place) => (
         <PlacesGridItem key={place._id} data={place} />
       ))}

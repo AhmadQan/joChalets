@@ -125,3 +125,11 @@ body {
     #53bdfb 100%
   );
 }
+
+.bluegradientoverlay {
+  background: linear-gradient(
+    180deg,
+    rgba(83, 189, 251, 0) 42.55%,
+    #53bdfb 100%
+  );
+}

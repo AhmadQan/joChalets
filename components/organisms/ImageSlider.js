@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import ExportOutlineIcon from "../../client/assets/icons/ExportOutlineIcon";
 
-export default function ImageSlider({ imagesList }) {
+export default function ImageSlider({ imagesList, onClick }) {
   const [imgList, setimgList] = useState([...imagesList]);
 
   const swipeConfidenceThreshold = 10000;
@@ -28,7 +29,10 @@ export default function ImageSlider({ imagesList }) {
   };
 
   return (
-    <motion.div className="self-baseline  w-max  h-auto ">
+    <motion.div
+      onClick={onClick}
+      className="self-baseline shadow-imagesSlider  w-max  h-full overflow-hidden border border-primary40 rounded-20 "
+    >
       <motion.div
         transition={{
           x: { type: "spring", stiffness: 300, damping: 30 },
@@ -46,15 +50,25 @@ export default function ImageSlider({ imagesList }) {
             paginate(-1);
           }
         }}
-        className="w-full relative  flex  "
+        className="w-full relative h-full flex"
       >
         {imgList.map((img, i) => (
-          <img
-            key={img._id}
-            className=" object-cover w-card aspect-square"
-            src={img.img}
-            alt={img.img}
-          />
+          <div className="w-card">
+            <div className="absolute top-0 w-full h-full bluegradientoverlay flex flex-col">
+              <div className="flex w-card justify-end px-5 py-5">
+                <ExportOutlineIcon
+                  fill={"#fff"}
+                  className={"w-8 aspect-square justify-self-end"}
+                />
+              </div>
+            </div>
+            <img
+              key={img._id}
+              className=" object-cover h-full w-card aspect-square"
+              src={img.img}
+              alt={img.img}
+            />
+          </div>
         ))}
       </motion.div>
     </motion.div>

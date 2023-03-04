@@ -67,6 +67,9 @@ module.exports = {
         oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",
         hole: " inset 8px 8px 16px #c1c1c1,inset -8px -8px 16px  #F6F6F6",
         flat: "0px 0px 8px rgba(0, 0, 0, 0.25)",
+        imagesSlider: "4.56698px 4.56698px 13.7009px rgba(0, 0, 0, 0.25)",
+        elvatedCard:
+          "-4px -4px 15px rgba(0, 0, 0, 0.25), 4px 4px 12px rgba(0, 0, 0, 0.25)",
       },
       borderRadius: {
         blob: "70% 70% 10% 10%;",
@@ -76,6 +79,7 @@ module.exports = {
         btn: "6 / 2",
         btnOutlined: "4.45 / 1",
         longBton: "6/1",
+        placeCard: "0.7754/1",
       },
     },
   },
