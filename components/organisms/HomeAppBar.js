@@ -30,7 +30,7 @@ export default function HomeAppBar() {
       variants={navVariants}
       className="w-full h-[12.206vh]  fixed top-0 z-10 flex justify-center items-end"
     >
-      <div className="w-[81.58vw] h-[69.23%] bubblerGradient rounded-full backdrop-blur-md shadow-flat border-primary50 border flex justify-between px-4 items-center">
+      <div className="w-[93.606%] h-[69.23%] bluegradientBg rounded-xl backdrop-blur-md shadow-flat border-primary50 border flex justify-between px-4 items-center">
         <div className="flex justify-center items-center w-12 aspect-square bg-secondryBase rounded-full border border-primary50 shadow-flat">
           <Link href={"/"}>
             <img
@@ -61,7 +61,7 @@ export default function HomeAppBar() {
               </div>
             ) : (
               <Link
-                className={`text-sm font-bold text-primary90 px-2`}
+                className={`text-sm font-bold text-primary90 px-6`}
                 href="/api/auth/login"
               >
                 Login
@@ -76,78 +76,5 @@ export default function HomeAppBar() {
         </div>
       </div>
     </motion.nav>
-    // <motion.nav
-    //   className="   bg-gray-200 bg-opacity-30 backdrop-blur-md shadow-md rounded-b-2xl flex flex-col w-full z-20 fixed top-0"
-    //   initial="hidden"
-    //   whileInView={"show"}
-    //   variants={navVariant}
-    // >
-    //   <div className=" px-3 py-4 flex justify-start gap-3 items-center ">
-    //     <button
-    //       className={`${stylesObj.buttons.textBTN} text-primaryDark font-bold  font-IBMPlexSansArabic`}
-    //     >
-    //       JoChalets
-    //     </button>
-    //     <div className="flex-1">
-    //       <button
-    //         className={`flex-1 w-1/2 ${
-    //           showFilterModel ? "bg-secondry" : "bg-secondryBase"
-    //         }  p-2 shadow-md rounded-full`}
-    //         onClick={() => {
-    //           dispatch(toggleFilterModel());
-    //         }}
-    //       >
-    //         <svg
-    //           xmlns="http://www.w3.org/2000/svg"
-    //           fill="none"
-    //           viewBox="0 0 24 24"
-    //           strokeWidth={1.5}
-    //           stroke="currentColor"
-    //           className="w-6 h-6 text-secondryDark"
-    //         >
-    //           <path
-    //             strokeLinecap="round"
-    //             strokeLinejoin="round"
-    //             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-    //           />
-    //         </svg>
-    //       </button>
-    //     </div>
-    //     {user ? (
-    //       <svg
-    //         className="text-secondryDark w-8"
-    //         xmlns="http://www.w3.org/2000/svg"
-    //         fill="none"
-    //         viewBox="0 0 24 24"
-    //         strokeWidth="1.5"
-    //         stroke="currentColor"
-    //         onClick={(e) => {
-    //           e.preventDefault();
-    //           setisopen((isopen) => !isopen);
-    //         }}
-    //       >
-    //         <path
-    //           strokeLinecap="round"
-    //           strokeLinejoin="round"
-    //           d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-    //         />
-    //       </svg>
-    //     ) : (
-    //       LogedoutButtons
-    //     )}
-    //   </div>
-    //   {isopen && user && (
-    //     <motion.nav
-    //       className="w-auto h-auto bg-secondryligth  backdrop-blur-sm bg-opacity-25 py-6 "
-    //       initial="hidden"
-    //       whileInView={"show"}
-    //       animate={isopen ? "open" : "closed"}
-    //       variants={variants}
-    //     >
-    //       {user ? LogedinButtons : LogedoutButtons}
-    //     </motion.nav>
-    //   )}
-    //   {showFilterModel && <FilterForm />}
-    // </motion.nav>
   );
 }

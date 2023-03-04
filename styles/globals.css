@@ -133,3 +133,11 @@ body {
     #53bdfb 100%
   );
 }
+
+.bluegradientBg {
+  background: linear-gradient(
+    180deg,
+    rgba(36, 171, 249, 0.25) 0%,
+    rgba(36, 171, 249, 0) 161.11%
+  );
+}

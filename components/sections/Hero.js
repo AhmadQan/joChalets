@@ -34,16 +34,16 @@ function Hero() {
           initial="hidden"
           whileInView={"show"}
           variants={navVariants}
-          className="h-[60.128%] w-[93.606%] bubblerGradient border border-primary50 backdrop-blur-md rounded-20 flex flex-col items-center justify-around"
+          className="h-[60.128%] w-[93.606%] bluegradientBg border border-primary50 backdrop-blur-md rounded-20 flex flex-col items-center justify-between"
         >
           <div
             onClick={() => {
               dispatch(toggleFilterModel());
             }}
-            className="w-gridWidth aspect-btnOutlined bg-white rounded-full border cursor-pointer border-primary50 shadow-flat flex justify-start gap-3 items-center px-6"
+            className="w-[70%] aspect-btnOutlined mt-[3%] bg-white rounded-full border cursor-pointer border-primary50 shadow-flat flex justify-start gap-3 items-center px-6"
           >
-            <HouseBoldIcon fill={"#35E956"} className={"h-12 aspect-square "} />
-            <p className="text-xl font-bold text-primary90">
+            <HouseBoldIcon fill={"#35E956"} className={"h-10 aspect-square "} />
+            <p className="text-lg font-bold text-primary90">
               Book Now
               <br />
               <span className="font-normal text-primary100 text-base">
@@ -51,7 +51,7 @@ function Hero() {
               </span>
             </p>
           </div>
-          <div className="w-gridWidth relative aspect-square rounded-20 border shadow-flat border-primary50 bg-white overflow-hidden">
+          <div className="w-full relative aspect-square rounded-20 border-2 shadow-elvatedCard border-primary20 bg-white overflow-hidden">
             <img
               alt="kid enjoying a swim in the pool"
               className="w-full aspect-square object-cover"
