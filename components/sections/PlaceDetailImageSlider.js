@@ -21,16 +21,6 @@ const SliderOverlay = ({ className, title }) => (
         className={`w-[12%] aspect-square rotate-180`}
       />
     </div>
-    <BookIcon fill={"#94ebc0"} className={"w-1/5 aspect-square "} />
-    <div className="flex justify-between items-end">
-      <h2 className="text-3xl font-IBMPlexSans font-normal bg-gr text-white">
-        Welcome To <br /> {`${title}`}
-      </h2>
-      <div>
-        <HeartIcon fill={"#BF3115"} className={"w-8 aspect-square "} />
-        <p className="text-white">235 people</p>
-      </div>
-    </div>
   </div>
 );
 

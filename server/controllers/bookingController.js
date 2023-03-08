@@ -86,3 +86,22 @@ export const deleteById = async (req, res) => {
 
   return res.status(200).json(bookingId);
 };
+
+// APIs relating to place Details
+
+export const getBookingByPlaceId = async (req, res) => {
+  const { placeId } = req.query;
+
+  const { data } = req.body;
+
+  await connectDB();
+
+  const allPlaceBooking = await BookingModel.find({
+    placeBooked: placeId,
+    // $or: [],
+  }).catch((err) => {
+    res.status(400).json({ err });
+  });
+
+  return res.status(200).json(allPlaceBooking);
+};

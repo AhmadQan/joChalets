@@ -141,3 +141,9 @@ body {
     rgba(36, 171, 249, 0) 161.11%
   );
 }
+
+.rdrCalendarWrapper {
+  width: 100% !important;
+  border-radius: 20px !important;
+  aspect-ratio: 1/1 !important;
+}

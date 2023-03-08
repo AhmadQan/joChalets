@@ -49,13 +49,6 @@ module.exports = {
         purpleDark: "#22136C",
         purpleDarker: "#0B0624",
 
-        red: "#BF3115",
-        redBase: "#EA5B3F",
-        redligth: "#F29D8C",
-        redLigther: "#FBDED9",
-        redDark: "#731D0D",
-        redDarker: "#260A04",
-
         bgGray: "#e0e0e0",
       },
       spacing: {
