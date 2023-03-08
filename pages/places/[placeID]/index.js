@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 import { fetchSelectedPlace } from "../../../storeSlices/placesSlice";
 
@@ -13,6 +14,8 @@ import PlaceFeedback from "../../../components/sections/PlaceFeedback";
 import PlaceInstruction from "../../../components/sections/PlaceInstruction";
 
 export default function PlaceDetailPage() {
+  const { user, error, isLoading } = useUser();
+  console.log(user);
   const router = useRouter();
   const { placeID } = router.query;
 

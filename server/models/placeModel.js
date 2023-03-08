@@ -2,9 +2,10 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 const PlaceSchema = new Schema({
   name: { type: String, required: true },
-  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  address: { type: String },
+  owner: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  city: { type: String, required: true },
   description: { type: String },
+  address: { type: String },
   images: [{ imgIndex: Number, img: String }],
   utils: [{ utilKey: String, utilValue: Boolean }],
   bookingList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }],

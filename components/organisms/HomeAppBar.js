@@ -3,11 +3,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 
-import { toggleAddModel } from "../../storeSlices/placesSlice";
-import { toggleFilterModel } from "../../storeSlices/settingSlice";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { stylesObj } from "../../styles/stylesSpecific/index";
-import FilterForm from "./FilterForm";
+import { createPlaces, toggleAddModel } from "../../storeSlices/placesSlice";
 
 import NotificationIcon from "../../client/assets/icons/NotificationIcon";
 import { navVariants } from "../../client/utils/motion";
@@ -15,13 +12,11 @@ import MenuOutlineIcon from "../../client/assets/icons/MenuOutlineIcon";
 
 export default function HomeAppBar() {
   const dispatch = useDispatch();
-  const seetingStore = useSelector((state) => state.settings);
-  const { showFilterModel } = seetingStore;
   const [avatarMenu, setAvatarMenu] = useState(false);
 
   const { user, error, isLoading } = useUser();
 
-  console.log(user);
+  console.log(user?.dbinfo?.role);
 
   return (
     <motion.nav
@@ -69,8 +64,19 @@ export default function HomeAppBar() {
             )}
           </div>
           {avatarMenu && (
-            <div className="w-[32.99vw] h-auto px-2 py-2 bg-white absolute top-full right-0 border-primary50 border shadow-flat rounded-md">
+            <div className="w-[32.99vw] flex flex-col gap-4 h-auto px-2 py-2 bg-white absolute text-xs font-bold text-primary90 top-full right-0 border-primary50 border shadow-flat rounded-md">
               <Link href={"/api/auth/logout"}>Log Out</Link>
+              {user?.dbinfo?.role === "admin" && (
+                <div className="w-full  ">
+                  <button
+                    onClick={() => {
+                      dispatch(toggleAddModel());
+                    }}
+                  >
+                    Register Place
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>

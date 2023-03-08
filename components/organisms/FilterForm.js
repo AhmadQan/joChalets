@@ -51,14 +51,14 @@ export default function FilterForm() {
   };
 
   return (
-    <div className="w-full h-full bg-primary100 bg-opacity-30 flex justify-center items-center fixed backdrop-blur-md overflow-hidden z-20 ">
-      <div className="h-[89.177%] w-[80.81%]  relative flex flex-col justify-between">
+    <div className="w-full h-full bg-primary100 bg-opacity-30 flex justify-center items-center  backdrop-blur-md overflow-hidden  ">
+      <div className="h-[89.177%] w-[80.81%]  relative flex flex-col justify-between ">
         <CloseCirculeIcon
           onClick={() => {
             dispatch(toggleFilterModel());
           }}
           fill={"#EA5B3F"}
-          className={"w-10 aspect-square"}
+          className={"w-10 aspect-square z-30"}
         />
         <form
           onSubmit={handleSubmit(onSubmit)}

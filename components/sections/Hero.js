@@ -34,7 +34,7 @@ function Hero() {
           initial="hidden"
           whileInView={"show"}
           variants={navVariants}
-          className="h-[60.128%] w-[93.606%] bluegradientBg border border-primary50 backdrop-blur-md rounded-20 flex flex-col items-center justify-between"
+          className="h-[60.128%] w-[93.606%] bluegradientBg border border-primary50 backdrop-blur-md rounded-20 flex flex-col gap-8 items-center justify-between"
         >
           <div
             onClick={() => {

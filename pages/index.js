@@ -32,13 +32,13 @@ export default function Home() {
         <Hero />
         <PlacesGrid />
         {showAddModel && (
-          <div className="h-full w-full bg-primary bg-opacity-25 backdrop-blur-lg absolute top-0 left-0 z-20">
+          <div className="h-full w-full bg-primary90 bg-opacity-70 text-white backdrop-blur-lg fixed top-0 left-0 z-20">
             <AddPlaceForm />
           </div>
         )}
 
         {showFilterModel && (
-          <div className="absolute top-0 w-full h-screen">
+          <div className="fixed top-0 w-full h-screen z-30">
             <FilterForm />
           </div>
         )}

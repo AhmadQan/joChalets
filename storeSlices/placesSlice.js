@@ -11,7 +11,7 @@ export const PlacesSlice = createSlice({
     totalCount: null,
     pageNumber: 0,
     idToEdit: null,
-    showAddModel: false,
+    showAddModel: true,
     placeSelected: null,
   },
   reducers: {

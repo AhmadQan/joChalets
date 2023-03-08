@@ -33,9 +33,10 @@ export const BookingSlice = createSlice({
 });
 
 //action thunks
-export const createBooking = (data) => async (dispatch) => {
+export const createBooking = (data) => async (dispatch, state) => {
   try {
     dispatch(loading());
+    console.log(state);
 
     const response = await https.post(`booking`, { data: data });
 
@@ -43,9 +44,9 @@ export const createBooking = (data) => async (dispatch) => {
   } catch (bookingError) {
     dispatch(
       apiErr(
-        error.response && error.response.data?.detail
-          ? error.response.data?.detail
-          : error.message
+        bookingError.response && bookingError.response.data?.detail
+          ? bookingError.response.data?.detail
+          : bookingError.message
       )
     );
   }

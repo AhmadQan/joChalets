@@ -80,6 +80,7 @@ module.exports = {
         btnOutlined: "4.45 / 1",
         longBton: "6/1",
         placeCard: "0.7754/1",
+        textField: "6.7/1",
       },
     },
   },

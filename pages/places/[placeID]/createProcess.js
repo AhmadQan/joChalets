@@ -32,9 +32,10 @@ export default function CreateProcess() {
 
   //uploading images to firebase function
   const imagesHandler = async (e) => {
+    console.log("here");
+
     e.preventDefault();
     if (!files || !identifier) return;
-
     for (const index in files) {
       if (files[index]?.size) {
         await UploadImages(identifier, files[index]);
@@ -86,7 +87,7 @@ export default function CreateProcess() {
             }}
           ></input>
           <button
-            className=" bg-primary text-grayLight rounded-md py-3"
+            className=" bg-primary70 text-grayLight rounded-md py-3"
             type="submit"
           >
             Upload
@@ -94,7 +95,7 @@ export default function CreateProcess() {
         </form>
       </div>
       <button
-        className=" bg-accent w-full text-grayDark rounded-md py-3"
+        className=" bg-secondry70 w-full text-grayDark rounded-md py-3"
         onClick={(e) => {
           e.preventDefault();
           attachImagesToDBHandler();
@@ -103,7 +104,7 @@ export default function CreateProcess() {
         Next
       </button>
       <button
-        className=" bg-accent text-grayDark w-full rounded-md py-3"
+        className=" border border-primary70 text-grayDark w-full rounded-md py-3"
         type="submit"
       >
         Cancel
