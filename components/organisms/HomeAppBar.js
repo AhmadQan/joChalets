@@ -16,8 +16,6 @@ export default function HomeAppBar() {
 
   const { user, error, isLoading } = useUser();
 
-  console.log(user?.dbinfo?.role);
-
   return (
     <motion.nav
       initial="hidden"

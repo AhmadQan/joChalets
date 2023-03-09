@@ -162,7 +162,6 @@ export const getPlaceAvailablityById = async (req, res) => {
 
   const placeBookingList = place?.bookingList;
   const availablity = await checkThisMoth(placeBookingList);
-  console.log("availablity", availablity);
 
   return res.status(200).json({ data: availablity });
 };

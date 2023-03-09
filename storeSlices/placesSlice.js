@@ -110,13 +110,13 @@ export const updatePlaces = (placeId, placeData) => async (dispatch) => {
   }
 };
 
-export const fetchSelectedPlace = (placeId) => async (dispatch) => {
+export const getPlaceAvailablity = (placeId) => async (dispatch) => {
   try {
     dispatch(loading());
 
-    const response = await https.get(`places/${placeId}`);
+    const response = await https.get(`booking/places/${placeId}`);
 
-    dispatch(loadSelectedPlace(response));
+    dispatch(loadPlaceAvailablity(response?.data));
   } catch (error) {
     dispatch(
       apiErr(
@@ -128,13 +128,14 @@ export const fetchSelectedPlace = (placeId) => async (dispatch) => {
   }
 };
 
-export const getPlaceAvailablity = (placeId) => async (dispatch) => {
+export const fetchSelectedPlace = (placeId) => async (dispatch) => {
   try {
     dispatch(loading());
 
-    const response = await https.get(`booking/places/${placeId}`);
+    const response = await https.get(`places/${placeId}`);
+    dispatch(getPlaceAvailablity(placeId));
 
-    dispatch(loadPlaceAvailablity(response?.data));
+    dispatch(loadSelectedPlace(response));
   } catch (error) {
     dispatch(
       apiErr(
