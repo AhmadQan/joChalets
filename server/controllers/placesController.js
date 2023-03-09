@@ -3,6 +3,11 @@ import PlaceModel from "../models/placeModel";
 import BookingModel from "../models/bookingModel";
 import UserModel from "../models/userModel";
 import ReviewsModel from "../models/reviewsModel";
+import {
+  checkDatesAvilablity,
+  checkThisMoth,
+  getThisMonthArray,
+} from "../utils/helpers/datesHelpers";
 
 export const getAll = async (req, res) => {
   //where p is the page number and s is the size or the number of element per page
@@ -140,4 +145,24 @@ export const deleteById = async (req, res) => {
   });
 
   return res.status(200).json(placeid);
+};
+
+///APIs for availablety controll
+
+export const getPlaceAvailablityById = async (req, res) => {
+  const { placeId } = req.query;
+
+  await connectDB();
+
+  const place = await PlaceModel.findOne({ _id: placeId })
+    .populate("bookingList")
+    .catch((err) => {
+      return res.status(400).json({ err });
+    });
+
+  const placeBookingList = place?.bookingList;
+  const availablity = await checkThisMoth(placeBookingList);
+  console.log("availablity", availablity);
+
+  return res.status(200).json({ data: availablity });
 };

@@ -13,6 +13,7 @@ export const PlacesSlice = createSlice({
     idToEdit: null,
     showAddModel: true,
     placeSelected: null,
+    placeAvailablity: null,
   },
   reducers: {
     loading: (state) => {
@@ -43,6 +44,9 @@ export const PlacesSlice = createSlice({
       state.placeSelected = action.payload.data;
       state.loading = false;
       state.err = null;
+    },
+    loadPlaceAvailablity: (state, action) => {
+      state.placeAvailablity = action.payload.data;
     },
   },
 });
@@ -94,7 +98,7 @@ export const updatePlaces = (placeId, placeData) => async (dispatch) => {
 
     const response = await https.put(`places/${placeId}`, { data: placeData });
 
-    dispatch(setPlaceToEdit(response.data._id));
+    dispatch(setPlaceToEdit(response));
   } catch (error) {
     dispatch(
       apiErr(
@@ -124,6 +128,24 @@ export const fetchSelectedPlace = (placeId) => async (dispatch) => {
   }
 };
 
+export const getPlaceAvailablity = (placeId) => async (dispatch) => {
+  try {
+    dispatch(loading());
+
+    const response = await https.get(`booking/places/${placeId}`);
+
+    dispatch(loadPlaceAvailablity(response?.data));
+  } catch (error) {
+    dispatch(
+      apiErr(
+        error.response && error.response.data?.detail
+          ? error.response.data?.detail
+          : error.message
+      )
+    );
+  }
+};
+
 // Action creators are generated for each case reducer function
 export const {
   loading,
@@ -133,6 +155,7 @@ export const {
   setPageNumber,
   toggleAddModel,
   loadSelectedPlace,
+  loadPlaceAvailablity,
 } = PlacesSlice.actions;
 
 export default PlacesSlice.reducer;

@@ -32,8 +32,6 @@ export default function CreateProcess() {
 
   //uploading images to firebase function
   const imagesHandler = async (e) => {
-    console.log("here");
-
     e.preventDefault();
     if (!files || !identifier) return;
     for (const index in files) {

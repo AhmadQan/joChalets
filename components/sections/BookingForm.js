@@ -299,8 +299,6 @@ function BookingForm() {
       customer: user?.dbinfo?._id,
     };
     dispatch(createBooking(APIdata));
-
-    console.log(APIdata);
   };
 
   //logic for optaining the dates
@@ -314,7 +312,6 @@ function BookingForm() {
       toBeChanged.setHours(22);
       setFromDate(toBeChanged);
     }
-    console.log(fromDate?.getHours());
   };
 
   const HandleToggleMorning = (hours) => {
@@ -333,7 +330,6 @@ function BookingForm() {
       toBeChanged.setHours(22);
       setToDate(toBeChanged);
     }
-    console.log(toDate?.getHours());
   };
 
   const HandleToggleMorningTo = (hours) => {

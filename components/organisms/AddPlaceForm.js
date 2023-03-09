@@ -21,7 +21,6 @@ export default function AddPlaceForm() {
 
   //creating a place function
   const submitHandler = async (data) => {
-    console.log(data);
     dispatch(createPlaces(data));
   };
 

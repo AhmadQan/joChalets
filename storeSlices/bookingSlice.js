@@ -36,7 +36,6 @@ export const BookingSlice = createSlice({
 export const createBooking = (data) => async (dispatch, state) => {
   try {
     dispatch(loading());
-    console.log(state);
 
     const response = await https.post(`booking`, { data: data });
 
