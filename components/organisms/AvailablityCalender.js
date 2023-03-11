@@ -26,6 +26,9 @@ function AvailablityCalender({ placeID, closeHandler }) {
     placeAvailablity;
 
   const dispatch = useDispatch();
+  const datesToDisable = disabledDates.map((date) => {
+    return new Date(date);
+  });
 
   useEffect(() => {
     if (placeAvailablity) return;
@@ -35,15 +38,25 @@ function AvailablityCalender({ placeID, closeHandler }) {
   function renderCustomDayContent(day) {
     // Here you can add any custom content for the day cell
 
-    const isAvailableMorning = availableAtMorning?.includes(day.toDateString());
-    const isAvailableEvening = availableAtEvening?.includes(day.toDateString());
+    const isAvailableMorning = availableAtMorning?.filter((date) => {
+      return (
+        new Date(date).toLocaleDateString() ===
+        new Date(day).toLocaleDateString()
+      );
+    });
+    const isAvailableEvening = availableAtEvening?.filter((date) => {
+      return (
+        new Date(date).toLocaleDateString() ===
+        new Date(day).toLocaleDateString()
+      );
+    });
 
     return (
       <div
         className={`rounded-md   ${
-          isAvailableMorning
+          isAvailableMorning.length
             ? "bg-yellow-100  text-black border border-yellow-300"
-            : isAvailableEvening
+            : isAvailableEvening.length
             ? "bg-blue-200 text-white border border-primary40"
             : ""
         } w-full`}
@@ -102,7 +115,7 @@ function AvailablityCalender({ placeID, closeHandler }) {
         </div>
       </div>
       <Calendar
-        disabledDates={disabledDates}
+        disabledDates={datesToDisable}
         dayContentRenderer={renderCustomDayContent}
         rangeColors={["#C8F9D1", "#C8F9D1", "#C8F9D1"]}
         onChange={(date) => {

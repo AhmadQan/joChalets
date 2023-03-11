@@ -98,33 +98,27 @@ export const getPlaceAvailablity = (placeId) => async (dispatch) => {
     const response = await https.get(`booking/places/${placeId}`);
 
     const disabledDates = await response?.data?.data?.filter((item) => {
-      return (
-        item?.availableMorning === false && item?.availableEvening === false
-      );
+      return item.availableMorning === false && item.availableEvening === false;
     });
 
     const availableAtEvening = await response?.data?.data?.filter((item) => {
-      return (
-        item?.availableMorning === false && item?.availableEvening === true
-      );
+      return item.availableMorning === false && item.availableEvening === true;
     });
 
     const availableAtMorning = await response?.data?.data?.filter((item) => {
-      return (
-        item?.availableMorning === true && item?.availableEvening === false
-      );
+      return item.availableMorning === true && item.availableEvening === false;
     });
 
     dispatch(
       loadPlaceAvailablity({
         disabledDates: disabledDates.map((item) => {
-          return new Date(item.date);
+          return item.date;
         }),
         availableAtEvening: availableAtEvening.map((item) => {
-          return new Date(item.date).toDateString();
+          return item.date;
         }),
         availableAtMorning: availableAtMorning.map((item) => {
-          return new Date(item.date).toDateString();
+          return item.date;
         }),
       })
     );
