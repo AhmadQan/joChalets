@@ -16,12 +16,14 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { async } from "@firebase/util";
 
 function AvailablityCalender({ placeID, closeHandler }) {
-  const [actionModelOpen, setActionModelOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
   const PlaceState = useSelector((state) => state.placeDetail);
   const { err, loading, placeAvailablity } = PlaceState;
   const { user, error, isLoading } = useUser();
+
+  const { disabledDates, availableAtEvening, availableAtMorning } =
+    placeAvailablity;
 
   console.log(`availablity`, user?.dbinfo?.role);
 
@@ -32,56 +34,22 @@ function AvailablityCalender({ placeID, closeHandler }) {
     dispatch(getPlaceAvailablity(placeID));
   }, [placeAvailablity]);
 
-  const disabledDates = placeAvailablity
-    ?.filter((item) => {
-      return !item?.availableMorning && !item?.availableEvening;
-    })
-    .map((item) => {
-      return new Date(item.date);
-    });
-
-  const availableAtEvening = placeAvailablity
-    ?.filter((item) => {
-      return !item?.availableMorning && item?.availableEvening;
-    })
-    .map((item) => {
-      return new Date(item.date);
-    });
-
-  const availableAtMorning = placeAvailablity
-    ?.filter((item) => {
-      return item?.availableMorning && !item?.availableEvening;
-    })
-    .map((item) => {
-      return new Date(item.date);
-    });
-
   function renderCustomDayContent(day) {
     // Here you can add any custom content for the day cell
 
-    let isMorning = false;
-    let isEvening = false;
-
-    availableAtMorning?.forEach((date) => {
-      if (date.toDateString() === day.toDateString()) {
-        isMorning = true;
-      }
+    const isAvailableMorning = availableAtMorning?.filter((item) => {
+      return item.toDateString() === day.toDateString();
     });
-    availableAtEvening?.forEach((date) => {
-      if (date.toDateString() === day.toDateString()) {
-        isEvening = true;
-      }
+    const isAvailableEvening = availableAtEvening?.filter((item) => {
+      return item.toDateString() === day.toDateString();
     });
-
-    console.log("availableAtEvening", availableAtEvening);
-    console.log("availableAtMorning", availableAtMorning);
 
     return (
       <div
         className={`rounded-md   ${
-          isMorning
+          isAvailableMorning.length > 0
             ? "bg-yellow-100  text-black border border-yellow-300"
-            : isEvening
+            : isAvailableEvening.length > 0
             ? "bg-blue-200 text-white border border-primary40"
             : ""
         } w-full`}

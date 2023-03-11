@@ -9,7 +9,11 @@ export const PlaceDetailSlice = createSlice({
 
     allBookings: null,
     totalCount: null,
-    placeAvailablity: null,
+    placeAvailablity: {
+      disabledDates: [],
+      availableAtEvening: [],
+      availableAtMorning: [],
+    },
     newBooking: null,
     bookingError: false,
 
@@ -39,7 +43,7 @@ export const PlaceDetailSlice = createSlice({
       state.loading = false;
     },
     loadPlaceAvailablity: (state, action) => {
-      state.placeAvailablity = action.payload.data;
+      state.placeAvailablity = action.payload;
     },
     loadSelectedPlace: (state, action) => {
       state.placeSelected = action.payload.data;
@@ -93,7 +97,39 @@ export const getPlaceAvailablity = (placeId) => async (dispatch) => {
 
     const response = await https.get(`booking/places/${placeId}`);
 
-    dispatch(loadPlaceAvailablity(response?.data));
+    const placeAvailablity = response?.data?.data;
+
+    const disabledDates = placeAvailablity?.filter((item) => {
+      return (
+        item?.availableMorning === false && item?.availableEvening === false
+      );
+    });
+
+    const availableAtEvening = placeAvailablity?.filter((item) => {
+      return (
+        item?.availableMorning === false && item?.availableEvening === true
+      );
+    });
+
+    const availableAtMorning = placeAvailablity?.filter((item) => {
+      return (
+        item?.availableMorning === true && item?.availableEvening === false
+      );
+    });
+
+    dispatch(
+      loadPlaceAvailablity({
+        disabledDates: disabledDates.map((item) => {
+          return new Date(item.date);
+        }),
+        availableAtEvening: availableAtEvening.map((item) => {
+          return new Date(item.date);
+        }),
+        availableAtMorning: availableAtMorning.map((item) => {
+          return new Date(item.date);
+        }),
+      })
+    );
   } catch (error) {
     dispatch(
       apiErr(
