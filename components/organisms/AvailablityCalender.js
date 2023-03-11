@@ -13,6 +13,7 @@ import MoonFilledIcon from "../../client/assets/icons/MoonFilledIcon";
 
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { async } from "@firebase/util";
 
 function AvailablityCalender({ placeID, closeHandler }) {
   const [actionModelOpen, setActionModelOpen] = useState(false);
@@ -87,6 +88,20 @@ function AvailablityCalender({ placeID, closeHandler }) {
     );
   }
 
+  const calenserHandler = async (start, end) => {
+    dispatch(
+      createBooking({
+        contactPhoneNumber: "0096200000000",
+        numberOfGuests: 1,
+        placeBooked: placeID,
+        startDateInSec: new Date(start)?.getTime(),
+        endDateInSec: new Date(end)?.getTime(),
+        customer: user?.dbinfo?._id,
+      })
+    );
+    setSelectedDate(null);
+  };
+
   return (
     <div className="fixed bg-opacity-60 backdrop-blur-sm bg-re z-20 w-screen h-screen bg-primary90 flex flex-col justify-start gap-[5%] pt-[2%]">
       <CloseCirculeIcon
@@ -148,21 +163,12 @@ function AvailablityCalender({ placeID, closeHandler }) {
               className={"w-8 aspect-square"}
             />
             <button
-              onClick={() => {
-                dispatch(
-                  createBooking({
-                    contactPhoneNumber: "0096200000000",
-                    numberOfGuests: 1,
-                    placeBooked: placeID,
-                    startDateInSec: new Date(
-                      selectedDate?.setHours(10, 0, 0)
-                    )?.getTime(),
-                    endDateInSec: new Date(
-                      selectedDate?.setHours(22, 0, 0)
-                    )?.getTime(),
-                    customer: user?.dbinfo?._id,
-                  })
-                );
+              onClick={async () => {
+                const start = new Date(selectedDate).setHours(10, 0, 0);
+                const end = new Date(selectedDate).setHours(22, 0, 0);
+
+                await calenserHandler(start, end);
+
                 setSelectedDate(null);
               }}
               className="ml-auto bg-red-200 font-semibold w-auto px-3 py-2 rounded-md shadow-flat border border-red-600 aspect-btn"
@@ -177,28 +183,15 @@ function AvailablityCalender({ placeID, closeHandler }) {
               className={"w-8 aspect-square"}
             />
             <button
-              onClick={() => {
-                console.log("selectedDate then", new Date(selectedDate));
+              onClick={async () => {
+                const thisDate = new Date(selectedDate).getDate();
 
-                const nextDay = new Date(selectedDate);
-                nextDay.setDate(new Date(selectedDate)?.getDate() + 1);
+                const start = new Date(selectedDate).setHours(22, 0, 0);
+                const endDate = new Date(selectedDate).setDate(thisDate + 1);
+                const end = new Date(endDate).setHours(10, 0, 0);
 
-                console.log("nextDay", new Date(nextDay));
-                console.log("selectedDate now", new Date(selectedDate));
-                dispatch(
-                  createBooking({
-                    contactPhoneNumber: "0096200000000",
-                    numberOfGuests: 1,
-                    placeBooked: placeID,
-                    startDateInSec: new Date(
-                      selectedDate?.setHours(22, 0, 0)
-                    )?.getTime(),
-                    endDateInSec: new Date(
-                      nextDay.setHours(10, 0, 0)
-                    )?.getTime(),
-                    customer: user?.dbinfo?._id,
-                  })
-                );
+                await calenserHandler(start, end);
+
                 setSelectedDate(null);
               }}
               className="ml-auto bg-red-200 font-semibold w-auto px-3 py-2 rounded-md shadow-flat border border-red-600 aspect-btn"
@@ -219,23 +212,15 @@ function AvailablityCalender({ placeID, closeHandler }) {
               />
             </div>
             <button
-              onClick={() => {
-                const nextDay = new Date(selectedDate);
-                nextDay.setDate(new Date(selectedDate)?.getDate() + 1);
-                dispatch(
-                  createBooking({
-                    contactPhoneNumber: "000000",
-                    numberOfGuests: 1,
-                    placeBooked: placeID,
-                    startDateInSec: new Date(
-                      selectedDate?.setHours(10, 0, 0)
-                    )?.getTime(),
-                    endDateInSec: new Date(
-                      nextDay?.setHours(10, 0, 0)
-                    )?.getTime(),
-                    customer: user?.dbinfo?._id,
-                  })
-                );
+              onClick={async () => {
+                const thisDate = new Date(selectedDate).getDate();
+
+                const start = new Date(selectedDate).setHours(10, 0, 0);
+                const endDate = new Date(selectedDate).setDate(thisDate + 1);
+                const end = new Date(endDate).setHours(10, 0, 0);
+
+                await calenserHandler(start, end);
+
                 setSelectedDate(null);
               }}
               className="ml-auto bg-red-200 font-semibold w-auto px-3 py-2 rounded-md shadow-flat border border-red-600 aspect-btn"
