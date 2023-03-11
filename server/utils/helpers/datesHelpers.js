@@ -75,7 +75,7 @@ export const checkDatesAvilablity = async (day, bookingList) => {
   );
 
   return {
-    date: day.date?.getTime(),
+    date: day.date?.setHours(0, 0, 0, 0),
     availableMorning: availablityMorning,
     availableEvening: availablityEvening,
   };
