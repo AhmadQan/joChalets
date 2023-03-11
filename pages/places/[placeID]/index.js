@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-import { fetchSelectedPlace } from "../../../storeSlices/placesSlice";
+import { fetchSelectedPlace } from "../../../storeSlices/placeDetailSlice";
 
 import HomeAppBar from "../../../components/organisms/HomeAppBar";
 import QuickActionNav from "../../../components/organisms/QuickActionNav";
@@ -24,7 +24,7 @@ export default function PlaceDetailPage() {
   const { placeID } = router.query;
 
   const dispatch = useDispatch();
-  const PlaceState = useSelector((state) => state.places);
+  const PlaceState = useSelector((state) => state.placeDetail);
   const { placeSelected, err, loading } = PlaceState;
 
   useEffect(() => {

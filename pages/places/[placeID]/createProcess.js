@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { UploadImages, getImages } from "../../../client/helpers/imagesHelper";
 import ImageGrid from "../../../components/organisms/ImageGrid";
-import { updatePlaces } from "../../../storeSlices/placesSlice";
+import { updatePlaces } from "../../../storeSlices/placeDetailSlice";
 
 export default function CreateProcess() {
   const router = useRouter();

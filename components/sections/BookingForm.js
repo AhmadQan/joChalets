@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-import { createBooking } from "../../storeSlices/bookingSlice";
+import { createBooking } from "../../storeSlices/placeDetailSlice";
 
 import SunOutlineIcon from "../../client/assets/icons/SunOutlineIcon";
 import MoonOutlineIcon from "../../client/assets/icons/MoonOutlineIcon";

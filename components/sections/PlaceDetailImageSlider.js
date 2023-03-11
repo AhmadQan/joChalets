@@ -25,7 +25,7 @@ const SliderOverlay = ({ className, title }) => (
 );
 
 function PlaceDetailImageSlider() {
-  const PlacesStore = useSelector((state) => state.places);
+  const PlacesStore = useSelector((state) => state.placeDetail);
   const { placeSelected, loading, err } = PlacesStore;
 
   const imagesList = placeSelected?.images || [];

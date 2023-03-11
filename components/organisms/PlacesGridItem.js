@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
 import ImageSlider from "./ImageSlider";
-import { fetchSelectedPlace } from "../../storeSlices/placesSlice";
+import { fetchSelectedPlace } from "../../storeSlices/placeDetailSlice";
 import AddNoteIcon from "../../client/assets/icons/AddNoteIcon";
 import StarOutlineIcon from "../../client/assets/icons/StarOutlineIcon";
 import EyeSlashIcon from "../../client/assets/icons/EyeSlashIcon";

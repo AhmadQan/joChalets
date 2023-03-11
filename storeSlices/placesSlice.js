@@ -7,13 +7,9 @@ export const PlacesSlice = createSlice({
     allPlaces: [],
     loading: false,
     err: null,
-    selectedPlaceId: null,
     totalCount: null,
     pageNumber: 0,
-    idToEdit: null,
     showAddModel: false,
-    placeSelected: null,
-    placeAvailablity: null,
   },
   reducers: {
     loading: (state) => {
@@ -30,23 +26,11 @@ export const PlacesSlice = createSlice({
       state.err = action.payload;
     },
 
-    setPlaceToEdit: (state, action) => {
-      state.idToEdit = action.payload;
-      state.loading = false;
-    },
     toggleAddModel: (state) => {
       state.showAddModel = !state.showAddModel;
     },
     setPageNumber: (state, payload) => {
       state.pageNumber = payload;
-    },
-    loadSelectedPlace: (state, action) => {
-      state.placeSelected = action.payload.data;
-      state.loading = false;
-      state.err = null;
-    },
-    loadPlaceAvailablity: (state, action) => {
-      state.placeAvailablity = action.payload.data;
     },
   },
 });
@@ -92,71 +76,13 @@ export const createPlaces = (data) => async (dispatch) => {
   }
 };
 
-export const updatePlaces = (placeId, placeData) => async (dispatch) => {
-  try {
-    dispatch(loading());
-
-    const response = await https.put(`places/${placeId}`, { data: placeData });
-
-    dispatch(setPlaceToEdit(response));
-  } catch (error) {
-    dispatch(
-      apiErr(
-        error.response && error.response.data?.detail
-          ? error.response.data?.detail
-          : error.message
-      )
-    );
-  }
-};
-
-export const getPlaceAvailablity = (placeId) => async (dispatch) => {
-  try {
-    dispatch(loading());
-
-    const response = await https.get(`booking/places/${placeId}`);
-
-    dispatch(loadPlaceAvailablity(response?.data));
-  } catch (error) {
-    dispatch(
-      apiErr(
-        error.response && error.response.data?.detail
-          ? error.response.data?.detail
-          : error.message
-      )
-    );
-  }
-};
-
-export const fetchSelectedPlace = (placeId) => async (dispatch) => {
-  try {
-    dispatch(loading());
-
-    const response = await https.get(`places/${placeId}`);
-    dispatch(getPlaceAvailablity(placeId));
-
-    dispatch(loadSelectedPlace(response));
-  } catch (error) {
-    dispatch(
-      apiErr(
-        error.response && error.response.data?.detail
-          ? error.response.data?.detail
-          : error.message
-      )
-    );
-  }
-};
-
 // Action creators are generated for each case reducer function
 export const {
   loading,
   loadAllPlacesSuccess,
   apiErr,
-  setPlaceToEdit,
   setPageNumber,
   toggleAddModel,
-  loadSelectedPlace,
-  loadPlaceAvailablity,
 } = PlacesSlice.actions;
 
 export default PlacesSlice.reducer;

@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import placesSlice from "./storeSlices/placesSlice";
 import SettingsSlice from "./storeSlices/settingSlice";
-import bookingSlice from "./storeSlices/bookingSlice";
+import placeDetailSlice from "./storeSlices/placeDetailSlice";
 
 export default configureStore({
   reducer: {
     places: placesSlice,
     settings: SettingsSlice,
-    booking: bookingSlice,
+    placeDetail: placeDetailSlice,
   },
 });
