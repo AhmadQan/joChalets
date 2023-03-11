@@ -47,13 +47,13 @@ function AvailablityCalender({ placeID, closeHandler }) {
     console.log(
       "isAvailableMorning",
       isAvailableMorning,
-      item.toDateString(),
+
       day.toDateString()
     );
     console.log(
       "isAvailableEvening",
       isAvailableEvening,
-      item.toDateString(),
+
       day.toDateString()
     );
 
