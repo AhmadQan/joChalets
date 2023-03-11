@@ -21,8 +21,11 @@ function AvailablityCalender({ placeID, closeHandler }) {
   const { err, loading, placeAvailablity } = PlaceState;
   const { user, error, isLoading } = useUser();
 
-  const { disabledDates, availableAtEvening, availableAtMorning } =
-    placeAvailablity;
+  const {
+    disabledDates = [],
+    availableAtEvening = [],
+    availableAtMorning = [],
+  } = placeAvailablity;
 
   const dispatch = useDispatch();
   const datesToDisable = disabledDates.map((date) => {
@@ -38,6 +41,8 @@ function AvailablityCalender({ placeID, closeHandler }) {
     // Here you can add any custom content for the day cell
 
     const isAvailableMorning = availableAtMorning?.filter((date) => {
+      console.log("client", new Date(date));
+
       return (
         new Date(date).toLocaleDateString() ===
         new Date(day).toLocaleDateString()

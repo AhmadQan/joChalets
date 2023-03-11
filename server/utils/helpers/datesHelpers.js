@@ -73,6 +73,7 @@ export const checkDatesAvilablity = async (day, bookingList) => {
     nigthSlot,
     bookingList
   );
+  console.log("server", day.date);
 
   return {
     date: new Date(day.date?.setHours(0, 0, 0, 0)).getTime(),
