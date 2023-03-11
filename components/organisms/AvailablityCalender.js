@@ -73,6 +73,9 @@ function AvailablityCalender({ placeID, closeHandler }) {
       }
     });
 
+    console.log("availableAtEvening", availableAtEvening);
+    console.log("availableAtMorning", availableAtMorning);
+
     return (
       <div
         className={`rounded-md   ${
