@@ -13,7 +13,6 @@ import MoonFilledIcon from "../../client/assets/icons/MoonFilledIcon";
 
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { async } from "@firebase/util";
 
 function AvailablityCalender({ placeID, closeHandler }) {
   const [selectedDate, setSelectedDate] = useState(null);

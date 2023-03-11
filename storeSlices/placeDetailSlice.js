@@ -9,11 +9,7 @@ export const PlaceDetailSlice = createSlice({
 
     allBookings: null,
     totalCount: null,
-    placeAvailablity: {
-      disabledDates: [],
-      availableAtEvening: [],
-      availableAtMorning: [],
-    },
+    placeAvailablity: null,
     newBooking: null,
     bookingError: false,
 
