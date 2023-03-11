@@ -25,8 +25,6 @@ function AvailablityCalender({ placeID, closeHandler }) {
   const { disabledDates, availableAtEvening, availableAtMorning } =
     placeAvailablity;
 
-  console.log(`availablity`, user?.dbinfo?.role);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,9 +37,6 @@ function AvailablityCalender({ placeID, closeHandler }) {
 
     const isAvailableMorning = availableAtMorning?.includes(day.toDateString());
     const isAvailableEvening = availableAtEvening?.includes(day.toDateString());
-
-    console.log(day.toDateString(), "isAvailableMorning", isAvailableMorning);
-    console.log(day.toDateString(), "isAvailableEvening", isAvailableEvening);
 
     return (
       <div

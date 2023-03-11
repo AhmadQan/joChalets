@@ -97,28 +97,23 @@ export const getPlaceAvailablity = (placeId) => async (dispatch) => {
 
     const response = await https.get(`booking/places/${placeId}`);
 
-    const placeAvailablity = response?.data?.data;
-
-    const disabledDates = placeAvailablity?.filter((item) => {
+    const disabledDates = await response?.data?.data?.filter((item) => {
       return (
         item?.availableMorning === false && item?.availableEvening === false
       );
     });
 
-    const availableAtEvening = placeAvailablity?.filter((item) => {
+    const availableAtEvening = await response?.data?.data?.filter((item) => {
       return (
         item?.availableMorning === false && item?.availableEvening === true
       );
     });
 
-    const availableAtMorning = placeAvailablity?.filter((item) => {
+    const availableAtMorning = await response?.data?.data?.filter((item) => {
       return (
         item?.availableMorning === true && item?.availableEvening === false
       );
     });
-
-    console.log("store  availableAtEvening", availableAtEvening);
-    console.log("store  availableAtMorning", availableAtMorning);
 
     dispatch(
       loadPlaceAvailablity({
