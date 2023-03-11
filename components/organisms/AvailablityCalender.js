@@ -44,6 +44,19 @@ function AvailablityCalender({ placeID, closeHandler }) {
       return item.toDateString() === day.toDateString();
     });
 
+    console.log(
+      "isAvailableMorning",
+      isAvailableMorning,
+      item.toDateString(),
+      day.toDateString()
+    );
+    console.log(
+      "isAvailableEvening",
+      isAvailableEvening,
+      item.toDateString(),
+      day.toDateString()
+    );
+
     return (
       <div
         className={`rounded-md   ${
