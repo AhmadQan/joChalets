@@ -117,6 +117,9 @@ export const getPlaceAvailablity = (placeId) => async (dispatch) => {
       );
     });
 
+    console.log("store  availableAtEvening", availableAtEvening);
+    console.log("store  availableAtMorning", availableAtMorning);
+
     dispatch(
       loadPlaceAvailablity({
         disabledDates: disabledDates.map((item) => {
