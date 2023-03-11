@@ -123,10 +123,10 @@ export const getPlaceAvailablity = (placeId) => async (dispatch) => {
           return new Date(item.date);
         }),
         availableAtEvening: availableAtEvening.map((item) => {
-          return new Date(item.date);
+          return new Date(item.date).toDateString();
         }),
         availableAtMorning: availableAtMorning.map((item) => {
-          return new Date(item.date);
+          return new Date(item.date).toDateString();
         }),
       })
     );

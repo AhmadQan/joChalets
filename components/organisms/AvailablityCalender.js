@@ -37,32 +37,18 @@ function AvailablityCalender({ placeID, closeHandler }) {
   function renderCustomDayContent(day) {
     // Here you can add any custom content for the day cell
 
-    const isAvailableMorning = availableAtMorning?.filter((item) => {
-      return item.toDateString() === day.toDateString();
-    });
-    const isAvailableEvening = availableAtEvening?.filter((item) => {
-      return item.toDateString() === day.toDateString();
-    });
+    const isAvailableMorning = availableAtMorning?.includes(day.toDateString());
+    const isAvailableEvening = availableAtEvening?.includes(day.toDateString());
 
-    console.log(
-      "isAvailableMorning",
-      isAvailableMorning,
-
-      day.toDateString()
-    );
-    console.log(
-      "isAvailableEvening",
-      isAvailableEvening,
-
-      day.toDateString()
-    );
+    console.log(day.toDateString(), "isAvailableMorning", isAvailableMorning);
+    console.log(day.toDateString(), "isAvailableEvening", isAvailableEvening);
 
     return (
       <div
         className={`rounded-md   ${
-          isAvailableMorning.length > 0
+          isAvailableMorning
             ? "bg-yellow-100  text-black border border-yellow-300"
-            : isAvailableEvening.length > 0
+            : isAvailableEvening
             ? "bg-blue-200 text-white border border-primary40"
             : ""
         } w-full`}
