@@ -1,5 +1,5 @@
 export const getThisMonthArray = async () => {
-  const today = new Date(); // create a new Date object with the current date
+  const today = new Date(Date.UTC()); // create a new Date object with the current date
   const year = today.getFullYear(); // get the current year
   const month = today.getMonth(); // get the current month (0-indexed, so January is 0)
 
@@ -51,18 +51,49 @@ export const checkDatesAvilablity = async (day, bookingList) => {
   //   const date = new Date();
   //   var lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
+  const localDate = new Date(day?.date);
+  const utcDate = new Date(Date.UTC());
+  const utcDateMorning = new Date(
+    Date.UTC(
+      localDate.getFullYear(),
+      localDate.getMonth(),
+      localDate.getDate(),
+      10,
+      0,
+      0
+    )
+  );
+  const utcDateNigth = new Date(
+    Date.UTC(
+      localDate.getFullYear(),
+      localDate.getMonth(),
+      localDate.getDate(),
+      22,
+      0,
+      0
+    )
+  );
+  const utcDateMorningNextDate = new Date(
+    Date.UTC(
+      localDate.getFullYear(),
+      localDate.getMonth(),
+      localDate.getDate() + 1,
+      10,
+      0,
+      0
+    )
+  );
+
   const morningSlot = {
     date: day?.date,
-    start: day?.date.setHours(10, 0, 0),
-    end: day?.date.setHours(22, 0, 0),
+    start: utcDateMorning,
+    end: utcDateNigth,
   };
 
   const nigthSlot = {
     date: day?.date,
     start: day?.date.setHours(22, 0, 0),
-    end: new Date(
-      new Date(day?.date)?.setDate(new Date(day?.date).getDate() + 1)
-    ).setHours(10, 0, 0),
+    end: utcDateMorningNextDate,
   };
 
   const availablityMorning = await checkSlotinBookingList(
@@ -76,7 +107,7 @@ export const checkDatesAvilablity = async (day, bookingList) => {
   console.log("server", day.date);
 
   return {
-    date: new Date(day.date?.setHours(0, 0, 0, 0)).getTime(),
+    date: day?.date,
     availableMorning: availablityMorning,
     availableEvening: availablityEvening,
   };

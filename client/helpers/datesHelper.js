@@ -75,8 +75,30 @@ export const checkDatesAvilablity = async (day, bookingList) => {
   );
 
   return {
-    date: day.date,
+    date: day.date?.getTime(),
     availableMorning: availablityMorning,
     availableEvening: availablityEvening,
+  };
+};
+
+export const categorizeDates = async (dates) => {
+  const disabledDates = [];
+  const onlyAvailableAtMorning = [];
+  const onlyAvailableAtEvening = [];
+
+  for (const date of dates) {
+    if (!date.availableMorning && !date.availableEvening) {
+      disabledDates.push(date);
+    } else if (date.availableMorning && !date.availableEvening) {
+      onlyAvailableAtMorning.push(date);
+    } else if (!date.availableMorning && date.availableEvening) {
+      onlyAvailableAtEvening.push(date);
+    }
+  }
+
+  return {
+    disabledDates,
+    onlyAvailableAtMorning,
+    onlyAvailableAtEvening,
   };
 };

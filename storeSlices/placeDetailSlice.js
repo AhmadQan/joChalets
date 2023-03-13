@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import https from "../axios/axiosInstance";
+import {
+  categorizeDates,
+  checkDatesAvilablity,
+  getThisMonthArray,
+} from "../client/helpers/datesHelper";
 
 export const PlaceDetailSlice = createSlice({
   name: "PlaceDetail",
@@ -50,7 +55,7 @@ export const PlaceDetailSlice = createSlice({
 });
 
 //action thunks
-export const createBooking = (data) => async (dispatch, state) => {
+export const createBooking = (data) => async (dispatch) => {
   try {
     dispatch(loading());
 
@@ -87,37 +92,29 @@ export const updatePlaces = (placeId, placeData) => async (dispatch) => {
   }
 };
 
-export const getPlaceAvailablity = (placeId) => async (dispatch) => {
+export const getPlaceAvailablity = () => async (dispatch, getState) => {
   try {
     dispatch(loading());
+    const thisMonthArray = await getThisMonthArray();
+    const currentState = getState();
+    const { placeDetail } = currentState;
 
-    const response = await https.get(`booking/places/${placeId}`);
+    // if (!placeSelected) return;
+    if (!placeDetail?.placeSelected) return;
+    const availablityList = [];
 
-    const disabledDates = await response?.data?.data?.filter((item) => {
-      return item.availableMorning === false && item.availableEvening === false;
-    });
+    const bookingArray = placeDetail?.placeSelected?.bookingList;
 
-    const availableAtEvening = await response?.data?.data?.filter((item) => {
-      return item.availableMorning === false && item.availableEvening === true;
-    });
-
-    const availableAtMorning = await response?.data?.data?.filter((item) => {
-      return item.availableMorning === true && item.availableEvening === false;
-    });
-
-    dispatch(
-      loadPlaceAvailablity({
-        disabledDates: disabledDates.map((item) => {
-          return item.date;
-        }),
-        availableAtEvening: availableAtEvening.map((item) => {
-          return item.date;
-        }),
-        availableAtMorning: availableAtMorning.map((item) => {
-          return item.date;
-        }),
+    await Promise.all(
+      thisMonthArray?.map(async (day) => {
+        const item = await checkDatesAvilablity(day, bookingArray);
+        availablityList.push(item);
       })
     );
+
+    const AvailablityObj = await categorizeDates(availablityList);
+
+    dispatch(loadPlaceAvailablity(AvailablityObj));
   } catch (error) {
     dispatch(
       apiErr(
@@ -134,7 +131,7 @@ export const fetchSelectedPlace = (placeId) => async (dispatch) => {
     dispatch(loading());
 
     const response = await https.get(`places/${placeId}`);
-    dispatch(getPlaceAvailablity(placeId));
+    dispatch(getPlaceAvailablity());
 
     dispatch(loadSelectedPlace(response));
   } catch (error) {
