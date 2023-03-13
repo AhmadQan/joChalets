@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Calendar } from "react-date-range";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { motion } from "framer-motion";
 
 import { getPlaceAvailablity } from "../../storeSlices/placeDetailSlice";
 import { createBooking } from "../../storeSlices/placeDetailSlice";
@@ -120,17 +121,41 @@ function AvailablityCalender({ placeID, closeHandler }) {
           </p>
         </div>
       </div>
-      <Calendar
-        disabledDates={datesToDisaple}
-        dayContentRenderer={renderCustomDayContent}
-        rangeColors={["#C8F9D1", "#C8F9D1", "#C8F9D1"]}
-        onChange={(date) => {
-          if (user?.dbinfo?.role !== "admin") return;
-          setSelectedDate(date);
-          console.log(date.toLocaleString());
-        }}
-        minDate={new Date()}
-      />
+      {loading ? (
+        <div className="w-full aspect-square border-t-2 border-primary60 bg-white flex justify-center items-center">
+          <div className="flex justify-center items-center h-full">
+            <div className="flex justify-between w-20 h-10">
+              {[...Array(5)].map((_, index) => (
+                <motion.div
+                  key={index}
+                  className="w-2 h-2 rounded-full bg-primary50 "
+                  animate={{
+                    y: [-30, 0, -30],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: index / 5,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Calendar
+          disabledDates={datesToDisaple}
+          dayContentRenderer={renderCustomDayContent}
+          rangeColors={["#C8F9D1", "#C8F9D1", "#C8F9D1"]}
+          onChange={(date) => {
+            if (user?.dbinfo?.role !== "admin") return;
+            setSelectedDate(date);
+            console.log(date.toLocaleString());
+          }}
+          minDate={new Date()}
+        />
+      )}
+
       {user?.dbinfo?.role === "admin" && selectedDate ? (
         <div className="flex py-6 gap-5 justify-between absolute bg-white flex-col w-full  top-[20%] rounded-lg shadow-elvatedCard border border-primary30">
           <CloseCirculeIcon

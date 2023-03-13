@@ -62,7 +62,7 @@ export const createBooking = (data) => async (dispatch) => {
     const response = await https.post(`booking`, { data: data });
 
     dispatch(loadNewBooking(response.data));
-    dispatch(getPlaceAvailablity(data?.placeBooked));
+    dispatch(fetchSelectedPlace(data?.placeBooked));
   } catch (bookingError) {
     dispatch(
       apiErr(
