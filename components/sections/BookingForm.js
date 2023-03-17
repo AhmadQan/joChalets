@@ -21,7 +21,7 @@ function BookingForm() {
   //store logic
   const dispatch = useDispatch();
   const bookingState = useSelector((state) => {
-    return state.booking;
+    return state.placeDetail;
   });
 
   const { loading, bookingError, newBooking } = bookingState;
@@ -297,6 +297,7 @@ function BookingForm() {
       startDateInSec: fromDate.getTime(),
       endDateInSec: toDate.getTime(),
       customer: user?.dbinfo?._id,
+      status: "created",
     };
     dispatch(createBooking(APIdata));
   };

@@ -145,6 +145,41 @@ export const fetchSelectedPlace = (placeId) => async (dispatch) => {
   }
 };
 
+export const deleteBookingHandler = (data) => async (dispatch) => {
+  try {
+    dispatch(loading());
+
+    await https.delete(`booking/${data?._id}`);
+
+    dispatch(fetchSelectedPlace(data?.placeBooked));
+  } catch (error) {
+    dispatch(
+      apiErr(
+        error.response && error.response.data?.detail
+          ? error.response.data?.detail
+          : error.message
+      )
+    );
+  }
+};
+export const changeBookingStatusHandler = (data) => async (dispatch) => {
+  try {
+    dispatch(loading());
+
+    await https.put(`booking/${data?._id}`, { data: { status: data?.status } });
+
+    dispatch(fetchSelectedPlace(data?.placeBooked));
+  } catch (error) {
+    dispatch(
+      apiErr(
+        error.response && error.response.data?.detail
+          ? error.response.data?.detail
+          : error.message
+      )
+    );
+  }
+};
+
 export const {
   loading,
   loadAllBookingSuccess,

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { motion } from "framer-motion";
 
+import LoaderDrops from "../molecules/LoaderDrops";
+
 import { getPlaceAvailablity } from "../../storeSlices/placeDetailSlice";
 import { createBooking } from "../../storeSlices/placeDetailSlice";
 
@@ -82,6 +84,7 @@ function AvailablityCalender({ placeID, closeHandler }) {
         startDateInSec: new Date(start)?.getTime(),
         endDateInSec: new Date(end)?.getTime(),
         customer: user?.dbinfo?._id,
+        status: "created",
       })
     );
     setSelectedDate(null);
@@ -123,24 +126,7 @@ function AvailablityCalender({ placeID, closeHandler }) {
       </div>
       {loading ? (
         <div className="w-full aspect-square border-t-2 border-primary60 bg-white flex justify-center items-center">
-          <div className="flex justify-center items-center h-full">
-            <div className="flex justify-between w-20 h-10">
-              {[...Array(5)].map((_, index) => (
-                <motion.div
-                  key={index}
-                  className="w-2 h-2 rounded-full bg-primary50 "
-                  animate={{
-                    y: [-30, 0, -30],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: index / 5,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
+          <LoaderDrops />
         </div>
       ) : (
         <Calendar

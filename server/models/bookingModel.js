@@ -15,7 +15,12 @@ const BookingSchema = new Schema({
     ref: "Place",
     required: true,
   },
-  isCompleted: { type: Boolean },
+  status: {
+    type: String,
+    required: true,
+    enum: ["created", "approved", "paid", "completed", "rejected"],
+  },
+
   isCanceled: { type: Boolean },
 });
 
