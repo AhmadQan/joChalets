@@ -7,7 +7,9 @@ const PlaceSchema = new Schema({
   description: { type: String },
   address: { type: String },
   images: [{ imgIndex: Number, img: String }],
-  utils: [{ utilKey: String, utilValue: Boolean }],
+  utils: {
+    type: mongoose.Schema.Types.Mixed,
+  },
   bookingList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }],
   placeReviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reviews" }],
 });

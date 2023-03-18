@@ -58,7 +58,7 @@ export default function PlaceDetailPage() {
 
   const editSubmitHandler = (data) => {
     console.log(data);
-    // dispatch(updatePlaces(placeSelected?._id, data));
+    dispatch(updatePlaces(placeSelected?._id, data));
   };
 
   return (
@@ -109,7 +109,7 @@ export default function PlaceDetailPage() {
         {isEditMode ? (
           <PlaceUtilsForm errors={errors} register={register} />
         ) : (
-          <PlaceUtils utils={placeSelected?.description} />
+          <PlaceUtils utils={placeSelected?.utils} />
         )}
 
         <PlaceFeedback />

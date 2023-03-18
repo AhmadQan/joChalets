@@ -3,14 +3,19 @@ import React from "react";
 import BathHubIcon from "../../client/assets/icons/BathHubIcon";
 import BedBoldIcon from "../../client/assets/icons/BedBoldIcon";
 import BedRoomIcon from "../../client/assets/icons/BedRoomIcon";
+import FireIcon from "../../client/assets/icons/FireIcon";
 import GardenIcon from "../../client/assets/icons/GardenIcon";
 import GrillPlaceIcon from "../../client/assets/icons/GrillPlaceIcon";
 import HotTopIcon from "../../client/assets/icons/HotTopIcon";
 
 import HouseBoldIcon from "../../client/assets/icons/HouseBoldIcon";
+import KitchenIcon from "../../client/assets/icons/KitchenIcon";
 import MusicBoxIcon from "../../client/assets/icons/MusicBoxIcon";
 import PoolIcon from "../../client/assets/icons/PoolIcon";
+import SliverWareIcon from "../../client/assets/icons/SliverWareIcon";
 import SoccerIcon from "../../client/assets/icons/SoccerIcon";
+import SpoonIcon from "../../client/assets/icons/SpoonIcon";
+import WaterIcon from "../../client/assets/icons/WaterIcon";
 
 function PlaceUtilsForm({ register, errors }) {
   return (
@@ -163,6 +168,41 @@ function PlaceUtilsForm({ register, errors }) {
               placeholder="2"
               type={"checkbox"}
               {...register("utils.pool.isHeated", {})}
+              className="aspect-square w-6 border border-primary40 rounded-md "
+            />
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-6 items-start w-full">
+        <div className="flex bg-primary30 w-full justify-start p-5 gap-4 font-bold items-center">
+          <KitchenIcon fill={"#333"} className={"w-8 aspect-square"} />
+          Kitchen Info
+        </div>
+        <div className="flex flex-col px-[8%]  gap-4">
+          <div className="flex justify-start   gap-6">
+            <WaterIcon fill={"#333"} className={"w-8 aspect-square"} />
+            <input
+              placeholder="2"
+              type={"checkbox"}
+              {...register("utils.kitchen.isWater", {})}
+              className="aspect-square w-6 border border-primary40 rounded-md "
+            />
+          </div>
+          <div className="flex justify-start gap-6">
+            <SliverWareIcon fill={"#333"} className={"w-8 aspect-square"} />
+            <input
+              placeholder="2"
+              type={"checkbox"}
+              {...register("utils.kitchen.isSliverWare", {})}
+              className="aspect-square w-6 border border-primary40 rounded-md "
+            />
+          </div>
+          <div className="flex justify-start gap-6">
+            <FireIcon fill={"#333"} className={"w-8 aspect-square"} />
+            <input
+              placeholder="2"
+              type={"checkbox"}
+              {...register("utils.kitchen.isFire", {})}
               className="aspect-square w-6 border border-primary40 rounded-md "
             />
           </div>
