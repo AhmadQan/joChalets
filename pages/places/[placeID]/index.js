@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 
 import {
   fetchSelectedPlace,
@@ -23,6 +23,7 @@ import PlaceUtilsForm from "../../../components/organisms/PlaceUtilsForm";
 import BookIcon from "../../../client/assets/icons/BookIcon";
 import BookingOutlineIcon from "../../../client/assets/icons/BookingOutlineIcon";
 import EditOutlineIcon from "../../../client/assets/icons/EditOutlineIcon";
+import PlaceInstructionForm from "../../../components/organisms/PlaceInstructionForm";
 
 export default function PlaceDetailPage() {
   const { user, error, isLoading } = useUser();
@@ -35,11 +36,17 @@ export default function PlaceDetailPage() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
       ...placeSelected,
     },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "rules",
   });
 
   const [showCalender, setShowCalender] = useState(false);
@@ -57,7 +64,7 @@ export default function PlaceDetailPage() {
   console.log(errors);
 
   const editSubmitHandler = (data) => {
-    console.log(data);
+    console.log("data", data);
     dispatch(updatePlaces(placeSelected?._id, data));
   };
 
@@ -113,7 +120,18 @@ export default function PlaceDetailPage() {
         )}
 
         <PlaceFeedback />
-        <PlaceInstruction />
+        {isEditMode ? (
+          <PlaceInstructionForm
+            name={"rules"}
+            errors={errors}
+            register={register}
+            fields={fields}
+            append={append}
+            remove={remove}
+          />
+        ) : (
+          <PlaceInstruction />
+        )}
       </form>
       <div className="absolute top-[10%] w-full justify-between flex px-[3%]">
         <div

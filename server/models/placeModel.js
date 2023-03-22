@@ -10,6 +10,7 @@ const PlaceSchema = new Schema({
   utils: {
     type: mongoose.Schema.Types.Mixed,
   },
+  rules: [String],
   bookingList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }],
   placeReviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reviews" }],
 });

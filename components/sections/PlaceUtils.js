@@ -1,8 +1,9 @@
 import React from "react";
-import UtilsIcon from "../molecules/UtilsIcon";
-import HouseBoldIcon from "../../client/assets/icons/HouseBoldIcon";
 
 import UtilsItem from "../organisms/UtilsItem";
+import GardinUtilsItem from "../organisms/GardinUtilsItem";
+import PoolUtilsItem from "../organisms/PoolUtilsItem";
+import KitchenUtilsItem from "../organisms/KitchenUtilsItem";
 
 function PlaceUtils({ utils }) {
   console.log("utils", utils);
@@ -21,6 +22,9 @@ function PlaceUtils({ utils }) {
         </h2>
         <div className="flex flex-col items-center gap-8 w-full ">
           <UtilsItem item={utils?.bulding} title={"Bulding"} />
+          <GardinUtilsItem item={utils?.garden} title={"Garden"} />
+          <PoolUtilsItem item={utils?.pool} title={"Pool"} />
+          <KitchenUtilsItem item={utils?.kitchen} title={"Kitchen"} />
         </div>
       </div>
       <div className="  w-3/4 rounded-full absolute h-full -top-[50%] bg-opacity-10 blur-3xl bg-teal-400" />
