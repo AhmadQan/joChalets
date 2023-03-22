@@ -72,18 +72,20 @@ export default function PlaceDetailPage() {
     <section className="flex flex-col relative">
       <HomeAppBar />
       <PlaceDetailImageSlider />
-      {user?.dbinfo?.role === "admin" && <div></div>}
+
       <QuickActionNav />
       <form onSubmit={handleSubmit(editSubmitHandler)}>
-        <div className="w-full aspect-longBton border-y flex font-bold  justify-between items-center px-6 bg-opacity-60 backdrop-blur-md  border-secondry90 text-secondry90  bg-secondry40 shadow-elvatedCard z-10">
+        <div className="w-full aspect-longBton border-y flex font-bold  justify-between items-center px-6 bg-opacity-60 backdrop-blur-md  border-primary90 text-primary90  bg-primary20  shadow-elvatedCard z-10">
           place Price{" "}
-          <EditOutlineIcon
-            onClick={() => {
-              setIsEditMode(!isEditMode);
-            }}
-            fill={"rgb(12, 110, 30)"}
-            className={"w-8 aspect-square"}
-          />
+          {user?.dbinfo?.role === "admin" && (
+            <EditOutlineIcon
+              onClick={() => {
+                setIsEditMode(!isEditMode);
+              }}
+              fill={"rgb(36 171 249)"}
+              className={"w-8 aspect-square"}
+            />
+          )}
         </div>
         {isEditMode ? (
           <div className="flex flex-col pt-4 gap-6">
@@ -130,10 +132,10 @@ export default function PlaceDetailPage() {
             remove={remove}
           />
         ) : (
-          <PlaceInstruction />
+          <PlaceInstruction rules={placeSelected?.rules} />
         )}
       </form>
-      <div className="absolute top-[10%] w-full justify-between flex px-[3%]">
+      <div className="absolute top-[48vh] w-full justify-between flex px-[3%]">
         <div
           onClick={async () => {
             setShowCalender(!showCalender);

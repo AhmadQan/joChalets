@@ -21,7 +21,7 @@ export default function HomeAppBar() {
       initial="hidden"
       whileInView={"show"}
       variants={navVariants}
-      className="w-full h-[12.206vh]  fixed top-0 z-10 flex justify-center items-end"
+      className="w-full h-[12.206vh]  fixed top-0 z-20 flex justify-center items-end"
     >
       <div className="w-[93.606%] h-[69.23%] bluegradientBg rounded-xl backdrop-blur-md shadow-flat border-primary50 border flex justify-between px-4 items-center">
         <div className="flex justify-center items-center w-12 aspect-square bg-secondryBase rounded-full border border-primary50 shadow-flat">
