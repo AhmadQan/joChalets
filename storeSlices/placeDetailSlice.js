@@ -63,6 +63,7 @@ export const PlaceDetailSlice = createSlice({
       }
       if (action.payload.step === 2) {
         state.form2 = action.payload.data;
+        state.currentStep = action.payload.step;
       }
     },
 

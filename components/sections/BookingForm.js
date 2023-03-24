@@ -6,6 +6,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { createBooking } from "../../storeSlices/placeDetailSlice";
 
 import BookingStep1 from "../organisms/BookingStep1";
+import BookingStep2 from "../organisms/BookingStep2";
 
 function BookingForm() {
   const router = useRouter();
@@ -107,7 +108,9 @@ function BookingForm() {
           {currentStep === 0 ? (
             <BookingStep1 />
           ) : currentStep === 1 ? (
-            <Form2 />
+            <BookingStep2 />
+          ) : currentStep === 2 ? (
+            <p>Summary To Be Designed</p>
           ) : (
             <></>
           )}
