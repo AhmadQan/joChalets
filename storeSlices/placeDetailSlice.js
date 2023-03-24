@@ -19,6 +19,10 @@ export const PlaceDetailSlice = createSlice({
     bookingError: false,
 
     idToEdit: null,
+
+    form1: null,
+    form2: null,
+    currentStep: 0,
   },
   reducers: {
     loading: (state) => {
@@ -50,6 +54,20 @@ export const PlaceDetailSlice = createSlice({
       state.placeSelected = action.payload.data;
       state.loading = false;
       state.err = null;
+    },
+
+    loadFormsData: (state, action) => {
+      if (action.payload.step === 1) {
+        state.form1 = action.payload.data;
+        state.currentStep = action.payload.step;
+      }
+      if (action.payload.step === 2) {
+        state.form2 = action.payload.data;
+      }
+    },
+
+    setStep: (state, action) => {
+      state.currentStep = action.payload;
     },
   },
 });
@@ -188,6 +206,8 @@ export const {
   loadPlaceAvailablity,
   setPlaceToEdit,
   loadSelectedPlace,
+  loadFormsData,
+  setStep,
 } = PlaceDetailSlice.actions;
 
 export default PlaceDetailSlice.reducer;

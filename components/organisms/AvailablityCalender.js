@@ -45,7 +45,6 @@ function AvailablityCalender({ placeID, closeHandler }) {
     // Here you can add any custom content for the day cell
 
     const isAvailableMorning = onlyAvailableAtMorning?.filter((date) => {
-      console.log("date", new Date(date?.date).toLocaleDateString());
       console.log("day", new Date(day).toLocaleDateString());
 
       return (
@@ -136,7 +135,6 @@ function AvailablityCalender({ placeID, closeHandler }) {
           onChange={(date) => {
             if (user?.dbinfo?.role !== "admin") return;
             setSelectedDate(date);
-            console.log(date.toLocaleString());
           }}
           minDate={new Date()}
         />

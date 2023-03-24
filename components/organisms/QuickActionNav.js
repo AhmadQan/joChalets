@@ -15,9 +15,9 @@ function QuickActionNav() {
   const [expanded, setexpanded] = useState(false);
   return (
     <div
-      className={`min-h-[10%] max-h-[100%] bg-white flex flex-col fixed bottom-0 w-full justify-center h-auto rounded-t-lg shadow-flat  z-20`}
+      className={`min-h-[10%] max-h-[100%] bg-primary40 bg-opacity-60 backdrop-blur-md flex flex-col fixed bottom-0 w-full justify-center h-auto rounded-t-lg shadow-flat  z-30`}
     >
-      <div className="  w-full   justify-around py-2  flex items-center ">
+      <div className="w-full justify-around py-2  flex items-center ">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -41,7 +41,11 @@ function QuickActionNav() {
           <CallCallingIcon fill={"#173868"} className={"w-6 aspect-square"} />
         </Step>
       </div>
-      {expanded && <BookingForm />}
+      {expanded && (
+        <div className="">
+          <BookingForm />
+        </div>
+      )}
     </div>
   );
 }
