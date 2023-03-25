@@ -72,6 +72,7 @@ export default function PlaceDetailPage() {
     <section className="flex flex-col relative">
       <HomeAppBar />
       <PlaceDetailImageSlider />
+      <div className="w-full aspect-video bg-white -translate-y-5 z-20 rounded-20 border border-primary40"></div>
 
       <QuickActionNav />
       <form onSubmit={handleSubmit(editSubmitHandler)}>
@@ -135,41 +136,32 @@ export default function PlaceDetailPage() {
           <PlaceInstruction rules={placeSelected?.rules} />
         )}
       </form>
-      <div className="absolute top-[48vh] w-full justify-between flex px-[3%]">
+      <div className="absolute top-[40vh] left-[8vw] gap-2 w-full justify-between flex flex-col items-start ">
         <div
           onClick={async () => {
             setShowCalender(!showCalender);
           }}
-          className="h-full w-[40%] bg-white rounded-xl bg-opacity-60 backdrop-blur-sm z-20 border border-primary30 flex flex-col justify-center  shadow-elvatedCard items-center"
+          className="h-full w-[40%] rounded-xl z-20 flex  gap-2 justify-start shadow-flat items-center"
         >
-          <div className="flex flex-col w-full justify-center items-center gap-2">
-            <BookIcon fill={"#023350"} className={"w-10 aspect-square "} />
-            <h3 className="text-lg font-medium text-primary100 ">
-              <span className="text-lg font-bold text-primary100 ">
-                {" "}
-                availablity
-              </span>
-            </h3>
+          <div className="flex flex-col  justify-center items-center bg-primary10 border border-primary90 rounded-full w-14 aspect-square">
+            <BookIcon fill={"#023350"} className={"w-8 aspect-square "} />
           </div>
+          <h3 className="text-lg font-bold text-primary10 ">Availablity</h3>
         </div>
         {user?.dbinfo?.role === "admin" && (
           <div
             onClick={async () => {
               setShowBookingList(!showBookingList);
             }}
-            className="h-full w-[40%] bg-white rounded-xl bg-opacity-60 backdrop-blur-sm z-20 border border-primary30 flex flex-col justify-center  shadow-elvatedCard items-center"
+            className="h-full w-[40%]  rounded-xl shadow-flat z-20 flex gap-2 justify-start items-center"
           >
-            <div className="flex flex-col w-full justify-center items-center gap-2">
+            <div className="flex flex-col  justify-center items-center bg-primary10 border border-primary90 rounded-full w-14 aspect-square">
               <BookingOutlineIcon
                 fill={"#023350"}
-                className={"w-10 aspect-square "}
+                className={"w-8 aspect-square "}
               />
-              <h3 className="text-lg font-medium text-primary100 ">
-                <span className="text-lg font-bold text-primary100 ">
-                  Booking
-                </span>
-              </h3>
             </div>
+            <h3 className="text-lg font-bold text-primary10 ">Booking</h3>
           </div>
         )}
       </div>
