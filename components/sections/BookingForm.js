@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-import { createBooking } from "../../storeSlices/placeDetailSlice";
+import {
+  createBooking,
+  clearAndCloseForms,
+} from "../../storeSlices/placeDetailSlice";
 
 import BookingStep1 from "../organisms/BookingStep1";
 import BookingStep2 from "../organisms/BookingStep2";
@@ -11,8 +14,9 @@ import CalenderBoldIcon from "../../client/assets/icons/CalenderBoldIcon";
 import PeopleIcon from "../../client/assets/icons/PeopleIcon";
 import CallCallingIcon from "../../client/assets/icons/CallCallingIcon";
 import ClockIconOutline from "../../client/assets/icons/ClockIconOutline";
+import CloseCirculeIcon from "../../client/assets/icons/CloseCirculeIcon";
 
-function BookingForm() {
+function BookingForm({ windowCloseHandler }) {
   const router = useRouter();
   const { placeID } = router.query;
 
@@ -28,67 +32,13 @@ function BookingForm() {
 
   const { err, loading, currentStep, form1, form2 } = bookingState;
 
-  const [fromDate, setFromDate] = useState(null);
-  const [isMorning, setisMorning] = useState(true);
-
-  const [toDate, setToDate] = useState(null);
-  const [toIsMorning, setToIsMorning] = useState(false);
-
-  const [step, setStep] = useState(1);
-
-  //step 3 logic
-  const handleSubmitUseForm = (data) => {
-    const APIdata = {
-      contactPhoneNumber: data.contactPhoneNumber,
-      numberOfGuests: parseInt(data.numberOfGuests),
-      placeBooked: placeID,
-      startDateInSec: fromDate.getTime(),
-      endDateInSec: toDate.getTime(),
-      customer: user?.dbinfo?._id,
-      status: "created",
-    };
-    dispatch(createBooking(APIdata));
+  const closeHandler = async () => {
+    dispatch(clearAndCloseForms());
   };
 
   //logic for optaining the dates
 
-  const HandleChangeCalender = (date) => {
-    const toBeChanged = new Date(date.getTime());
-    if (isMorning) {
-      toBeChanged.setHours(10);
-      setFromDate(toBeChanged);
-    } else {
-      toBeChanged.setHours(22);
-      setFromDate(toBeChanged);
-    }
-  };
-
-  const HandleToggleMorning = (hours) => {
-    if (!fromDate) return;
-    const dateToChange = new Date(fromDate.getTime());
-    dateToChange.setHours(hours);
-    setFromDate(dateToChange);
-  };
-
-  const HandleChangeCalenderTo = (date) => {
-    const toBeChanged = new Date(date.getTime());
-    if (toIsMorning) {
-      toBeChanged.setHours(10);
-      setToDate(toBeChanged);
-    } else {
-      toBeChanged.setHours(22);
-      setToDate(toBeChanged);
-    }
-  };
-
-  const HandleToggleMorningTo = (hours) => {
-    if (!toDate) return;
-    const dateToChange = new Date(toDate.getTime());
-    dateToChange.setHours(hours);
-    setToDate(dateToChange);
-  };
-
-  const handleCreateBooking = () => {
+  const handleCreateBooking = async () => {
     const startDateInSec =
       form1?.from?.DayTime === "morning"
         ? new Date(form1?.from?.startDate)?.setHours(10, 0, 0, 0)
@@ -109,6 +59,8 @@ function BookingForm() {
         ...form2,
       })
     );
+    await closeHandler();
+    windowCloseHandler();
   };
 
   return (
@@ -118,7 +70,21 @@ function BookingForm() {
           Loading
         </div>
       ) : (
-        <div className="flex flex-col w-[86.511vw] h-full pt-6 gap-6">
+        <div className="flex flex-col  w-[86.511vw] h-full pt-6 gap-6">
+          <div className="w-full ">
+            <div
+              onClick={async () => {
+                await closeHandler();
+                windowCloseHandler();
+              }}
+              className="bg-white w-10 aspect-square rounded-full flex justify-center items-center shadow-flat"
+            >
+              <CloseCirculeIcon
+                fill={"rgb(239, 68, 68)"}
+                className={"w-9  aspect-square"}
+              />
+            </div>
+          </div>
           <div className="w-full h-8 bg-white shadow-flat rounded-full overflow-hidden  ">
             <div
               style={{

@@ -19,11 +19,14 @@ import PlaceInstruction from "../../../components/sections/PlaceInstruction";
 import BookingGrid from "../../../components/organisms/BookingGrid";
 import AvailablityCalender from "../../../components/organisms/AvailablityCalender";
 import PlaceUtilsForm from "../../../components/organisms/PlaceUtilsForm";
+import PlaceInstructionForm from "../../../components/organisms/PlaceInstructionForm";
 
-import BookIcon from "../../../client/assets/icons/BookIcon";
 import BookingOutlineIcon from "../../../client/assets/icons/BookingOutlineIcon";
 import EditOutlineIcon from "../../../client/assets/icons/EditOutlineIcon";
-import PlaceInstructionForm from "../../../components/organisms/PlaceInstructionForm";
+import BookIcon from "../../../client/assets/icons/BookIcon";
+import LocationBoldIcon from "../../../client/assets/icons/LocationBoldIcon";
+import DollarCirculeIcon from "../../../client/assets/icons/DollarCirculeIcon";
+import BookingForm from "../../../components/sections/BookingForm";
 
 export default function PlaceDetailPage() {
   const { user, error, isLoading } = useUser();
@@ -51,6 +54,9 @@ export default function PlaceDetailPage() {
 
   const [showCalender, setShowCalender] = useState(false);
   const [showBookingList, setShowBookingList] = useState(false);
+
+  const [expanded, setExpanded] = useState(false);
+
   const [isEditMode, setIsEditMode] = useState(false);
 
   const router = useRouter();
@@ -69,15 +75,14 @@ export default function PlaceDetailPage() {
   };
 
   return (
-    <section className="flex flex-col relative">
+    <section className="flex flex-col relative bg-primary30">
       <HomeAppBar />
       <PlaceDetailImageSlider />
-      <div className="w-full aspect-video bg-white -translate-y-5 z-20 rounded-20 border border-primary40"></div>
-
-      <QuickActionNav />
-      <form onSubmit={handleSubmit(editSubmitHandler)}>
-        <div className="w-full aspect-longBton border-y flex font-bold  justify-between items-center px-6 bg-opacity-60 backdrop-blur-md  border-primary90 text-primary90  bg-primary20  shadow-elvatedCard z-10">
-          place Price{" "}
+      <div className="w-full h-auto shadow-elvatedCard bg-white -translate-y-5 z-20 rounded-20 border border-primary40 flex flex-col gap-6 px-4 py-5">
+        <div className="flex justify-between">
+          <p className="text-xl font-bold text-primary90">
+            {placeSelected?.name}
+          </p>
           {user?.dbinfo?.role === "admin" && (
             <EditOutlineIcon
               onClick={() => {
@@ -88,6 +93,56 @@ export default function PlaceDetailPage() {
             />
           )}
         </div>
+        <div className="flex justify-between">
+          <div className="flex gap-1 items-center">
+            <LocationBoldIcon
+              fill={"#068DDB"}
+              className={"w-4 aspect-square"}
+            />
+            <p className="text-sm font-medium">{placeSelected?.address}</p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="flex gap-1">
+              <DollarCirculeIcon
+                fill={"#22B36B"}
+                className={"w-4 aspect-square"}
+              />
+              <p className="text-sm ">Weekends:</p>
+              <p className="text-sm font-medium">
+                {placeSelected?.price?.weekends || "On Call"}
+              </p>
+            </div>
+            <div className="flex gap-1">
+              <DollarCirculeIcon
+                fill={"#22B36B"}
+                className={"w-4 aspect-square"}
+              />
+              <p className="text-sm ">Normal Days:</p>
+              <p className="text-sm font-medium">
+                {placeSelected?.price?.workdays || "On Call"}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          onClick={() => [setExpanded(!expanded)]}
+          className="w-[91.14%] aspect-longBton bg-secondry50 border border-secondry20 rounded-xl self-center text-secondry90 font-bold text-lg flex justify-center items-center shadow-xl"
+        >
+          Book Now
+        </div>
+      </div>
+      {expanded && (
+        <div className="fixed top-0 left-0 z-40 w-full h-screen bg-primary70 bg-opacity-60 backdrop-blur-md">
+          <BookingForm
+            windowCloseHandler={() => {
+              setExpanded(!expanded);
+            }}
+          />
+        </div>
+      )}
+
+      {/* <QuickActionNav /> */}
+      <form onSubmit={handleSubmit(editSubmitHandler)}>
         {isEditMode ? (
           <div className="flex flex-col pt-4 gap-6">
             <p className=" px-6 font-bold font-Koulen text-3xl text-primary90">

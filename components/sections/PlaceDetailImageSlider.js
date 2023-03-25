@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
-import BookIcon from "../../client/assets/icons/BookIcon";
-import HeartIcon from "../../client/assets/icons/HeartIcon";
 import CirculeArrow from "../../client/assets/icons/CirculeArrow";
 
 const SliderOverlay = ({ className, title }) => (

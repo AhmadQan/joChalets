@@ -55,6 +55,12 @@ export const PlaceDetailSlice = createSlice({
       state.loading = false;
       state.err = null;
     },
+    clearFormsState: (state) => {
+      state.form1 = null;
+      state.form2 = null;
+      state.currentStep = 0;
+      state.loading = false;
+    },
 
     loadFormsData: (state, action) => {
       if (action.payload.step === 1) {
@@ -198,6 +204,20 @@ export const changeBookingStatusHandler = (data) => async (dispatch) => {
     );
   }
 };
+export const clearAndCloseForms = () => async (dispatch) => {
+  try {
+    dispatch(loading());
+    dispatch(clearFormsState());
+  } catch (error) {
+    dispatch(
+      apiErr(
+        error.response && error.response.data?.detail
+          ? error.response.data?.detail
+          : error.message
+      )
+    );
+  }
+};
 
 export const {
   loading,
@@ -209,6 +229,7 @@ export const {
   loadSelectedPlace,
   loadFormsData,
   setStep,
+  clearFormsState,
 } = PlaceDetailSlice.actions;
 
 export default PlaceDetailSlice.reducer;
