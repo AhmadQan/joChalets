@@ -1,0 +1,37 @@
+const accountSid = "AC0e5917a218ba4f23aecc264143525ffa";
+const authToken = "c137e41e1bddf8762bf8dcfd9daebf2b";
+
+const client = require("twilio")(accountSid, authToken);
+
+export default async function handler(req, res) {
+  const { method } = req;
+
+  switch (method) {
+    case "GET":
+      // Get data from your database
+      //   await getAll(req, res);
+      //   res.status(200).json({ id, name: `User ${id}` });
+      break;
+    case "POST":
+      // Update or create data in your database
+      client.messages
+        .create({
+          body: "Your appointment is coming up on July 21 at 3PM",
+          from: "whatsapp:+14155238886",
+          to: "whatsapp:+962798033926",
+        })
+        .then((message) => {
+          console.log(message.sid);
+          res.status(200).json({ message: "Message sent successfully" });
+        })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).json({ error: "Failed to send message" });
+        });
+
+      break;
+    default:
+      res.setHeader("Allow", ["GET", "PUT", "POST"]);
+      res.status(405).end(`Method ${method} Not Allowed`);
+  }
+}
