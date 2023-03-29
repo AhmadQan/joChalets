@@ -2,6 +2,15 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 const PlaceSchema = new Schema({
   name: { type: String, required: true },
+  price: {
+    weekend: {
+      type: Number,
+    },
+    normalDays: {
+      type: Number,
+    },
+  },
+
   owner: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   city: { type: String, required: true },
   description: { type: String },

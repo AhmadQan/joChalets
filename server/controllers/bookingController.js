@@ -1,7 +1,6 @@
 import { connectDB } from "../utils/db";
 import BookingModel from "../models/bookingModel";
 import PlaceModel from "../models/placeModel";
-import axios from "axios";
 
 export const getAll = async (req, res) => {
   //where p is the page number and s is the size or the number of element per page
@@ -42,7 +41,6 @@ export const createBooking = async (req, res) => {
     { $push: { bookingList: newBooking._id } },
     { new: true, useFindAndModify: false }
   );
-  await axios.post("http://localhost:3000/api/twilioapi");
 
   return res.status(200).json(newBooking);
 };

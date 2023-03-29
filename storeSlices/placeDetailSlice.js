@@ -85,6 +85,7 @@ export const createBooking = (data) => async (dispatch) => {
     dispatch(loading());
 
     const response = await https.post(`booking`, { data: data });
+    // const message = await https.post("http://localhost:3000/api/twilioapi");
 
     dispatch(loadNewBooking(response.data));
     dispatch(fetchSelectedPlace(data?.placeBooked));
@@ -103,9 +104,10 @@ export const updatePlaces = (placeId, placeData) => async (dispatch) => {
   try {
     dispatch(loading());
 
-    const response = await https.put(`places/${placeId}`, { data: placeData });
+    await https.put(`places/${placeId}`, { data: placeData });
+    const placeUpdated = await https.get(`places/${placeId}`);
 
-    dispatch(setPlaceToEdit(response));
+    dispatch(loadSelectedPlace(placeUpdated));
   } catch (error) {
     dispatch(
       apiErr(

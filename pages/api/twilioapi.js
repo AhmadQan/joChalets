@@ -1,5 +1,5 @@
-const accountSid = "AC0e5917a218ba4f23aecc264143525ffa";
-const authToken = "c137e41e1bddf8762bf8dcfd9daebf2b";
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = require("twilio")(accountSid, authToken);
 
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       client.messages
         .create({
           body: "Your appointment is coming up on July 21 at 3PM",
-          from: "whatsapp:+14155238886",
+          from: "whatsapp:+14346085544",
           to: "whatsapp:+962798033926",
         })
         .then((message) => {

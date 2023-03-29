@@ -10,7 +10,6 @@ import {
 } from "../../../storeSlices/placeDetailSlice";
 
 import HomeAppBar from "../../../components/organisms/HomeAppBar";
-import QuickActionNav from "../../../components/organisms/QuickActionNav";
 import PlaceAboutUS from "../../../components/sections/PlaceAboutUS";
 import PlaceUtils from "../../../components/sections/PlaceUtils";
 import PlaceDetailImageSlider from "../../../components/sections/PlaceDetailImageSlider";
@@ -18,8 +17,6 @@ import PlaceFeedback from "../../../components/sections/PlaceFeedback";
 import PlaceInstruction from "../../../components/sections/PlaceInstruction";
 import BookingGrid from "../../../components/organisms/BookingGrid";
 import AvailablityCalender from "../../../components/organisms/AvailablityCalender";
-import PlaceUtilsForm from "../../../components/organisms/PlaceUtilsForm";
-import PlaceInstructionForm from "../../../components/organisms/PlaceInstructionForm";
 
 import BookingOutlineIcon from "../../../client/assets/icons/BookingOutlineIcon";
 import EditOutlineIcon from "../../../client/assets/icons/EditOutlineIcon";
@@ -28,6 +25,8 @@ import LocationBoldIcon from "../../../client/assets/icons/LocationBoldIcon";
 import DollarCirculeIcon from "../../../client/assets/icons/DollarCirculeIcon";
 import BookingForm from "../../../components/sections/BookingForm";
 
+import PlaceDetailsForm from "../../../components/organisms/PlaceDetailsForm";
+
 export default function PlaceDetailPage() {
   const { user, error, isLoading } = useUser();
 
@@ -35,22 +34,6 @@ export default function PlaceDetailPage() {
   const dispatch = useDispatch();
   const PlaceState = useSelector((state) => state.placeDetail);
   const { placeSelected, err, loading } = PlaceState;
-
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      ...placeSelected,
-    },
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "rules",
-  });
 
   const [showCalender, setShowCalender] = useState(false);
   const [showBookingList, setShowBookingList] = useState(false);
@@ -67,12 +50,6 @@ export default function PlaceDetailPage() {
       dispatch(fetchSelectedPlace(placeID));
     }
   }, [placeSelected, placeID]);
-  console.log(errors);
-
-  const editSubmitHandler = (data) => {
-    console.log("data", data);
-    dispatch(updatePlaces(placeSelected?._id, data));
-  };
 
   return (
     <section className="flex flex-col relative bg-primary30">
@@ -109,7 +86,7 @@ export default function PlaceDetailPage() {
               />
               <p className="text-sm ">Weekends:</p>
               <p className="text-sm font-medium">
-                {placeSelected?.price?.weekends || "On Call"}
+                {placeSelected?.price?.weekend || "On Call"}
               </p>
             </div>
             <div className="flex gap-1">
@@ -119,7 +96,7 @@ export default function PlaceDetailPage() {
               />
               <p className="text-sm ">Normal Days:</p>
               <p className="text-sm font-medium">
-                {placeSelected?.price?.workdays || "On Call"}
+                {placeSelected?.price?.normalDays || "On Call"}
               </p>
             </div>
           </div>
@@ -142,55 +119,27 @@ export default function PlaceDetailPage() {
       )}
 
       {/* <QuickActionNav /> */}
-      <form onSubmit={handleSubmit(editSubmitHandler)}>
-        {isEditMode ? (
-          <div className="flex flex-col pt-4 gap-6">
-            <p className=" px-6 font-bold font-Koulen text-3xl text-primary90">
-              About Us
-            </p>
-            {errors?.description && (
-              <p className="text-red-500 font-semibold">
-                {errors?.description?.message}
-              </p>
-            )}
-            <textarea
-              {...register("description", {
-                required: "Please enter description",
-              })}
-              className="h-[25vh] border border-primary40"
-            />
-            <div className="w-full flex justify-end">
-              <button
-                type="submit"
-                className="w-[26%] bg-secondry80 text-secondry10 font-bold  aspect-btn border border-primary40 rounded-lg"
-              >
-                save
-              </button>
-            </div>
-          </div>
-        ) : (
+      {isEditMode ? (
+        <PlaceDetailsForm
+          loading={loading}
+          placeInfo={placeSelected}
+          placeID={placeSelected?._id}
+          closeHandler={() => {
+            setIsEditMode(!isEditMode);
+          }}
+        />
+      ) : (
+        <div className="flex flex-col ">
           <PlaceAboutUS description={placeSelected?.description} />
-        )}
-        {isEditMode ? (
-          <PlaceUtilsForm errors={errors} register={register} />
-        ) : (
-          <PlaceUtils utils={placeSelected?.utils} />
-        )}
 
-        <PlaceFeedback />
-        {isEditMode ? (
-          <PlaceInstructionForm
-            name={"rules"}
-            errors={errors}
-            register={register}
-            fields={fields}
-            append={append}
-            remove={remove}
-          />
-        ) : (
+          <PlaceUtils utils={placeSelected?.utils} />
+
+          <PlaceFeedback />
+
           <PlaceInstruction rules={placeSelected?.rules} />
-        )}
-      </form>
+        </div>
+      )}
+
       <div className="absolute top-[40vh] left-[8vw] gap-2 w-full justify-between flex flex-col items-start ">
         <div
           onClick={async () => {
