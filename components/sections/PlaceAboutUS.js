@@ -15,7 +15,10 @@ function PlaceAboutUS({ description }) {
           </span>
         </h2>
         <p className="text-primary100">
-          {description || "there is no description for this place yet"}
+          <pre className="w-full font-IBMPlexSansArabic text-right">
+            {" "}
+            {description || "there is no description for this place yet"}
+          </pre>
         </p>
         <button className="w-[47%] aspect-btnOutlined border border-primary90 rounded-lg text-primary90">
           View More{" "}
