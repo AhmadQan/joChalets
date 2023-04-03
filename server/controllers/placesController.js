@@ -122,15 +122,12 @@ export const updateById = async (req, res) => {
 
   await connectDB();
 
-  console.log("placeid", placeid);
-
   const updatedPlace = await PlaceModel.findOneAndUpdate(
     { _id: placeid },
     data
   ).catch((err) => {
     res.status(400).json({ err });
   });
-  console.log(updatedPlace);
 
   return res.status(200).json(updatedPlace);
 };
