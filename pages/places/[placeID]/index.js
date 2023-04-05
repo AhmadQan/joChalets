@@ -52,7 +52,12 @@ export default function PlaceDetailPage() {
   }, [placeSelected, placeID]);
 
   return (
-    <section className="flex flex-col relative bg-primary30">
+    <section
+      // style={{
+      //   background: " linear-gradient(90deg, #98FB98, #00FF7F)",
+      // }}
+      className="flex flex-col relative bg-primary20"
+    >
       <HomeAppBar />
       <PlaceDetailImageSlider />
       <div className="w-full h-auto shadow-elvatedCard bg-white -translate-y-5 z-20 rounded-20 border border-primary40 flex flex-col gap-6 px-4 py-5">

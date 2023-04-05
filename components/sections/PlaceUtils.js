@@ -9,14 +9,16 @@ function PlaceUtils({ utils }) {
   console.log("utils", utils);
   return (
     <section
-      style={{ background: "#FAFAFA" }}
-      className="h-auto w-full  relative overflow-hidden py-11 px-6 "
+      style={{
+        background: "#ffff",
+      }}
+      className="h-auto w-full bg-white  relative overflow-hidden py-11 px-6 bg-transparent rounded-20"
     >
       <div className="h-full w-full  flex flex-col  gap-8 relative z-10">
-        <h2 className=" font-IBMPlexSans font-normal opacity-60 text-primary90 ">
+        <h2 className=" font-IBMPlexSans font-normal opacity-60 text-secondry50 ">
           What you will need
           <br />{" "}
-          <span className="font-bold font-Koulen text-3xl text-primary80">
+          <span className="font-bold font-Koulen text-3xl text-primary90">
             We Offer
           </span>
         </h2>
@@ -27,8 +29,8 @@ function PlaceUtils({ utils }) {
           <KitchenUtilsItem item={utils?.kitchen} title={"Kitchen"} />
         </div>
       </div>
-      <div className="  w-3/4 rounded-full absolute h-full -top-[50%] bg-opacity-10 blur-3xl bg-teal-400" />
-      <div className="   w-3/4 right-0 rounded-full absolute h-full -bottom-[50%] bg-opacity-25 blur-3xl " />
+      {/* <div className="  w-3/4 rounded-full absolute h-full -top-[50%] bg-opacity-10 blur-3xl bg-teal-400" />
+      <div className="   w-3/4 right-0 rounded-full absolute h-full -bottom-[50%] bg-opacity-25 blur-3xl " /> */}
     </section>
   );
 }

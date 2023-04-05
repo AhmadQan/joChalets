@@ -58,7 +58,7 @@ module.exports = {
       },
       boxShadow: {
         oval: "-16px 16px 32px #0e213e,16px -16px 32px #b7c0cd",
-        hole: " inset 8px 8px 16px #c1c1c1,inset -8px -8px 16px  #F6F6F6",
+        hole: " 20px 20px 60px #bebebe,-20px -20px 60px #ffffff",
         flat: "0px 0px 8px rgba(0, 0, 0, 0.25)",
         imagesSlider: "4.56698px 4.56698px 13.7009px rgba(0, 0, 0, 0.25)",
         elvatedCard:
