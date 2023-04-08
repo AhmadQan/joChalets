@@ -27,23 +27,38 @@ export const getAll = async (req, res) => {
 
 export const createReview = async (req, res) => {
   const { data } = req.body;
+
   //data can be one object or a list of objects and both cases will work
   //send list of objects when you need to bulk insert
 
   await connectDB();
-
-  const newReview = await ReviewsModel.create(data).catch((err) => {
-    res.status(400).json({ err });
+  const existingRating = await ReviewsModel.findOne({
+    reviewUser: data?.reviewUser,
+    reviewPlace: data?.reviewPlace,
   });
 
-  await PlaceModel.findByIdAndUpdate(
-    data.reviewPlace,
-    { $push: { placeReviews: newReview._id } },
-    { new: true, useFindAndModify: false }
-  );
-  return res.status(200).json(newReview);
+  if (existingRating) {
+    // If the user has already rated the place before, update the existing rating
+    existingRating.reviewMessage = data?.reviewMessage;
+    existingRating.score = data?.score;
+
+    await existingRating.save();
+    res.status(200).json({ message: "Rating updated successfully" });
+  } else {
+    // If the user hasn't rated the place before, create a new rating
+    const newReview = await ReviewsModel.create(data).catch((err) => {
+      res.status(400).json({ err });
+    });
+    await PlaceModel.findByIdAndUpdate(
+      data.reviewPlace,
+      { $push: { placeReviews: newReview._id } },
+      { new: true, useFindAndModify: false }
+    );
+    return res.status(200).json(newReview);
+  }
 };
 
+//get review by id controller
 export const getById = async (req, res) => {
   const { reviewId } = req.query;
 

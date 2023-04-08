@@ -139,7 +139,7 @@ export default function PlaceDetailPage() {
 
           <PlaceUtils utils={placeSelected?.utils} />
 
-          <PlaceFeedback />
+          <PlaceFeedback reviews={placeSelected?.placeReviews} />
 
           <PlaceInstruction rules={placeSelected?.rules} />
         </div>

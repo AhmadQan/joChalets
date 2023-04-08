@@ -206,6 +206,24 @@ export const changeBookingStatusHandler = (data) => async (dispatch) => {
     );
   }
 };
+
+export const postReviewHandler = (data) => async (dispatch) => {
+  try {
+    dispatch(loading());
+
+    await https.post(`reviews`, { data: data });
+
+    dispatch(fetchSelectedPlace(data?.placeBooked));
+  } catch (error) {
+    dispatch(
+      apiErr(
+        error.response && error.response.data?.detail
+          ? error.response.data?.detail
+          : error.message
+      )
+    );
+  }
+};
 export const clearAndCloseForms = () => async (dispatch) => {
   try {
     dispatch(loading());

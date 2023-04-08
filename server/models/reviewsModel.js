@@ -7,7 +7,16 @@ const ReviewsSchema = new Schema({
     required: true,
   },
   reviewMessage: { type: String },
-  isPostive: { type: Boolean },
+  score: {
+    type: Number,
+    validate: {
+      validator: function (v) {
+        return v <= 5;
+      },
+      message: (props) => `${props.value} must be less than or equal to 5`,
+    },
+  },
+
   reviewPlace: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Place",

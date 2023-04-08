@@ -27,6 +27,7 @@ export const getAll = async (req, res) => {
 
 export const createBooking = async (req, res) => {
   const { data } = req.body;
+
   //data can be one object or a list of objects and both cases will work
   //send list of objects when you need to bulk insert
 
