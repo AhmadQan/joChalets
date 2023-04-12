@@ -26,10 +26,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className=" h-auto  relative ">
+      <main className=" h-auto  relative flex flex-col">
         <HomeAppBar />
-
-        <Hero />
+        <div className="">
+          <Hero />
+        </div>
         <PlacesGrid />
         {showAddModel && (
           <div className="h-full w-full bg-primary90 bg-opacity-70 text-white backdrop-blur-lg fixed top-0 left-0 z-20">

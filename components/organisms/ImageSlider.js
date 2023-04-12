@@ -53,7 +53,7 @@ export default function ImageSlider({ imagesList, onClick }) {
         className="w-full relative h-full flex"
       >
         {imgList.map((img, i) => (
-          <div className="w-card">
+          <div className="w-card lg:w-[25vw] ">
             <div className="absolute top-0 w-full h-full bluegradientoverlay flex flex-col">
               <div className="flex w-card justify-end px-5 py-5">
                 <ExportOutlineIcon
@@ -64,7 +64,7 @@ export default function ImageSlider({ imagesList, onClick }) {
             </div>
             <img
               key={img._id}
-              className=" object-cover h-full w-card aspect-square"
+              className=" object-cover h-full w-card lg:w-[25vw] aspect-square"
               src={img.img}
               alt={img.img}
             />
