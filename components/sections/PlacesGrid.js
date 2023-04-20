@@ -11,14 +11,19 @@ function PlacesGrid() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (allPlaces) return;
     dispatch(fetchPlaces(0));
-  }, []);
+  });
   return (
     <div className="w-full flex py-8 lg:py-[8vh] justify-center bg-primary20">
       <div className="w-[92%]  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-11 gap-x-8  items-center">
-        {allPlaces.map((place) => (
-          <PlacesGridItem key={place._id} data={place} />
-        ))}
+        {allPlaces?.map((place, idx) => {
+          return (
+            <div className="w-card lg:w-full" key={place._id}>
+              <PlacesGridItem key={place._id} data={place} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

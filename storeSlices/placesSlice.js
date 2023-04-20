@@ -4,7 +4,7 @@ import https from "../axios/axiosInstance";
 export const PlacesSlice = createSlice({
   name: "places",
   initialState: {
-    allPlaces: [],
+    allPlaces: null,
     loading: false,
     err: null,
     totalCount: null,

@@ -50,7 +50,7 @@ function Hero() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setActiveDiv((prevActiveDiv) => (prevActiveDiv + 1) % divs.length);
-    }, 4000); // Change this value to adjust the interval between div switches
+    }, 3000); // Change this value to adjust the interval between div switches
 
     return () => clearInterval(intervalId);
   }, []);
@@ -137,7 +137,7 @@ function Hero() {
         <div className="lg:w-[68%] w-full h-[68%] lg:h-full relative">
           <AnimatePresence>
             {divs.map((div, index) => (
-              <>
+              <div key={index}>
                 {activeDiv === index && (
                   <div className="w-full h-full justify-end">
                     <motion.div
@@ -148,7 +148,7 @@ function Hero() {
                         opacity: [0, 1, 1, 0],
                       }}
                       transition={{
-                        duration: 3.8,
+                        duration: 3,
                         repeatType: "mirror",
                         ease: "easeIn",
                       }}
@@ -168,7 +168,7 @@ function Hero() {
                         opacity: [0, 1, 1, 0],
                       }}
                       transition={{
-                        duration: 3.8,
+                        duration: 3,
                         repeatType: "mirror",
                         ease: "easeIn",
                       }}
@@ -184,7 +184,7 @@ function Hero() {
                     </motion.div>
                   </div>
                 )}
-              </>
+              </div>
             ))}
           </AnimatePresence>
         </div>

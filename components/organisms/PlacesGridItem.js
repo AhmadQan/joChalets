@@ -13,7 +13,7 @@ export default function PlacesGridItem({ data }) {
 
   const router = useRouter();
   return (
-    <div className="w-card lg:w-full shadow-elvatedCard aspect-placeCard overflow-hidden rounded-3xl flex flex-col relative bg-white border border-primary40">
+    <div className="w-full shadow-elvatedCard aspect-placeCard overflow-hidden rounded-3xl flex flex-col relative bg-white border border-primary40">
       <div className="h-[79.58%]">
         <ImageSlider
           onClick={() => {

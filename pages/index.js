@@ -6,18 +6,19 @@ import FilterForm from "../components/organisms/FilterForm";
 import Hero from "../components/sections/Hero";
 import PlacesGrid from "../components/sections/PlacesGrid";
 
+import LoaderDrops from "../components/molecules/LoaderDrops";
+
 import { useSelector } from "react-redux";
 
 import AddPlaceForm from "../components/organisms/AddPlaceForm";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
   const PlacesStore = useSelector((state) => state.places);
-  const { showAddModel } = PlacesStore;
+  const { showAddModel, loading } = PlacesStore;
 
   const seetingStore = useSelector((state) => state.settings);
   const { showFilterModel } = seetingStore;
+
   return (
     <>
       <Head>
@@ -28,10 +29,18 @@ export default function Home() {
       </Head>
       <main className=" h-auto  relative flex flex-col">
         <HomeAppBar />
+
         <div className="">
           <Hero />
         </div>
-        <PlacesGrid />
+        {loading ? (
+          <LoaderDrops />
+        ) : (
+          <div>
+            <PlacesGrid />
+          </div>
+        )}
+
         {showAddModel && (
           <div className="h-full w-full bg-primary90 bg-opacity-70 text-white backdrop-blur-lg fixed top-0 left-0 z-20">
             <AddPlaceForm />

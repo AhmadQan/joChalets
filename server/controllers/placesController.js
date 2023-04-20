@@ -1,8 +1,8 @@
 import { connectDB } from "../utils/db";
 import PlaceModel from "../models/placeModel";
 import BookingModel from "../models/bookingModel";
-import UserModel from "../models/userModel";
-import ReviewsModel from "../models/reviewsModel";
+// import UserModel from "../models/userModel";
+// import ReviewsModel from "../models/reviewsModel";
 import {
   checkDatesAvilablity,
   checkThisMoth,
@@ -62,7 +62,7 @@ export const getAll = async (req, res) => {
   }
 
   ///
-  const paramsToFilter = city ? { address: city } : {};
+  const paramsToFilter = city ? { city: city } : {};
 
   //quering the data from the db with pagination logic
   const allPlaces = await PlaceModel.find({
