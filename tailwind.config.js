@@ -74,6 +74,7 @@ module.exports = {
         longBton: "6/1",
         placeCard: "0.7754/1",
         textField: "6.7/1",
+        semiSquare: "1.194/1",
       },
     },
   },

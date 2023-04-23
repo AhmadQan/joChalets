@@ -53,7 +53,7 @@ function BookingGrid({ placeID, close }) {
   };
 
   return (
-    <div className="fixed bg-opacity-60 backdrop-blur-sm  bg-re z-20 w-screen h-screen bg-primary90 flex flex-col justify-start gap-[5%] pt-[2%]">
+    <div className="fixed bg-opacity-60 backdrop-blur-sm  bg-re z-30 w-screen h-screen bg-primary90 flex flex-col justify-start gap-[5%] pt-[2%]">
       <CloseCirculeIcon
         onClick={close}
         fill={"rgb(248, 113, 113)"}

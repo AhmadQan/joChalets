@@ -54,14 +54,7 @@ export default function ImageSlider({ imagesList, onClick }) {
       >
         {imgList.map((img, i) => (
           <div className="w-card lg:w-[25vw] ">
-            <div className="absolute top-0 w-full h-full bluegradientoverlay flex flex-col">
-              <div className="flex w-card justify-end px-5 py-5">
-                <ExportOutlineIcon
-                  fill={"#fff"}
-                  className={"w-8 aspect-square justify-self-end"}
-                />
-              </div>
-            </div>
+            <div className="absolute top-0 w-full h-full bluegradientoverlay flex flex-col" />
             <img
               key={img._id}
               className=" object-cover h-full w-card lg:w-[25vw] aspect-square"

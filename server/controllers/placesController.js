@@ -1,8 +1,10 @@
 import { connectDB } from "../utils/db";
 import PlaceModel from "../models/placeModel";
 import BookingModel from "../models/bookingModel";
+
 // import UserModel from "../models/userModel";
-// import ReviewsModel from "../models/reviewsModel";
+import ReviewsModel from "../models/reviewsModel";
+
 import {
   checkDatesAvilablity,
   checkThisMoth,
@@ -100,6 +102,8 @@ export const createPlace = async (req, res) => {
 export const getById = async (req, res) => {
   const { placeid } = req.query;
 
+  console.log(placeid);
+
   await connectDB();
 
   const place = await PlaceModel.findOne({ _id: placeid })
@@ -117,6 +121,7 @@ export const getById = async (req, res) => {
 
   // const { bookingList, placeReviews } = place;
   // console.log(bookingList, placeReviews);
+  console.log(place);
 
   return res.status(200).json(place);
 };
@@ -170,4 +175,21 @@ export const getPlaceAvailablityById = async (req, res) => {
   const availablity = await checkThisMoth(placeBookingList);
 
   return res.status(200).json({ data: availablity });
+};
+
+///Api for user booking
+export const getAllUserBooking = async (req, res) => {
+  //where p is the page number and s is the size or the number of element per page
+  const { userId } = req.query;
+
+  await connectDB();
+
+  const userBooking = await BookingModel.find({ customer: userId });
+
+  //quering the data from the db with pagination logic
+
+  const totalCount = await BookingModel.find({ customer: userId }).count();
+
+  // return the res statment to avoid stalled requests
+  return res.status(200).json({ data: userBooking, totalCount: totalCount });
 };

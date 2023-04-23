@@ -64,6 +64,11 @@ export default function HomeAppBar() {
           {avatarMenu && (
             <div className="w-[32.99vw] flex flex-col gap-4 h-auto px-2 py-2 bg-white absolute text-xs font-bold text-primary90 top-full right-0 border-primary50 border shadow-flat rounded-md">
               <Link href={"/api/auth/logout"}>Log Out</Link>
+              {user?.dbinfo && (
+                <div className="w-full  ">
+                  <Link href={"/users/profile"}>Profile</Link>
+                </div>
+              )}
               {user?.dbinfo?.role === "admin" && (
                 <div className="w-full  ">
                   <button

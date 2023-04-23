@@ -11,6 +11,7 @@ import LoaderDrops from "../components/molecules/LoaderDrops";
 import { useSelector } from "react-redux";
 
 import AddPlaceForm from "../components/organisms/AddPlaceForm";
+import Fotter from "../components/sections/Fotter";
 
 export default function Home() {
   const PlacesStore = useSelector((state) => state.places);
@@ -52,6 +53,7 @@ export default function Home() {
             <FilterForm />
           </div>
         )}
+        <Fotter />
       </main>
     </>
   );
