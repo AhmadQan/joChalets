@@ -141,15 +141,19 @@ export default function PlaceDetailPage() {
             />
           )}
         </div>
-        {placeSelected?.contactNumber ? (
-          <a
-            className="font-bold bg-secondry50 px-6 py-2 rounded w-1/2 border border-secondry10 shadow-flat"
-            href={`tel:+${placeSelected?.contactNumber}`}
-          >
-            {placeSelected?.contactNumber}
-          </a>
-        ) : (
-          <p>No Number Yet</p>
+        {user?.dbinfo?.role === "admin" && (
+          <>
+            {placeSelected?.contactNumber ? (
+              <a
+                className="font-bold bg-secondry50 px-6 py-2 rounded w-1/2 border border-secondry10 shadow-flat"
+                href={`tel:+${placeSelected?.contactNumber}`}
+              >
+                {placeSelected?.contactNumber}
+              </a>
+            ) : (
+              <p>No Number Yet</p>
+            )}
+          </>
         )}
 
         <div className="flex justify-between">
