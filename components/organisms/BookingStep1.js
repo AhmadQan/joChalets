@@ -77,7 +77,6 @@ function BookingStep1() {
   ///form 1////
 
   const submitHandler = async (data) => {
-    console.log(data);
     await loadStoreFormFun({
       step: 1,
       data: data,

@@ -17,16 +17,15 @@ export default async function handler(req, res) {
       client.messages
         .create({
           body: "Your appointment is coming up on July 21 at 3PM",
-          from: "whatsapp:+14346085544",
-          to: "whatsapp:+962798033926",
+          from: "+14346085544",
+          to: "+962798033926",
         })
         .then((message) => {
-          console.log(message.sid);
           res.status(200).json({ message: "Message sent successfully" });
         })
         .catch((error) => {
           console.error(error);
-          res.status(500).json({ error: "Failed to send message" });
+          res.status(500).json({ error: error });
         });
 
       break;

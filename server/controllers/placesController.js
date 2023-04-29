@@ -102,8 +102,6 @@ export const createPlace = async (req, res) => {
 export const getById = async (req, res) => {
   const { placeid } = req.query;
 
-  console.log(placeid);
-
   await connectDB();
 
   const place = await PlaceModel.findOne({ _id: placeid })
@@ -118,10 +116,6 @@ export const getById = async (req, res) => {
     .catch((err) => {
       return res.status(400).json({ err });
     });
-
-  // const { bookingList, placeReviews } = place;
-  // console.log(bookingList, placeReviews);
-  console.log(place);
 
   return res.status(200).json(place);
 };

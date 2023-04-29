@@ -62,7 +62,6 @@ export const updateById = async (req, res) => {
   const { bookingId } = req.query;
 
   const { data } = req.body;
-  console.log("backEnd", req.body);
 
   await connectDB();
 

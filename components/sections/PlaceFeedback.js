@@ -14,7 +14,6 @@ function PlaceFeedback({ reviews }) {
   const { placeSelected } = placeState;
   const { user, error, isLoading } = useUser();
 
-  console.log("placeState", user, placeState);
   const {
     register,
     handleSubmit,
@@ -33,8 +32,6 @@ function PlaceFeedback({ reviews }) {
       reviewPlace: placeSelected?._id,
       ...data,
     });
-
-    console.log(data);
   };
 
   return (

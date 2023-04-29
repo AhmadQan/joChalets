@@ -30,7 +30,6 @@ function BookingStep2() {
   ///form 1////
 
   const submitHandler = async (data) => {
-    console.log(data);
     await loadStoreFormFun({
       step: 2,
       data: data,

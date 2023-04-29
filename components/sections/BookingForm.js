@@ -59,6 +59,8 @@ function BookingForm({ windowCloseHandler }) {
         ...form2,
       })
     );
+    router?.push(`/users/profile`);
+
     await closeHandler();
     windowCloseHandler();
   };

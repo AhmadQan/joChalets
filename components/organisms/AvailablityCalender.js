@@ -45,8 +45,6 @@ function AvailablityCalender({ placeID, closeHandler }) {
     // Here you can add any custom content for the day cell
 
     const isAvailableMorning = onlyAvailableAtMorning?.filter((date) => {
-      console.log("day", new Date(day).toLocaleDateString());
-
       return (
         new Date(date?.date).toLocaleDateString() ===
         new Date(day).toLocaleDateString()

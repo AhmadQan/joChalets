@@ -35,9 +35,7 @@ function Profile() {
     dispatch(getUserBookingHandler(user?.user?.dbinfo?._id));
   }, [bookingList, user?.user?.dbinfo?._id]);
 
-  const updateHandler = (data) => {
-    console.log(data);
-  };
+  const updateHandler = (data) => {};
 
   return (
     <section className="w-full flex flex-col min-h-screen ">

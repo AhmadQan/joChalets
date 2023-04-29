@@ -58,7 +58,6 @@ export default function FilterForm({ loading, placesRef }) {
   };
 
   const submitHandler = async (data) => {
-    console.log(data);
     await searchHandler(data);
 
     dispatch(toggleFilterModel());

@@ -86,6 +86,9 @@ export const createBooking = (data) => async (dispatch) => {
 
     const response = await https.post(`booking`, { data: data });
     // const message = await https.post("http://localhost:3000/api/twilioapi");
+    //twilioapi
+    const notifcationResponse = await https.post(`twilioapi`);
+    console.log("notifcationResponse", notifcationResponse);
 
     dispatch(loadNewBooking(response.data));
     dispatch(fetchSelectedPlace(data?.placeBooked));

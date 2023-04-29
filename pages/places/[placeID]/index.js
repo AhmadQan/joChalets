@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useForm, useFieldArray } from "react-hook-form";
 
-import {
-  fetchSelectedPlace,
-  updatePlaces,
-} from "../../../storeSlices/placeDetailSlice";
+import { fetchSelectedPlace } from "../../../storeSlices/placeDetailSlice";
 
 import HomeAppBar from "../../../components/organisms/HomeAppBar";
 import PlaceAboutUS from "../../../components/sections/PlaceAboutUS";
 import PlaceUtils from "../../../components/sections/PlaceUtils";
-import PlaceDetailImageSlider from "../../../components/sections/PlaceDetailImageSlider";
 import PlaceFeedback from "../../../components/sections/PlaceFeedback";
 import PlaceInstruction from "../../../components/sections/PlaceInstruction";
 import BookingGrid from "../../../components/organisms/BookingGrid";
@@ -26,6 +21,7 @@ import DollarCirculeIcon from "../../../client/assets/icons/DollarCirculeIcon";
 import BookingForm from "../../../components/sections/BookingForm";
 
 import PlaceDetailsForm from "../../../components/organisms/PlaceDetailsForm";
+import PlaceGallery from "../../../components/organisms/PlaceGallery";
 
 export default function PlaceDetailPage() {
   const { user, error, isLoading } = useUser();
@@ -39,8 +35,9 @@ export default function PlaceDetailPage() {
   const [showBookingList, setShowBookingList] = useState(false);
 
   const [expanded, setExpanded] = useState(false);
-
   const [isEditMode, setIsEditMode] = useState(false);
+
+  const [expandGallery, setExpandGallery] = useState(false);
 
   const router = useRouter();
   const { placeID } = router.query;
@@ -56,10 +53,79 @@ export default function PlaceDetailPage() {
       // style={{
       //   background: " linear-gradient(90deg, #98FB98, #00FF7F)",
       // }}
-      className="flex flex-col relative bg-primary20"
+      className="flex flex-col w-full relative bg-primary20"
     >
       <HomeAppBar />
-      <PlaceDetailImageSlider />
+      <div className="relative w-full h-[70vh] ">
+        <img
+          className="h-full  object-cover absolute top-0 left-0"
+          src={`${placeSelected?.images[0]?.img}`}
+        />
+        <div className="absolute w-full h-[74%] bottom-0 left-0 bluegradientoverlay flex flex-col gap-4 justify-end pb-[25%] px-6">
+          <div
+            onClick={() => {
+              setExpandGallery(!expandGallery);
+            }}
+            className=" w-[16%] aspect-placeCard relative"
+          >
+            <img
+              alt=""
+              src={`${placeSelected?.images[0]?.img}`}
+              className="w-full absolute top-0 left-0 object-cover rounded shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
+            />
+            <img
+              alt=""
+              src={`${placeSelected?.images[1]?.img}`}
+              className="w-full absolute top-0 left-2 object-cover rounded shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
+            />
+            <img
+              alt=""
+              src={`${placeSelected?.images[2]?.img}`}
+              className="w-full absolute top-0 left-4 object-cover rounded shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
+            />
+          </div>
+          {user?.dbinfo?.role === "admin" && (
+            <div
+              onClick={async () => {
+                setShowBookingList(!showBookingList);
+              }}
+              className=" w-[40%]  rounded-xl   flex gap-2 justify-start items-center"
+            >
+              <div className="flex flex-col  justify-center items-center bg-secondry50 border border-primary90 rounded-full w-14 aspect-square">
+                <BookingOutlineIcon
+                  fill={"rgb(4 37 10 )"}
+                  className={"w-8 aspect-square "}
+                />
+              </div>
+              <h3 className="text-lg font-bold text-primary10 ">Booking</h3>
+            </div>
+          )}
+
+          <div
+            onClick={async () => {
+              setShowCalender(!showCalender);
+            }}
+            className="  rounded-xl  flex  gap-2 justify-start  items-center"
+          >
+            <div className="flex flex-col  justify-center items-center bg-secondry50 border border-secondry10 rounded-full w-14 aspect-square">
+              <BookIcon
+                fill={"rgb(4 37 10 )"}
+                className={"w-8 aspect-square "}
+              />
+            </div>
+            <div></div>
+            <h3 className="text-lg font-bold text-white ">Availablity</h3>
+          </div>
+        </div>
+      </div>
+      {expandGallery && (
+        <PlaceGallery
+          closeHandler={() => {
+            setExpandGallery(!expandGallery);
+          }}
+        />
+      )}
+
       <div className="w-full h-auto shadow-elvatedCard bg-white -translate-y-5 z-20 rounded-20 border border-primary40 flex flex-col gap-6 px-4 py-5">
         <div className="flex justify-between">
           <p className="text-xl font-bold text-primary90">
@@ -75,6 +141,17 @@ export default function PlaceDetailPage() {
             />
           )}
         </div>
+        {placeSelected?.contactNumber ? (
+          <a
+            className="font-bold bg-secondry50 px-6 py-2 rounded w-1/2 border border-secondry10 shadow-flat"
+            href={`tel:+${placeSelected?.contactNumber}`}
+          >
+            {placeSelected?.contactNumber}
+          </a>
+        ) : (
+          <p>No Number Yet</p>
+        )}
+
         <div className="flex justify-between">
           <div className="flex gap-1 items-center">
             <LocationBoldIcon
@@ -145,35 +222,6 @@ export default function PlaceDetailPage() {
         </div>
       )}
 
-      <div className="absolute top-[40vh] left-[8vw] gap-2 w-full justify-between flex flex-col items-start ">
-        <div
-          onClick={async () => {
-            setShowCalender(!showCalender);
-          }}
-          className="h-full w-[40%] rounded-xl z-20 flex  gap-2 justify-start shadow-flat items-center"
-        >
-          <div className="flex flex-col  justify-center items-center bg-primary10 border border-primary90 rounded-full w-14 aspect-square">
-            <BookIcon fill={"#023350"} className={"w-8 aspect-square "} />
-          </div>
-          <h3 className="text-lg font-bold text-primary10 ">Availablity</h3>
-        </div>
-        {user?.dbinfo?.role === "admin" && (
-          <div
-            onClick={async () => {
-              setShowBookingList(!showBookingList);
-            }}
-            className="h-full w-[40%]  rounded-xl shadow-flat z-20 flex gap-2 justify-start items-center"
-          >
-            <div className="flex flex-col  justify-center items-center bg-primary10 border border-primary90 rounded-full w-14 aspect-square">
-              <BookingOutlineIcon
-                fill={"#023350"}
-                className={"w-8 aspect-square "}
-              />
-            </div>
-            <h3 className="text-lg font-bold text-primary10 ">Booking</h3>
-          </div>
-        )}
-      </div>
       {showCalender && (
         <AvailablityCalender
           placeID={placeID}

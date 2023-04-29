@@ -6,7 +6,6 @@ import PoolUtilsItem from "../organisms/PoolUtilsItem";
 import KitchenUtilsItem from "../organisms/KitchenUtilsItem";
 
 function PlaceUtils({ utils }) {
-  console.log("utils", utils);
   return (
     <section
       style={{

@@ -22,6 +22,7 @@ const PlaceSchema = new Schema({
   rules: [String],
   bookingList: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }],
   placeReviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reviews" }],
+  contactNumber: { type: Number },
 });
 
 const PlaceModel = models.Place || model("Place", PlaceSchema);
