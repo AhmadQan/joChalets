@@ -6,7 +6,7 @@ import FalseXIcon from "../../client/assets/icons/FalseXIcon";
 function PoolSection({ utils }) {
   return (
     <div className="flex flex-col w-full bg-white">
-      <div className="flex flex-col px-4 py-12 mb-12">
+      <div className="flex flex-col px-4 pb-12 ">
         <p className="text-lg font-semibold font-IBMPlexSans leading-none">
           Our Pool
         </p>

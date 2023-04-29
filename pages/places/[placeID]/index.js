@@ -220,11 +220,11 @@ export default function PlaceDetailPage() {
       ) : (
         <div className="flex flex-col ">
           <PlaceAboutUS description={placeSelected?.description} />
-          <div className="w-full h-1 bg-opacity-40 bg-black my-12" />
+          <div className="w-full h-1 bg-opacity-40 bg-black my-8" />
           <PoolSection utils={placeSelected?.utils} />
-          <div className="w-full h-1 bg-opacity-40 bg-black my-12" />
+          <div className="w-full h-1 bg-opacity-40 bg-black my-8" />
           <HouseSection utils={placeSelected?.utils} />
-          <div className="w-full h-1 bg-opacity-40 bg-black my-12" />
+          <div className="w-full h-1 bg-opacity-40 bg-black my-8" />
           <GardenSection utils={placeSelected?.utils} />
 
           {/* <PlaceFeedback reviews={placeSelected?.placeReviews} /> */}
