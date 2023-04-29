@@ -8,7 +8,7 @@ function GardenIcon({ fill, className }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_17_4788)">
+      <g clipPath="url(#clip0_17_4788)">
         <path
           d="M22 9L12 2L2 9H11V22H13V9H22ZM12 4.44L15.66 7H8.34L12 4.44Z"
           fill={`${fill}`}

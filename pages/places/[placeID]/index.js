@@ -7,7 +7,6 @@ import { fetchSelectedPlace } from "../../../storeSlices/placeDetailSlice";
 
 import HomeAppBar from "../../../components/organisms/HomeAppBar";
 import PlaceAboutUS from "../../../components/sections/PlaceAboutUS";
-import PlaceUtils from "../../../components/sections/PlaceUtils";
 import PlaceFeedback from "../../../components/sections/PlaceFeedback";
 import PlaceInstruction from "../../../components/sections/PlaceInstruction";
 import BookingGrid from "../../../components/organisms/BookingGrid";
@@ -19,9 +18,13 @@ import BookIcon from "../../../client/assets/icons/BookIcon";
 import LocationBoldIcon from "../../../client/assets/icons/LocationBoldIcon";
 import DollarCirculeIcon from "../../../client/assets/icons/DollarCirculeIcon";
 import BookingForm from "../../../components/sections/BookingForm";
+import PoolSection from "../../../components/sections/PoolSection";
 
 import PlaceDetailsForm from "../../../components/organisms/PlaceDetailsForm";
 import PlaceGallery from "../../../components/organisms/PlaceGallery";
+import HouseSection from "../../../components/sections/HouseSection";
+import GardenSection from "../../../components/sections/GardenSection";
+import Fotter from "../../../components/sections/Fotter";
 
 export default function PlaceDetailPage() {
   const { user, error, isLoading } = useUser();
@@ -53,7 +56,7 @@ export default function PlaceDetailPage() {
       // style={{
       //   background: " linear-gradient(90deg, #98FB98, #00FF7F)",
       // }}
-      className="flex flex-col w-full relative bg-primary20"
+      className="flex flex-col w-full relative "
     >
       <HomeAppBar />
       <div className="relative w-full h-[70vh] ">
@@ -66,22 +69,22 @@ export default function PlaceDetailPage() {
             onClick={() => {
               setExpandGallery(!expandGallery);
             }}
-            className=" w-[16%] aspect-placeCard relative"
+            className=" w-[22%] aspect-placeCard relative"
           >
             <img
               alt=""
               src={`${placeSelected?.images[0]?.img}`}
-              className="w-full absolute top-0 left-0 object-cover rounded shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
+              className="w-full absolute top-0 left-0 object-cover -rotate-12 rounded-lg shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
             />
             <img
               alt=""
               src={`${placeSelected?.images[1]?.img}`}
-              className="w-full absolute top-0 left-2 object-cover rounded shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
+              className="w-full absolute top-0 rotate-12 left-2 object-cover rounded-lg shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
             />
             <img
               alt=""
               src={`${placeSelected?.images[2]?.img}`}
-              className="w-full absolute top-0 left-4 object-cover rounded shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
+              className="w-full absolute top-0 left-0   object-cover rounded-lg shadow-sm shadow-primary10 aspect-placeCard bg-cover border border-primary10"
             />
           </div>
           {user?.dbinfo?.role === "admin" && (
@@ -217,10 +220,14 @@ export default function PlaceDetailPage() {
       ) : (
         <div className="flex flex-col ">
           <PlaceAboutUS description={placeSelected?.description} />
+          <div className="w-full h-1 bg-opacity-40 bg-black my-12" />
+          <PoolSection utils={placeSelected?.utils} />
+          <div className="w-full h-1 bg-opacity-40 bg-black my-12" />
+          <HouseSection utils={placeSelected?.utils} />
+          <div className="w-full h-1 bg-opacity-40 bg-black my-12" />
+          <GardenSection utils={placeSelected?.utils} />
 
-          <PlaceUtils utils={placeSelected?.utils} />
-
-          <PlaceFeedback reviews={placeSelected?.placeReviews} />
+          {/* <PlaceFeedback reviews={placeSelected?.placeReviews} /> */}
 
           <PlaceInstruction rules={placeSelected?.rules} />
         </div>
@@ -241,6 +248,7 @@ export default function PlaceDetailPage() {
           }}
         />
       )}
+      <Fotter />
     </section>
   );
 }

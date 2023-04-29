@@ -3,16 +3,16 @@ import BookOutlineIcon from "../../client/assets/icons/BookOutlineIcon";
 
 function PlaceAboutUS({ description }) {
   return (
-    <section className="h-auto w-full bg-primary20  relative overflow-hidden py-11 px-6  overflow-y-auto">
+    <section className="h-auto w-full font-IBMPlexSans   relative overflow-hidden py-11 px-6  overflow-y-auto">
       <div className="h-full w-full  flex flex-col z-10 relative gap-8">
-        <h2 className="  font-normal opacity-60 text-secondry70">
+        <h2 className="   opacity-60 text-primary50 font-semibold">
           you need to know more about our place
           <br />{" "}
           <span className="font-bold font-Koulen text-3xl text-primary100">
             About Us
           </span>
         </h2>
-        <div className="bg-white w-full aspect-square overflow-auto relative rounded-20 border border-primary50 shadow-hole px-4 py-7">
+        <div className=" w-full aspect-square overflow-auto relative  px-4 py-7">
           <p className="text-primary100">
             <pre className="w-full font-IBMPlexSansArabic text-right">
               {" "}

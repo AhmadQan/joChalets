@@ -8,7 +8,7 @@ function BathHubIcon({ fill, className }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_17_4715)">
+      <g clipPath="url(#clip0_17_4715)">
         <path
           d="M7 9C8.10457 9 9 8.10457 9 7C9 5.89543 8.10457 5 7 5C5.89543 5 5 5.89543 5 7C5 8.10457 5.89543 9 7 9Z"
           fill={`${fill}`}

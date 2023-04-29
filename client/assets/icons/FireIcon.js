@@ -8,7 +8,7 @@ function FireIcon({ fill, className }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_17_19141)">
+      <g clipPath="url(#clip0_17_19141)">
         <path
           opacity="0.3"
           d="M12.5802 15.07C12.3802 15.99 11.6402 17.03 10.2002 17.38C13.1002 19.75 15.8402 17.58 15.7602 15.06C15.7602 13.01 12.8102 11.85 12.4902 9.97998C11.6202 12.24 12.9002 13.64 12.5802 15.07Z"

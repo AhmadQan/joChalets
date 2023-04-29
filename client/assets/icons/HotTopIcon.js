@@ -8,7 +8,7 @@ function HotTopIcon({ fill, className }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_17_4714)">
+      <g clipPath="url(#clip0_17_4714)">
         <path
           d="M7 8C8.10457 8 9 7.10457 9 6C9 4.89543 8.10457 4 7 4C5.89543 4 5 4.89543 5 6C5 7.10457 5.89543 8 7 8Z"
           fill={`${fill}`}
