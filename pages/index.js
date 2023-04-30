@@ -1,8 +1,7 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
+// import { Inter } from "@next/font/google";
 
 import HomeAppBar from "../components/organisms/HomeAppBar";
-import FilterForm from "../components/organisms/FilterForm";
 import Hero from "../components/sections/Hero";
 import PlacesGrid from "../components/sections/PlacesGrid";
 
@@ -16,9 +15,6 @@ import Fotter from "../components/sections/Fotter";
 export default function Home() {
   const PlacesStore = useSelector((state) => state.places);
   const { showAddModel, loading } = PlacesStore;
-
-  const seetingStore = useSelector((state) => state.settings);
-  const { showFilterModel } = seetingStore;
 
   return (
     <>
@@ -48,11 +44,6 @@ export default function Home() {
           </div>
         )}
 
-        {showFilterModel && (
-          <div className="fixed top-0 w-full h-screen z-30">
-            <FilterForm />
-          </div>
-        )}
         <Fotter />
       </main>
     </>

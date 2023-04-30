@@ -10,15 +10,17 @@ export const PlacesSlice = createSlice({
     totalCount: null,
     pageNumber: 0,
     showAddModel: false,
+    filterData: null,
   },
   reducers: {
     loading: (state) => {
       state.loading = true;
     },
     loadAllPlacesSuccess: (state, action) => {
-      state.allPlaces = action.payload.data;
-      state.totalCount = action.payload.totalCount;
+      state.allPlaces = action.payload.data?.data;
+      state.totalCount = action.payload.data?.totalCount;
       state.loading = false;
+      state.filterData = action.payload?.filter;
       state.err = null;
     },
     apiErr: (state, action) => {
@@ -45,7 +47,7 @@ export const fetchPlaces = (page, filterData) => async (dispatch, getState) => {
       params: filterData,
     });
 
-    dispatch(loadAllPlacesSuccess(response.data));
+    dispatch(loadAllPlacesSuccess({ data: response.data, filter: filterData }));
     dispatch(setPageNumber(page));
   } catch (error) {
     dispatch(
