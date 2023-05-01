@@ -17,7 +17,7 @@ export default function Home() {
   const PlacesStore = useSelector((state) => state.places);
   const { showAddModel, loading } = PlacesStore;
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
