@@ -64,13 +64,13 @@ function Hero() {
   } = useForm();
 
   return (
-    <div
+    <motion.div
       style={{
         background: `url(https://firebasestorage.googleapis.com/v0/b/qanadilodesign.appspot.com/o/other%2FHeroNew.png?alt=media&token=5df4e2d6-7e9f-4b70-9af6-168cbf1d2fca)`,
       }}
-      className={`${
-        filterData ? "h-[58vh]" : "h-[96vh]"
-      }  pt-[16%] w-full bg-cover relative `}
+      animate={{ opacity: 1, height: filterData ? "58vh" : "96vh" }}
+      transition={{ duration: 0.5 }}
+      className={`pt-[16%] w-full bg-cover relative `}
     >
       <div className="w-full h-full blackOverlay absolute top-0 left-0" />
       <div className="w-full h-full flex flex-col gap-12 relative justify-center items-center z-20 ">
@@ -92,6 +92,7 @@ function Hero() {
               },
             },
           }}
+          exit={{ opacity: 0 }}
           className={`w-[86%] self-center  flex flex-col ${
             filterData ? "hidden" : ""
           }`}
@@ -177,7 +178,7 @@ function Hero() {
                       }  `}
                       className={"w-8 aspect-square"}
                     />
-                    <p className="uppercase">
+                    <p className="uppercase text-sm">
                       {watch("from.startDate")
                         ? new Date(
                             watch("from.startDate")
@@ -274,7 +275,7 @@ function Hero() {
                       }  `}
                       className={"w-8 aspect-square"}
                     />
-                    <p className="uppercase">
+                    <p className="uppercase text-sm">
                       {watch("to.startDate")
                         ? new Date(watch("to.startDate"))?.toLocaleDateString()
                         : "end Date"}
@@ -350,7 +351,7 @@ function Hero() {
           </form>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

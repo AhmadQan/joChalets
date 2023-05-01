@@ -11,10 +11,30 @@ import { useSelector } from "react-redux";
 
 import AddPlaceForm from "../components/organisms/AddPlaceForm";
 import Fotter from "../components/sections/Fotter";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const PlacesStore = useSelector((state) => state.places);
   const { showAddModel, loading } = PlacesStore;
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -24,28 +44,36 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className=" h-auto  relative flex flex-col">
-        <HomeAppBar />
+      {isMobile ? (
+        <main className=" h-auto  relative flex flex-col">
+          <HomeAppBar />
 
-        <div className="">
-          <Hero />
-        </div>
-        {loading ? (
-          <LoaderDrops />
-        ) : (
-          <div>
-            <PlacesGrid />
+          <div className="">
+            <Hero />
           </div>
-        )}
+          {loading ? (
+            <LoaderDrops />
+          ) : (
+            <div>
+              <PlacesGrid />
+            </div>
+          )}
 
-        {showAddModel && (
-          <div className="h-full w-full bg-primary90 bg-opacity-70 text-white backdrop-blur-lg fixed top-0 left-0 z-20">
-            <AddPlaceForm />
+          {showAddModel && (
+            <div className="h-full w-full bg-primary90 bg-opacity-70 text-white backdrop-blur-lg fixed top-0 left-0 z-20">
+              <AddPlaceForm />
+            </div>
+          )}
+
+          <Fotter />
+        </main>
+      ) : (
+        <main className="flex justify-center items-center w-full h-screen bg-gray-200">
+          <div className="w-1/2 bg-white aspect-square shadow-elvatedCard uppercase border border-red-500 mx-auto my-auto text-2xl font-bold text-red-300 px-8 py-8">
+            This is a mobile app only at the moment{" "}
           </div>
-        )}
-
-        <Fotter />
-      </main>
+        </main>
+      )}
     </>
   );
 }

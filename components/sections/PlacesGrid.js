@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPlaces } from "../../storeSlices/placesSlice";
 import PlacesGridItem from "../organisms/PlacesGridItem";
 
+import FilterRemoveIcon from "../../client/assets/icons/FilterRemoveIcon";
+
 function PlacesGrid() {
   const PlacesStore = useSelector((state) => state.places);
   const { allPlaces, filterData, loading, err, totalCount } = PlacesStore;
@@ -15,7 +17,7 @@ function PlacesGrid() {
     dispatch(fetchPlaces(0));
   });
   return (
-    <div className="relative w-full flex flex-col gap-4  lg:py-[8vh] justify-center  ">
+    <div className="relative w-full flex flex-col gap-4 pb-8 bg-gray-100 lg:py-[8vh] justify-center  ">
       <div className=" z-20 w-full sticky justify-between h-[8vh] bg-gray-100 flex  items-center text-primary90 px-3 border-y shadow-flat border-gray-500">
         {totalCount && (
           <p className="text-lg font-semibold">{totalCount} places</p>
@@ -26,9 +28,13 @@ function PlacesGrid() {
               e.preventDefault();
               dispatch(fetchPlaces(0, null));
             }}
-            className="text-lg text-red-400 font-semibold"
+            className="text-lg text-red-400 font-semibold flex gap-1"
           >
-            clear search
+            Reset search{" "}
+            <FilterRemoveIcon
+              fill={"#EA5B3F"}
+              className={"w-6 aspect-square"}
+            />
           </button>
         )}
       </div>
