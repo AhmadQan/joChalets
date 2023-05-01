@@ -198,7 +198,7 @@ export default function PlaceDetailPage() {
         </div>
       </div>
       {expanded && (
-        <div className="fixed top-0 left-0 z-40 w-full h-screen bg-primary70 bg-opacity-60 backdrop-blur-md">
+        <div className="fixed top-0 left-0 z-40 w-full h-screen bg-black bg-opacity-70 backdrop-blur-md">
           <BookingForm
             windowCloseHandler={() => {
               setExpanded(!expanded);

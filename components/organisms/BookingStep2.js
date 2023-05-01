@@ -41,65 +41,69 @@ function BookingStep2() {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="flex-1 w-full box-border overflow-y-scroll  justify-start flex overflow-hidden items-center flex-col gap-[5.1%] pt-3"
+      className="flex-1 w-full box-border overflow-y-scroll  justify-between flex overflow-hidden items-center flex-col gap-[5.1%] pt-3"
     >
-      <div className="w-full  flex flex-col rounded-xl gap-6 ">
-        <p className="text-primary10 font-semibold text-lg">Number Of Guests</p>
+      <div className="w-full flex flex-col gap-8">
+        <div className="w-full  flex flex-col rounded-xl gap-6 ">
+          <p className="text-primary10 font-semibold text-lg">
+            Number Of Guests
+          </p>
 
-        <div className="w-full">
-          {errors?.numberOfGuests && (
-            <p className="text-red-500 text-xs font-semibold">
-              {errors?.numberOfGuests?.message}
-            </p>
-          )}
-          <div className="w-full relative aspect-textField  overflow-hidden rounded-lg border border-primary50 bg-white shadow-flat">
-            <input
-              type={"number"}
-              {...register("numberOfGuests", {
-                required: "Please enter the number of Guests",
-                min: {
-                  value: 1,
-                  message: "minum value must be greater than zero",
-                },
-              })}
-              className="w-full h-full px-[20%]"
-            />
-            <PeopleIcon
-              fill={"#068DDB"}
-              className={"absolute top-[18%] left-[5%] w-8 aspect-square"}
-            />
+          <div className="w-full">
+            {errors?.numberOfGuests && (
+              <p className="text-red-500 text-xs font-semibold">
+                {errors?.numberOfGuests?.message}
+              </p>
+            )}
+            <div className="w-full relative aspect-textField  overflow-hidden rounded-lg border border-primary50 bg-white shadow-flat">
+              <input
+                type={"number"}
+                {...register("numberOfGuests", {
+                  required: "Please enter the number of Guests",
+                  min: {
+                    value: 1,
+                    message: "minum value must be greater than zero",
+                  },
+                })}
+                className="w-full h-full px-[20%]"
+              />
+              <PeopleIcon
+                fill={"#068DDB"}
+                className={"absolute top-[18%] left-[5%] w-8 aspect-square"}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="w-full  flex flex-col rounded-xl gap-6 ">
-        <p className="text-primary10 font-semibold text-lg">
-          Contact Phone Number
-        </p>
+        <div className="w-full  flex flex-col rounded-xl gap-6 ">
+          <p className="text-primary10 font-semibold text-lg">
+            Contact Phone Number
+          </p>
 
-        <div className="w-full">
-          {errors?.contactPhoneNumber && (
-            <p className="text-red-500 text-xs font-semibold">
-              {errors?.contactPhoneNumber?.message}
-            </p>
-          )}
-          <div className="w-full relative aspect-textField  overflow-hidden rounded-lg border border-primary50 bg-white shadow-flat">
-            <input
-              type={"number"}
-              placeholder={"07xxxxxxxx"}
-              {...register("contactPhoneNumber", {
-                required: "Please provide a valid phone number",
-                pattern: {
-                  value: /^((\+9627)|07)([789][0123456789])\d{6}$/, // Jordanian mobile number pattern
-                  message: "please enter a valid phone number",
-                },
-              })}
-              className="w-full h-full px-[20%]"
-            />
-            <div className="flex absolute top-[18%] left-[5%] ">
-              <CallCallingIcon
-                fill={"#068DDB"}
-                className={" w-8 aspect-square"}
+          <div className="w-full">
+            {errors?.contactPhoneNumber && (
+              <p className="text-red-500 text-xs font-semibold">
+                {errors?.contactPhoneNumber?.message}
+              </p>
+            )}
+            <div className="w-full relative aspect-textField  overflow-hidden rounded-lg border border-primary50 bg-white shadow-flat">
+              <input
+                type={"number"}
+                placeholder={"07xxxxxxxx"}
+                {...register("contactPhoneNumber", {
+                  required: "Please provide a valid phone number",
+                  pattern: {
+                    value: /^((\+9627)|07)([789][0123456789])\d{6}$/, // Jordanian mobile number pattern
+                    message: "please enter a valid phone number",
+                  },
+                })}
+                className="w-full h-full px-[20%]"
               />
+              <div className="flex absolute top-[18%] left-[5%] ">
+                <CallCallingIcon
+                  fill={"#068DDB"}
+                  className={" w-8 aspect-square"}
+                />
+              </div>
             </div>
           </div>
         </div>

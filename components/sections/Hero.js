@@ -129,8 +129,6 @@ function Hero() {
             className="w-full flex flex-col gap-[1.4vh] justify-around"
           >
             <div className="w-full  flex flex-col bg-white border  border-primary40 rounded-xl py-3 px-3">
-              {/* <p className="font-semibold text-lg">Start Date</p> */}
-
               <div
                 className={` ${
                   fromCalenderOpen ? "" : "hidden"

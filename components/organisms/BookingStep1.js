@@ -86,204 +86,206 @@ function BookingStep1() {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="flex-1 w-full box-border overflow-y-scroll  justify-start flex overflow-hidden items-center flex-col gap-[5.1%] pt-3"
+      className="flex-1 w-full box-border overflow-y-scroll  justify-between flex overflow-hidden items-center flex-col gap-[8.1%] pt-3"
     >
-      <div className="w-full  flex flex-col bg-white border  border-primary40 rounded-xl py-6 px-4">
-        <p className="font-semibold text-lg">Start Date</p>
-
-        <div
-          className={` ${
-            fromCalenderOpen ? "" : "hidden"
-          } absolute top-0 left-0 w-full h-screen bg-primary90 bg-opacity-40 backdrop-blur-md flex flex-col justify-center `}
-        >
-          <Controller
-            control={control}
-            rules={{ required: "Please select the starting Date" }}
-            name={"from.startDate"}
-            render={({ field: { onChange, value } }) => (
-              <Calendar
-                disabledDates={datesToDisaple}
-                dayContentRenderer={renderCustomDayContent}
-                rangeColors={["#C8F9D1", "#C8F9D1", "#C8F9D1"]}
-                minDate={new Date()}
-                date={value}
-                onChange={onChange}
-              />
-            )}
-          />
-          <button
-            onClick={() => {
-              setFromCalenderOpen(!fromCalenderOpen);
-            }}
-            className="w-full aspect-longBton bg-secondry50 rounded-xl"
-          >
-            Confirm
-          </button>
-        </div>
-
-        <div className="w-full flex justify-between">
-          <div className="w-[65.5%] flex flex-col gap-4">
+      <div className="w-full gap-8  flex flex-col">
+        <div className="w-full flex flex-col gap-1">
+          <p className="text-white text-lg uppercase ">when will you arrive</p>
+          <div className="w-full  flex flex-col bg-white border  border-primary40 rounded-xl py-3 px-4">
             <div
-              onClick={() => {
-                setFromCalenderOpen(!fromCalenderOpen);
-              }}
-              className={` border w-full ${
-                errors?.from?.startDate ? "border-red-500" : "border-primary50"
-              }  flex items-center justify-between px-6 py-3 rounded-xl shadow-flat `}
+              className={` ${
+                fromCalenderOpen ? "" : "hidden"
+              } absolute top-0 left-0 w-full h-screen bg-primary90 bg-opacity-40 backdrop-blur-md flex flex-col justify-center `}
             >
-              <CalenderSearch
-                fill={"rgb(3 77 119)"}
-                className={"w-8 aspect-square"}
+              <Controller
+                control={control}
+                rules={{ required: "Please select the starting Date" }}
+                name={"from.startDate"}
+                render={({ field: { onChange, value } }) => (
+                  <Calendar
+                    disabledDates={datesToDisaple}
+                    dayContentRenderer={renderCustomDayContent}
+                    rangeColors={["#C8F9D1", "#C8F9D1", "#C8F9D1"]}
+                    minDate={new Date()}
+                    date={value}
+                    onChange={onChange}
+                  />
+                )}
               />
-              <p>start Date</p>
+              <button
+                onClick={() => {
+                  setFromCalenderOpen(!fromCalenderOpen);
+                }}
+                className="w-full aspect-longBton bg-secondry50 rounded-xl"
+              >
+                Confirm
+              </button>
             </div>
-            {watch("from.startDate") ? (
-              <p className="text-secondry80 font-semibold text-lg">
-                {new Date(watch("from.startDate"))?.toLocaleDateString()}
-              </p>
-            ) : (
-              <p className="text-gray-400">please select a date</p>
-            )}
-            {errors?.from?.DayTime && (
-              <p className="text-red-500 text-xs font-semibold">
-                {errors?.from?.DayTime?.message}
-              </p>
-            )}
-            {errors?.from?.startDate && (
-              <p className="text-red-500 text-xs font-semibold">
-                {errors?.from?.startDate?.message}
-              </p>
-            )}
+
+            <div className="w-full flex justify-between">
+              <div className="w-[54.5%] flex flex-col gap-4">
+                <div
+                  onClick={() => {
+                    setFromCalenderOpen(!fromCalenderOpen);
+                  }}
+                  className={` border w-full ${
+                    errors?.from?.startDate
+                      ? "border-red-500"
+                      : "border-primary50"
+                  }  flex items-center justify-between px-6 py-3 rounded-xl shadow-flat `}
+                >
+                  <CalenderSearch
+                    fill={`${
+                      watch("from.startDate") ? "#5AED75" : "rgb(3 77 119)"
+                    }  `}
+                    className={"w-8 aspect-square"}
+                  />
+                  <p>
+                    {" "}
+                    {watch("from.startDate")
+                      ? new Date(watch("from.startDate"))?.toLocaleDateString()
+                      : "start Date"}
+                  </p>
+                </div>
+              </div>
+              <div className="w-[42.5%] flex gap-2">
+                <div
+                  className={`w-full border ${
+                    errors?.from?.DayTime
+                      ? "border-red-500"
+                      : "border-primary50"
+                  }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
+                >
+                  <SunFilledIcon
+                    fill={"#FBE205"}
+                    className={"w-6 aspect-square"}
+                  />
+                  <input
+                    {...register("from.DayTime", {
+                      required: "Please choose Morning or night",
+                    })}
+                    value={"morning"}
+                    type={"radio"}
+                  />
+                </div>
+                <div
+                  className={`w-full border ${
+                    errors?.from?.DayTime
+                      ? "border-red-500"
+                      : "border-primary50"
+                  }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
+                >
+                  <MoonFilledIcon
+                    fill={"rgb(3 77 119)"}
+                    className={"w-6 aspect-square"}
+                  />
+                  <input
+                    {...register("from.DayTime")}
+                    value={"nigth"}
+                    type={"radio"}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="w-[25.5%] flex flex-col gap-4">
-            <div
-              className={`w-full border ${
-                errors?.from?.DayTime ? "border-red-500" : "border-primary50"
-              }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
-            >
-              <SunFilledIcon fill={"#FBE205"} className={"w-6 aspect-square"} />
-              <input
-                {...register("from.DayTime", {
-                  required: "Please choose Morning or night",
-                })}
-                value={"morning"}
-                type={"radio"}
-              />
-            </div>
-            <div
-              className={`w-full border ${
-                errors?.from?.DayTime ? "border-red-500" : "border-primary50"
-              }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
-            >
-              <MoonFilledIcon
-                fill={"rgb(3 77 119)"}
-                className={"w-6 aspect-square"}
-              />
-              <input
-                {...register("from.DayTime")}
-                value={"nigth"}
-                type={"radio"}
-              />
-            </div>
-          </div>
         </div>
-      </div>
-      <div className="w-full  flex flex-col bg-white border  border-primary40 rounded-xl py-6 px-4">
-        <p className="font-semibold text-lg">End Date</p>
+        <div className="w-full flex flex-col gap-1">
+          <p className="text-white text-lg uppercase ">when will you return</p>
 
-        <div
-          className={` ${
-            toCalenderOpen ? "" : "hidden"
-          } absolute top-0 left-0 w-full h-screen bg-primary90 bg-opacity-40 backdrop-blur-md flex flex-col justify-center `}
-        >
-          <Controller
-            control={control}
-            rules={{ required: "Please select the starting Date" }}
-            name={"to.startDate"}
-            render={({ field: { onChange, value } }) => (
-              <Calendar
-                disabledDates={datesToDisaple}
-                dayContentRenderer={renderCustomDayContent}
-                rangeColors={["#C8F9D1", "#C8F9D1", "#C8F9D1"]}
-                minDate={new Date()}
-                date={value}
-                onChange={onChange}
+          <div className="w-full  flex flex-col bg-white border  border-primary40 rounded-xl py-3 px-4">
+            <div
+              className={` ${
+                toCalenderOpen ? "" : "hidden"
+              } absolute top-0 left-0 w-full h-screen bg-primary90 bg-opacity-40 backdrop-blur-md flex flex-col justify-center `}
+            >
+              <Controller
+                control={control}
+                rules={{ required: "Please select the starting Date" }}
+                name={"to.startDate"}
+                render={({ field: { onChange, value } }) => (
+                  <Calendar
+                    disabledDates={datesToDisaple}
+                    dayContentRenderer={renderCustomDayContent}
+                    rangeColors={["#C8F9D1", "#C8F9D1", "#C8F9D1"]}
+                    minDate={new Date()}
+                    date={value}
+                    onChange={onChange}
+                  />
+                )}
               />
-            )}
-          />
-          <button
-            onClick={() => {
-              setToCalenderOpen(!toCalenderOpen);
-            }}
-            className="w-full aspect-longBton bg-secondry50 rounded-xl"
-          >
-            Confirm
-          </button>
-        </div>
+              <button
+                onClick={() => {
+                  setToCalenderOpen(!toCalenderOpen);
+                }}
+                className="w-full aspect-longBton bg-secondry50 rounded-xl"
+              >
+                Confirm
+              </button>
+            </div>
 
-        <div className="w-full flex justify-between">
-          <div className="w-[65.5%] flex flex-col gap-4">
-            <div
-              onClick={() => {
-                setToCalenderOpen(!toCalenderOpen);
-              }}
-              className={` border w-full ${
-                errors?.to?.startDate ? "border-red-500" : "border-primary50"
-              }  flex items-center justify-between px-6 py-3 rounded-xl shadow-flat `}
-            >
-              <CalenderSearch
-                fill={"rgb(3 77 119)"}
-                className={"w-8 aspect-square"}
-              />
-              <p>End Date</p>
-            </div>
-            {watch("to.startDate") ? (
-              <p className="text-secondry80 font-semibold text-lg">
-                {new Date(watch("to.startDate"))?.toLocaleDateString()}
-              </p>
-            ) : (
-              <p className="text-gray-400">please select a date</p>
-            )}
-            {errors?.to?.DayTime && (
-              <p className="text-red-500 text-xs font-semibold">
-                {errors?.to?.DayTime?.message}
-              </p>
-            )}
-            {errors?.to?.startDate && (
-              <p className="text-red-500 text-xs font-semibold">
-                {errors?.to?.startDate?.message}
-              </p>
-            )}
-          </div>
-          <div className="w-[25.5%] flex flex-col gap-4">
-            <div
-              className={`w-full border ${
-                errors?.to?.DayTime ? "border-red-500" : "border-primary50"
-              }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
-            >
-              <SunFilledIcon fill={"#FBE205"} className={"w-6 aspect-square"} />
-              <input
-                {...register("to.DayTime", {
-                  required: "Please choose Morning or night",
-                })}
-                value={"morning"}
-                type={"radio"}
-              />
-            </div>
-            <div
-              className={`w-full border ${
-                errors?.to?.DayTime ? "border-red-500" : "border-primary50"
-              }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
-            >
-              <MoonFilledIcon
-                fill={"rgb(3 77 119)"}
-                className={"w-6 aspect-square"}
-              />
-              <input
-                {...register("to.DayTime")}
-                value={"nigth"}
-                type={"radio"}
-              />
+            <div className="w-full flex justify-between ">
+              <div className="w-[54.5%] flex flex-col gap-4">
+                <div
+                  onClick={() => {
+                    setToCalenderOpen(!toCalenderOpen);
+                  }}
+                  className={` border w-full ${
+                    errors?.to?.startDate
+                      ? "border-red-500"
+                      : "border-primary50"
+                  }  flex items-center justify-between px-6 py-3 rounded-xl shadow-flat `}
+                >
+                  <CalenderSearch
+                    fill={`${
+                      watch("from.startDate") ? "#5AED75" : "rgb(3 77 119)"
+                    }  `}
+                    className={"w-8 aspect-square"}
+                  />
+                  <p>
+                    {" "}
+                    <p>
+                      {" "}
+                      {watch("to?.startDate")
+                        ? new Date(watch("to?.startDate"))?.toLocaleDateString()
+                        : "End Date"}
+                    </p>{" "}
+                  </p>
+                </div>
+              </div>
+              <div className="w-[42.5%] flex gap-2">
+                <div
+                  className={`w-full border ${
+                    errors?.to?.DayTime ? "border-red-500" : "border-primary50"
+                  }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
+                >
+                  <SunFilledIcon
+                    fill={"#FBE205"}
+                    className={"w-6 aspect-square"}
+                  />
+                  <input
+                    {...register("to.DayTime", {
+                      required: "Please choose Morning or night",
+                    })}
+                    value={"morning"}
+                    type={"radio"}
+                  />
+                </div>
+                <div
+                  className={`w-full border ${
+                    errors?.to?.DayTime ? "border-red-500" : "border-primary50"
+                  }  flex items-center justify-between px-2 py-2 rounded-xl shadow-flat `}
+                >
+                  <MoonFilledIcon
+                    fill={"rgb(3 77 119)"}
+                    className={"w-6 aspect-square"}
+                  />
+                  <input
+                    {...register("to.DayTime")}
+                    value={"nigth"}
+                    type={"radio"}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

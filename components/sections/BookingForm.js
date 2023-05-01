@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { motion } from "framer-motion";
 
 import {
   createBooking,
@@ -72,7 +73,7 @@ function BookingForm({ windowCloseHandler }) {
           Loading
         </div>
       ) : (
-        <div className="flex flex-col  w-[86.511vw] h-full pt-6 gap-6">
+        <div className="flex flex-col  w-[86.511vw] h-full pt-6 gap-[7.2%]">
           <div className="w-full ">
             <div
               onClick={async () => {
@@ -87,13 +88,18 @@ function BookingForm({ windowCloseHandler }) {
               />
             </div>
           </div>
-          <div className="w-full h-8 bg-white shadow-flat rounded-full overflow-hidden  ">
-            <div
-              style={{
-                width: `${(currentStep + 1) * 25}%`,
-              }}
-              className="h-full w-[30%] greenGradient1 shadow-md "
-            />
+          <div className="flex flex-col gap-2">
+            <p className="text-3xl font-bold text-gray-400 uppercase">
+              Step {currentStep + 1}
+            </p>
+            <div className="w-full h-5 bg-white shadow-flat rounded-sm overflow-hidden  p-1">
+              <motion.div
+                animate={{
+                  width: `${(currentStep + 1) * 25}%`,
+                }}
+                className="h-full  greenGradient1 shadow-flat "
+              />
+            </div>
           </div>
           {currentStep === 0 ? (
             <BookingStep1 />
