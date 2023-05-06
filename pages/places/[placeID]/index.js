@@ -167,7 +167,7 @@ export default function PlaceDetailPage() {
               fill={"#068DDB"}
               className={"w-4 aspect-square"}
             />
-            <p className="text-sm font-medium">{placeSelected?.address}</p>
+            <p className="text-sm font-medium">{placeSelected?.city}</p>
           </div>
           <div className="flex flex-col gap-3">
             <div className="flex gap-1">

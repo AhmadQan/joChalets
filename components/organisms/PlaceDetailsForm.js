@@ -36,7 +36,7 @@ function PlaceDetailsForm({ placeInfo, placeID, closeHandler, loading }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      city: placeInfo?.name,
+      city: placeInfo?.city,
       price: placeInfo?.price,
       description: placeInfo?.description,
       utils: placeInfo?.utils || {},
@@ -80,13 +80,28 @@ function PlaceDetailsForm({ placeInfo, placeID, closeHandler, loading }) {
             )}
             <div className="flex flex-col gap-2">
               <p className="text-lg font-bold text-primary90 ml-3">City</p>
-              <input
-                type={"text"}
-                {...register("city", {
-                  required: "Please enter place City",
-                })}
-                className="aspect-textField w-full border rounded-xl border-primary40"
-              />
+
+              <select
+                defaultValue={""}
+                className="w-[46%] aspect-btn pl-[8%] bg-white rounded-lg border border-primary50 shadow-flat"
+                {...register("city", {})}
+              >
+                <option value={""}>All Places</option>
+                <option value={"DeadSea"}>Dead Sea</option>
+                <option value={"Amman"}>Amman</option>
+                <option value={"Alaghwar"}>Alaghwar</option>
+                <option value={"Madaba"}>Madaba</option>
+                <option value={"Jerash"}>Jerash</option>
+                <option value={"Ajloun"}>Ajloun</option>
+                <option value={"Zarqa"}>Zarqa</option>
+                <option value={"Irbid"}>Irbid</option>
+                <option value={"Alkarak"}>Alkarak</option>
+                <option value={"Almafraq"}>Almafraq</option>
+                <option value={"Ma'an"}>Ma'an</option>
+                <option value={"Aqaba"}>Aqaba</option>
+                <option value={"Balqa"}>Balqa</option>
+                <option value={"Tafilah"}>Tafilah</option>
+              </select>
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-lg font-bold text-primary90 ml-3">weekends</p>
