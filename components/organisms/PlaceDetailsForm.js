@@ -23,6 +23,8 @@ import CirculeAddIcon from "../../client/assets/icons/CirculeAddIcon";
 import TrashIcon from "../../client/assets/icons/TrashIcon";
 import DollarCirculeIcon from "../../client/assets/icons/DollarCirculeIcon";
 import LoaderDrops from "../molecules/LoaderDrops";
+import AirCondtionIcon from "../../client/assets/icons/AirCondtionIcon";
+import ParkingIcon from "../../client/assets/icons/ParkingIcon";
 
 function PlaceDetailsForm({ placeInfo, placeID, closeHandler, loading }) {
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ function PlaceDetailsForm({ placeInfo, placeID, closeHandler, loading }) {
       city: placeInfo?.name,
       price: placeInfo?.price,
       description: placeInfo?.description,
-      utils: placeInfo?.utils?.length || {},
+      utils: placeInfo?.utils || {},
       rules: placeInfo?.rules,
     },
   });
@@ -195,6 +197,18 @@ function PlaceDetailsForm({ placeInfo, placeID, closeHandler, loading }) {
                     className="h-[5vh] w-1/2 border border-primary40 rounded-md "
                   />
                 </div>
+                <div className="flex justify-start gap-6">
+                  <AirCondtionIcon
+                    fill={"#333"}
+                    className={"w-8 aspect-square"}
+                  />
+                  <input
+                    placeholder="2"
+                    type={"checkbox"}
+                    {...register("utils.bulding.isAirCondtion", {})}
+                    className="aspect-square w-6 border border-primary40 rounded-md "
+                  />
+                </div>
               </div>
             </div>
             <div className="flex flex-col gap-6 items-start w-full">
@@ -230,6 +244,24 @@ function PlaceDetailsForm({ placeInfo, placeID, closeHandler, loading }) {
                     placeholder="2"
                     type={"checkbox"}
                     {...register("utils.garden.isDj", {})}
+                    className="aspect-square w-6 border border-primary40 rounded-md "
+                  />
+                </div>
+                <div className="flex justify-start gap-6">
+                  <ParkingIcon fill={"#333"} className={"w-8 aspect-square"} />
+                  <input
+                    placeholder="2"
+                    type={"checkbox"}
+                    {...register("utils.garden.park", {})}
+                    className="aspect-square w-6 border border-primary40 rounded-md "
+                  />
+                </div>
+                <div className="flex justify-start gap-6">
+                  <GardenIcon fill={"#333"} className={"w-8 aspect-square"} />
+                  <input
+                    placeholder="2"
+                    type={"checkbox"}
+                    {...register("utils.garden.outsideSeats", {})}
                     className="aspect-square w-6 border border-primary40 rounded-md "
                   />
                 </div>

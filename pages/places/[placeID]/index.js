@@ -230,8 +230,9 @@ export default function PlaceDetailPage() {
           <GardenSection utils={placeSelected?.utils} />
 
           {/* <PlaceFeedback reviews={placeSelected?.placeReviews} /> */}
-
-          <PlaceInstruction rules={placeSelected?.rules} />
+          {placeSelected?.rules?.length > 0 && (
+            <PlaceInstruction rules={placeSelected?.rules} />
+          )}
         </div>
       )}
 
