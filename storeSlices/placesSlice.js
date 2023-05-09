@@ -6,6 +6,7 @@ export const PlacesSlice = createSlice({
   initialState: {
     allPlaces: null,
     loading: false,
+    newPlace: null,
     err: null,
     totalCount: null,
     pageNumber: 0,
@@ -33,6 +34,9 @@ export const PlacesSlice = createSlice({
     },
     setPageNumber: (state, payload) => {
       state.pageNumber = payload;
+    },
+    setNewCreatedPlace: (state, action) => {
+      state.newPlace = action.payload;
     },
   },
 });
@@ -66,7 +70,7 @@ export const createPlaces = (data) => async (dispatch) => {
 
     const response = await https.post(`places`, { data: data });
 
-    dispatch(setPlaceToEdit(response.data._id));
+    dispatch(setNewCreatedPlace(response.data));
   } catch (error) {
     dispatch(
       apiErr(
@@ -85,6 +89,7 @@ export const {
   apiErr,
   setPageNumber,
   toggleAddModel,
+  setNewCreatedPlace,
 } = PlacesSlice.actions;
 
 export default PlacesSlice.reducer;

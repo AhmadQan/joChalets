@@ -14,7 +14,7 @@ export default function AddPlaceForm() {
     formState: { errors },
   } = useForm();
   const PlacesStore = useSelector((state) => state.places);
-  const { idToEdit, loading, err } = PlacesStore;
+  const { newPlace, loading, err } = PlacesStore;
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -25,10 +25,10 @@ export default function AddPlaceForm() {
   };
 
   useEffect(() => {
-    if (idToEdit) {
-      router.push(`/places/${idToEdit}/createProcess`);
+    if (newPlace?._id) {
+      router.push(`/places/${newPlace?._id}/createProcess`);
     }
-  }, [idToEdit]);
+  }, [newPlace]);
 
   const inputStyle = " rounded w-full aspect-textField text-black";
 
@@ -56,14 +56,28 @@ export default function AddPlaceForm() {
           placeholder="descrption"
           type={"text"}
         ></input>
-        <input
-          {...register("city", {
-            required: "Please enter a address",
-          })}
-          className={inputStyle}
-          placeholder="address"
-          type={"text"}
-        ></input>
+        <select
+          defaultValue={""}
+          className="w-[46%] aspect-btn pl-[8%] bg-white text-black rounded-lg border border-primary50 shadow-flat"
+          {...register("city", {})}
+        >
+          <option value={""}>All Places</option>
+          <option value={"DeadSea"}>Dead Sea</option>
+          <option value={"Amman"}>Amman</option>
+          <option value={"Alaghwar"}>Alaghwar</option>
+          <option value={"Madaba"}>Madaba</option>
+          <option value={"Jerash"}>Jerash</option>
+          <option value={"Ajloun"}>Ajloun</option>
+          <option value={"Zarqa"}>Zarqa</option>
+          <option value={"Irbid"}>Irbid</option>
+          <option value={"Alkarak"}>Alkarak</option>
+          <option value={"Almafraq"}>Almafraq</option>
+          <option value={"Ma'an"}>Ma'an</option>
+          <option value={"Aqaba"}>Aqaba</option>
+          <option value={"Balqa"}>Balqa</option>
+          <option value={"Tafilah"}>Tafilah</option>
+        </select>
+
         <button
           className=" border-accent border-2 font-IBMPlexSans bg-primary80 text-accent p-4 rounded-md"
           type="submit"
