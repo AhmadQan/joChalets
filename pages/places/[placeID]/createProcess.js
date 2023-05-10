@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { UploadImages, getImages } from "../../../client/helpers/imagesHelper";
 import ImageGrid from "../../../components/organisms/ImageGrid";
 import { updatePlaces } from "../../../storeSlices/placeDetailSlice";
+import LoaderDrops from "../../../components/molecules/LoaderDrops";
 
 export default function CreateProcess() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function CreateProcess() {
 
   //this state is used for saving the list coming from firebase
   const [imgList, setimgList] = useState(null);
+  const [ImgLoader, setImgLoader] = useState(false);
 
   const identifier = placeID;
 
@@ -34,6 +36,7 @@ export default function CreateProcess() {
   const imagesHandler = async (e) => {
     e.preventDefault();
     if (!files || !identifier) return;
+    setImgLoader(true);
     for (const index in files) {
       if (files[index]?.size) {
         await UploadImages(identifier, files[index]);
@@ -41,6 +44,7 @@ export default function CreateProcess() {
     }
     setfiles(null);
     getAllImages(identifier);
+    setImgLoader(false);
   };
 
   useEffect(() => {
@@ -72,25 +76,31 @@ export default function CreateProcess() {
       </h1>
       <div className="flex flex-col justify-center items-center">
         {imgList && <ImageGrid list={imgList} handler={sortImagesHandler} />}
-        <form
-          onSubmit={imagesHandler}
-          className="h-auto p-6 flex flex-col gap-6 bg-gray rounded-md"
-        >
-          <input
-            type="file"
-            className="bg-white"
-            multiple
-            onChange={(e) => {
-              setfiles(e.target.files);
-            }}
-          ></input>
-          <button
-            className=" bg-primary70 text-grayLight rounded-md py-3"
-            type="submit"
+        {ImgLoader ? (
+          <div className="w-full">
+            <LoaderDrops />
+          </div>
+        ) : (
+          <form
+            onSubmit={imagesHandler}
+            className="h-auto p-6 flex flex-col gap-6 bg-gray rounded-md"
           >
-            Upload
-          </button>
-        </form>
+            <input
+              type="file"
+              className="bg-white"
+              multiple
+              onChange={(e) => {
+                setfiles(e.target.files);
+              }}
+            ></input>
+            <button
+              className=" bg-primary70 text-grayLight rounded-md py-3"
+              type="submit"
+            >
+              Upload
+            </button>
+          </form>
+        )}
       </div>
       <button
         className=" bg-secondry70 w-full text-grayDark rounded-md py-3"
