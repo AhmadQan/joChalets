@@ -76,7 +76,10 @@ export const getAll = async (req, res) => {
       res.status(400).json({ err });
     });
 
-  const totalCount = await PlaceModel.count();
+  const totalCount = await PlaceModel.find({
+    $and: [{ _id: { $nin: placesToRemove } }, paramsToFilter],
+  })
+  ?.count();
 
   // return the res statment to avoid stalled requests
   return res

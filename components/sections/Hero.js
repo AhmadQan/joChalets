@@ -9,7 +9,7 @@ import MoonFilledIcon from "../../client/assets/icons/MoonFilledIcon";
 import SunFilledIcon from "../../client/assets/icons/SunFilledIcon";
 import CalenderSearch from "../../client/assets/icons/calenderSearch";
 import { Calendar } from "react-date-range";
-import { fetchPlaces } from "../../storeSlices/placesSlice";
+import { FilterfetchPlaces } from "../../storeSlices/placesSlice";
 
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -47,7 +47,7 @@ function Hero() {
       city: data?.city,
     };
 
-    dispatch(fetchPlaces(0, dataToApi));
+    dispatch(FilterfetchPlaces(0, dataToApi));
   };
 
   const submitHandler = async (data) => {

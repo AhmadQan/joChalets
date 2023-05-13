@@ -39,26 +39,27 @@ export const PlacesSlice = createSlice({
     setNewCreatedPlace: (state, action) => {
       state.newPlace = action.payload;
     },
+    setFormData: (state, action) => {
+      state.newPlace = action.payload;
+    },
   },
 });
 
-export const fetchPlaces = (page, filterData) => async (dispatch, getState) => {
+export const fetchPlaces = (page, filter) => async (dispatch, getState) => {
   const state = getState();
-  const allPlaces = state.places.allPlaces;
-  const totalCount = state.places.totalCount;
-  if (allPlaces?.length === totalCount) return;
   const currentPlaces = state.places.allPlaces || [];
+  // if (currentPlaces?.length === totalCount) return;
 
   try {
     dispatch(loading());
     const response = await https.get(`places/?p=${page}&s=${10}`, {
-      params: filterData,
+      params: filter,
     });
 
     dispatch(
       loadAllPlacesSuccess({
         data: [...currentPlaces, ...response.data?.data],
-        filter: filterData,
+        filter: filter,
         pageNum: page,
         count: response.data?.totalCount,
       })
@@ -73,6 +74,36 @@ export const fetchPlaces = (page, filterData) => async (dispatch, getState) => {
     );
   }
 };
+export const FilterfetchPlaces =
+  (page, filterData) => async (dispatch, getState) => {
+    const state = getState();
+    // const totalCount = state.places.totalCount;
+    // const currentPlaces = state.places.allPlaces || [];
+
+    try {
+      dispatch(loading());
+      const response = await https.get(`places/?p=${page}&s=${10}`, {
+        params: filterData,
+      });
+
+      dispatch(
+        loadAllPlacesSuccess({
+          data: response.data?.data,
+          filter: filterData,
+          pageNum: page,
+          count: response.data?.totalCount,
+        })
+      );
+    } catch (error) {
+      dispatch(
+        apiErr(
+          error.response && error.response.data?.detail
+            ? error.response.data?.detail
+            : error.message
+        )
+      );
+    }
+  };
 
 export const createPlaces = (data) => async (dispatch) => {
   try {

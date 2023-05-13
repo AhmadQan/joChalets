@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchPlaces } from "../../storeSlices/placesSlice";
+import { FilterfetchPlaces, fetchPlaces } from "../../storeSlices/placesSlice";
 import PlacesGridItem from "../organisms/PlacesGridItem";
 
 import FilterRemoveIcon from "../../client/assets/icons/FilterRemoveIcon";
@@ -24,7 +24,7 @@ function PlacesGrid() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          dispatch(fetchPlaces(pageNumber + 1));
+          dispatch(fetchPlaces(pageNumber + 1, filterData));
         }
       },
       { threshold: 1 }
@@ -51,7 +51,7 @@ function PlacesGrid() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              dispatch(fetchPlaces(0, null));
+              dispatch(FilterfetchPlaces(0, null));
             }}
             className="text-lg text-red-400 font-semibold flex gap-1"
           >
