@@ -1,21 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchPlaces } from "../../storeSlices/placesSlice";
 import PlacesGridItem from "../organisms/PlacesGridItem";
 
 import FilterRemoveIcon from "../../client/assets/icons/FilterRemoveIcon";
+import LoaderDrops from "../molecules/LoaderDrops";
 
 function PlacesGrid() {
   const PlacesStore = useSelector((state) => state.places);
-  const { allPlaces, filterData, loading, err, totalCount } = PlacesStore;
+  const { allPlaces, filterData, loading, err, totalCount, pageNumber } =
+    PlacesStore;
+  const viewMoreButtonRef = useRef(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (allPlaces) return;
-    dispatch(fetchPlaces(0));
+    dispatch(fetchPlaces(pageNumber));
   });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          dispatch(fetchPlaces(pageNumber + 1));
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (viewMoreButtonRef.current) {
+      observer.observe(viewMoreButtonRef.current);
+    }
+
+    return () => {
+      if (viewMoreButtonRef.current) {
+        observer.unobserve(viewMoreButtonRef.current);
+      }
+    };
+  }, [viewMoreButtonRef.current]);
+
   return (
     <div className="relative w-full flex flex-col gap-4 pb-8 bg-gray-100 lg:py-[8vh] justify-center  ">
       <div className=" z-20 w-full sticky justify-between h-[8vh] bg-gray-100 flex  items-center text-primary90 px-3 border-y shadow-flat border-gray-500">
@@ -47,6 +72,18 @@ function PlacesGrid() {
           );
         })}
       </div>
+      {loading ? (
+        <LoaderDrops />
+      ) : (
+        <button
+          ref={viewMoreButtonRef}
+          className={`${
+            allPlaces?.length === totalCount ? "hidden" : ""
+          } text-xl font-Koulen font-bold`}
+        >
+          View More
+        </button>
+      )}
     </div>
   );
 }

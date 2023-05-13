@@ -18,11 +18,12 @@ export const PlacesSlice = createSlice({
       state.loading = true;
     },
     loadAllPlacesSuccess: (state, action) => {
-      state.allPlaces = action.payload.data?.data;
-      state.totalCount = action.payload.data?.totalCount;
+      state.allPlaces = action.payload.data;
+      state.totalCount = action.payload?.count;
       state.loading = false;
       state.filterData = action.payload?.filter;
       state.err = null;
+      state.pageNumber = action.payload.pageNum;
     },
     apiErr: (state, action) => {
       state.loading = false;
@@ -43,7 +44,10 @@ export const PlacesSlice = createSlice({
 
 export const fetchPlaces = (page, filterData) => async (dispatch, getState) => {
   const state = getState();
-  const pageNumber = state.places.pageNumber;
+  const allPlaces = state.places.allPlaces;
+  const totalCount = state.places.totalCount;
+  if (allPlaces?.length === totalCount) return;
+  const currentPlaces = state.places.allPlaces || [];
 
   try {
     dispatch(loading());
@@ -51,8 +55,14 @@ export const fetchPlaces = (page, filterData) => async (dispatch, getState) => {
       params: filterData,
     });
 
-    dispatch(loadAllPlacesSuccess({ data: response.data, filter: filterData }));
-    dispatch(setPageNumber(page));
+    dispatch(
+      loadAllPlacesSuccess({
+        data: [...currentPlaces, ...response.data?.data],
+        filter: filterData,
+        pageNum: page,
+        count: response.data?.totalCount,
+      })
+    );
   } catch (error) {
     dispatch(
       apiErr(

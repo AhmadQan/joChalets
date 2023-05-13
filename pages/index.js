@@ -51,13 +51,10 @@ export default function Home() {
           <div className="">
             <Hero />
           </div>
-          {loading ? (
-            <LoaderDrops />
-          ) : (
-            <div>
-              <PlacesGrid />
-            </div>
-          )}
+
+          <div>
+            <PlacesGrid />
+          </div>
 
           {showAddModel && (
             <div className="h-full w-full bg-primary90 bg-opacity-70 text-white backdrop-blur-lg fixed top-0 left-0 z-20">
