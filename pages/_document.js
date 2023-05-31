@@ -4,7 +4,12 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        {/* Add your Google Analytics tracking code here */}
+        <title> جو شاليتس | مزارع وشاليهات للايجار في الاردن</title>
+        <meta
+          name="description"
+          content=" اذا بتدور على مزارع وشاليهات في الاردن او مزارع وشاليهات في عمان او البحر الميت في صيف 2023 لتقدر تسبح وشاليهات ومزارع بسعر رخيص وخصومات دائمة عنا الحل"
+        ></meta>
+        {/*  */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-KR0FM5539S"
