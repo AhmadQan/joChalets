@@ -7,7 +7,7 @@ export default function Document() {
         {/* Add your Google Analytics tracking code here */}
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-C74KCDJSHL"
+          src="https://www.googletagmanager.com/gtag/js?id=G-KR0FM5539S"
         ></script>
         <script
           dangerouslySetInnerHTML={{
@@ -16,7 +16,7 @@ export default function Document() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-C74KCDJSHL');
+            gtag('config', 'G-KR0FM5539S');
           `,
           }}
         ></script>
