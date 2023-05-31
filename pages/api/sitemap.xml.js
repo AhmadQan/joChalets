@@ -17,7 +17,7 @@ const generateSitemap = async (req, res) => {
     const places = await https.get(`places/`);
 
     places.forEach((place) => {
-      const url = `/places/${place.id}`; // Adjust the URL structure based on your dynamic route
+      const url = `/places/${place._id}`; // Adjust the URL structure based on your dynamic route
       smStream.write({ url });
     });
 
