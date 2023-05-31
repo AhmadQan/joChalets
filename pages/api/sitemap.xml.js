@@ -4,7 +4,7 @@ import { Readable } from "stream";
 const generateSitemap = async (req, res) => {
   try {
     const smStream = new SitemapStream({
-      hostname: "https://https://www.jochalets.com",
+      hostname: "https://www.jochalets.com",
     });
 
     // Add URLs to the sitemap
